@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>我的手机</title>
+    <title>金硕珍女友的手机</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,9 +13,12 @@
             <div class="status-icons"><span>📶</span><span>🔋</span></div>
         </div>
 
+        <!-- 锁屏界面 -->
         <section id="lock-screen" class="screen active">
             <div id="lock-wallpaper-layer" style="position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop') center/cover; z-index: -1;"></div>
+            <!-- 锁屏消息区域 -->
             <div class="lock-notifications" id="lock-notifications"></div>
+            
             <div class="lock-time-area">
                 <div class="lock-date" id="lock-date">5月21日 星期六</div>
                 <div class="lock-time" id="lock-time">23:48</div>
@@ -26,6 +29,7 @@
             </div>
         </section>
 
+        <!-- 密码界面 -->
         <section id="passcode-screen" class="screen">
             <div class="passcode-area">
                 <div class="dots" id="dots"></div>
@@ -36,8 +40,13 @@
             </div>
         </section>
 
+        <!-- 主屏幕 -->
         <section id="home-screen" class="screen">
             <div id="wallpaper-layer" style="position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop') center/cover; z-index: -1;"></div>
+            
+            <!-- 桌面消息折叠提示 (类似 iOS 实时活动/小组件) -->
+            <div id="home-notifications-wrapper" class="home-notifications-wrapper"></div>
+
             <div class="home-pages-container" id="home-pages">
                 <div class="home-page" id="page-1"></div>
                 <div class="home-page" id="page-2"></div>
@@ -53,14 +62,13 @@
         <!-- 设置界面 -->
         <section id="settings-screen" class="screen" style="background: #000; z-index: 300; color: #fff; padding: 60px 20px 20px; overflow-y: auto;">
             <div class="app-header" style="padding: 0 0 20px 0; margin-top: -20px;">
-                <button class="back-btn" onclick="closeSettings()">‹ 返回</button>
+                <button class="back-btn" onclick="closeSettings()">‹ 设置</button>
                 <span class="app-title">设置</span>
                 <span style="width: 60px;"></span>
             </div>
 
             <div style="font-size: 32px; font-weight: bold; margin-bottom: 20px;">Ajustes</div>
             
-            <!-- 点击修改昵称 -->
             <div style="background: #1c1c1e; border-radius: 12px; padding: 15px; margin-bottom: 20px; display: flex; align-items: center; gap: 15px; cursor: pointer;" onclick="changeUserName()">
                 <div style="width: 60px; height: 60px; border-radius: 50%; background: #0a84ff; display: flex; justify-content: center; align-items: center; font-size: 24px; font-weight: bold;">BC</div>
                 <div>
@@ -85,7 +93,7 @@
             <input type="file" id="wallpaper-input" accept="image/*" style="display: none;" onchange="uploadWallpaper(event)">
         </section>
 
-        <div id="banner-notification" class="banner-notification" onclick="openApp('kkt')">
+        <div id="banner-notification" class="banner-notification">
             <div class="notif-icon" id="banner-icon">💬</div>
             <div class="notif-content">
                 <div class="notif-header"><span id="banner-title">KakaoTalk</span><span class="notif-time">现在</span></div>

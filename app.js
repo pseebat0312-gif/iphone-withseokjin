@@ -3,7 +3,7 @@ let inputCode = "";
 let currentRoomId = null;
 let isBannerHovered = false;
 
-// 强力清理 Netlify 残留
+// 清理 Netlify
 setInterval(() => {
     document.querySelectorAll('*').forEach(el => {
         if (el.id && el.id.includes('netlify')) el.remove();
@@ -13,7 +13,7 @@ setInterval(() => {
     });
 }, 1000);
 
-// ================= 数据加载与保存 =================
+// 数据加载
 let savedData = localStorage.getItem("phoneData");
 if (savedData) {
     const parsed = JSON.parse(savedData);
@@ -41,7 +41,6 @@ function saveData() {
     }));
 }
 
-// ================= 时钟 =================
 function updateClock() {
     const now = new Date();
     const timeStr = `${now.getHours()}:${String(now.getMinutes()).padStart(2, "0")}`;
@@ -53,7 +52,6 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// ================= 解锁 =================
 let touchStartY = 0;
 $("#lock-screen").addEventListener("touchstart", e => touchStartY = e.touches[0].clientY);
 $("#lock-screen").addEventListener("touchend", e => {
@@ -104,7 +102,6 @@ function handleKeyPress(k) {
     }
 }
 
-// ================= 推送与弹窗 =================
 let bannerTimeout;
 let jinInterval;
 
@@ -138,7 +135,7 @@ function startJinBombing() {
             const randomText = texts[Math.floor(Math.random() * texts.length)];
             pushNewMessage("r1", randomText);
         }
-    }, 600000); // 10分钟一次
+    }, 600000);
 }
 
 function showBanner(n) {
@@ -202,7 +199,6 @@ function renderHomeNotifications() {
     }
 }
 
-// ================= 主屏幕 =================
 function renderHome() {
     renderPage("page-1", PHONE_DATA.appsPage1);
     renderPage("page-2", PHONE_DATA.appsPage2);
@@ -231,7 +227,18 @@ function createIcon(app) {
     return btn;
 }
 
-// ================= App 路由 =================
+// 生成统一的 Header
+function setHeader(title, backAction) {
+    const header = document.querySelector(".app-header");
+    header.innerHTML = `
+        <button class="back-btn">‹ 返回</button>
+        <span class="app-title">${title}</span>
+        <span style="width: 60px;"></span>
+    `;
+    // 直接绑定点击事件
+    header.querySelector(".back-btn").onclick = backAction;
+}
+
 function openApp(id) {
     const view = $("#app-view");
     view.classList.add("active");
@@ -259,23 +266,20 @@ function openApp(id) {
 
     const header = document.createElement("div");
     header.className = "app-header";
-    let title = id;
-    if (id === 'kkt') title = 'KakaoTalk';
-    if (id === 'memo') title = '备忘录';
-    if (id === 'sms') title = '信息';
-    if (id === 'photos') title = '图库';
-    
-    // 外层 App 的返回键就是退回桌面
-    header.innerHTML = `
-        <button class="back-btn" onclick="closeApp()">‹ 返回</button>
-        <span class="app-title">${title}</span>
-        <span style="width: 60px;"></span>
-    `;
     view.appendChild(header);
 
     const body = document.createElement("div");
     body.className = "app-body";
     view.appendChild(body);
+
+    let title = id;
+    if (id === 'kkt') title = 'KakaoTalk';
+    if (id === 'memo') title = '备忘录';
+    if (id === 'sms') title = '信息';
+    if (id === 'photos') title = '图库';
+
+    // 每个 App 的首页，返回都是回桌面
+    setHeader(title, closeApp);
 
     if (id === "kkt") renderKKT(body);
     else if (id === "memo") renderMemoList(body);
@@ -295,7 +299,6 @@ function closeApp() {
 }
 $("#home-indicator").onclick = closeApp;
 
-// ================= KKT 核心 =================
 function renderKKT(container) {
     const rooms = [...PHONE_DATA.kkt.rooms].sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0));
     container.innerHTML = `
@@ -329,17 +332,8 @@ function openChat(roomId) {
     PHONE_DATA.appsPage1.find(a => a.id === 'kkt').unread = 0;
     saveData();
 
-    // 强行绑定返回列表事件，标题写名字
-    const header = document.querySelector(".app-header");
-    header.innerHTML = `
-        <button class="back-btn" id="back-to-list-btn">‹ 聊天</button>
-        <span class="app-title" id="chat-title">${room.name}</span>
-        <span style="width: 60px;"></span>
-    `;
-    
-    document.getElementById("back-to-list-btn").onclick = function() {
-        backToChatList();
-    };
+    // 设置 Header：标题是聊天对象的名字，返回键绑定到 backToChatList
+    setHeader(room.name, backToChatList);
 
     const body = document.querySelector(".app-body");
     body.innerHTML = `
@@ -365,17 +359,13 @@ function openChat(roomId) {
     scrollToBottom();
 }
 
+// 这个函数就是“退回上一级”的核心，绝对不会退到桌面
 function backToChatList() {
     currentRoomId = null;
-    const header = document.querySelector(".app-header");
-    header.innerHTML = `
-        <button class="back-btn" id="back-to-home-btn">‹ 返回</button>
-        <span class="app-title">KakaoTalk</span>
-        <span style="width: 60px;"></span>
-    `;
-    document.getElementById("back-to-home-btn").onclick = function() {
-        closeApp();
-    };
+    // 把 Header 恢复到聊天列表的状态
+    setHeader('KakaoTalk', closeApp);
+    
+    // 重新渲染列表，注意这里只渲染 body，不碰外层
     renderKKT(document.querySelector(".app-body"));
     renderHome();
 }
@@ -424,7 +414,7 @@ async function sendMessage() {
     input.value = "";
     scrollToBottom();
 
-    document.getElementById("chat-title").textContent = "对方正在输入...";
+    document.querySelector(".app-title").textContent = "对方正在输入...";
 
     try {
         let finalPrompt = room.prompt + ` 用户的名字是：${PHONE_DATA.userName}。请仔细阅读历史聊天记录，顺着上一句的话题继续聊！回复必须极简（不超过15字），必须口语化，严禁括号动作！如果你有多句话想发，请用竖线 | 分割开。`;
@@ -441,7 +431,7 @@ async function sendMessage() {
         });
 
         const data = await response.json();
-        document.getElementById("chat-title").textContent = room.name;
+        document.querySelector(".app-title").textContent = room.name;
         
         const replies = data.reply.split('|').filter(t => t.trim() !== '');
         let delay = 0;
@@ -456,11 +446,11 @@ async function sendMessage() {
         });
 
     } catch (error) {
-        document.getElementById("chat-title").textContent = "连接失败";
+        document.querySelector(".app-title").textContent = room.name;
     }
 }
 
-// ================= 备忘录 =================
+// 备忘录
 function renderMemoList(container) {
     container.innerHTML = `
         <div style="padding: 15px; display: flex; justify-content: space-between;">
@@ -497,11 +487,7 @@ function openMemoDetail(memoId) {
 }
 
 function backToMemoList() {
-    document.querySelector(".app-header").innerHTML = `
-        <button class="back-btn" onclick="closeApp()">‹ 返回</button>
-        <span class="app-title">备忘录</span>
-        <span style="width: 60px;"></span>
-    `;
+    setHeader('备忘录', closeApp);
     renderMemoList(document.querySelector(".app-body"));
 }
 
@@ -524,7 +510,7 @@ function shareMemo(id) {
     }
 }
 
-// ================= 设置 =================
+// 设置
 function closeSettings() {
     $("#settings-screen").style.display = "none";
     $("#settings-screen").classList.remove("active");
@@ -561,7 +547,7 @@ function uploadWallpaper(event) {
     }
 }
 
-// ================= 相册 / 闹钟 / 信息 =================
+// 相册 / 闹钟 / 信息
 function renderPhotos(container) {
     container.innerHTML = `
         <div style="padding: 15px; display: flex; justify-content: space-between;">
@@ -612,10 +598,7 @@ function renderSMSList(container) {
 function openSMS(index) {
     const sms = PHONE_DATA.sms[index];
     const body = document.querySelector(".app-body");
-    document.querySelector(".app-header").innerHTML = `
-        <button class="back-btn" onclick="backToSMSList()">‹ 信息</button>
-        <span class="app-title">${sms.name}</span>
-    `;
+    setHeader(sms.name, backToSMSList);
     body.innerHTML = `
         <div class="chat-wrapper">
             <div class="chat-area" id="sms-area">
@@ -633,10 +616,7 @@ function openSMS(index) {
 }
 
 function backToSMSList() {
-    document.querySelector(".app-header").innerHTML = `
-        <button class="back-btn" onclick="closeApp()">‹ 返回</button>
-        <span class="app-title">信息</span>
-    `;
+    setHeader('信息', closeApp);
     renderSMSList(document.querySelector(".app-body"));
 }
 

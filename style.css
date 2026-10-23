@@ -1,6 +1,9 @@
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 body { background: #000; display: flex; justify-content: center; align-items: center; height: 100vh; height: 100dvh; font-family: -apple-system, sans-serif; overflow: hidden; }
 
+/* 暴力隐藏 Netlify 徽章 */
+#netlify-badge, [id^="netlify"], [class^="netlify-badge"], .netlify-badge, iframe[src*="netlify"], div[style*="position: fixed"][style*="bottom"][style*="right"] { display: none !important; opacity: 0 !important; visibility: hidden !important; z-index: -9999 !important; }
+
 #phone { position: relative; width: 100%; max-width: 430px; height: 100%; max-height: 932px; background: #000; overflow: hidden; color: #fff; }
 @media (min-width: 500px) { #phone { border-radius: 50px; border: 12px solid #333; height: 90vh; } }
 
@@ -9,8 +12,7 @@ body { background: #000; display: flex; justify-content: center; align-items: ce
 .screen.active { display: flex; }
 
 /* --- 锁屏 --- */
-#lock-screen { background: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop') center/cover; z-index: 10; }
-#lock-screen::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.4); z-index: -1; }
+#lock-screen { z-index: 10; }
 .lock-time-area { text-align: center; margin-top: 70px; }
 .lock-date { font-size: 18px; font-weight: 600; }
 .lock-time { font-size: 85px; font-weight: 300; letter-spacing: -2px; margin-top: -5px;}
@@ -22,7 +24,6 @@ body { background: #000; display: flex; justify-content: center; align-items: ce
 .notif-title { font-size: 14px; font-weight: 600; }
 .notif-msg { font-size: 14px; overflow: hidden; }
 
-/* 滑动条区 */
 .swipe-up-area { position: absolute; bottom: 0; left: 0; right: 0; height: 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; z-index: 50; }
 .swipe-up-area span { font-size: 14px; opacity: 0.7; margin-bottom: 10px; animation: pulse 2s infinite; }
 @keyframes pulse { 0%, 100% { opacity: 0.3; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-5px); } }
@@ -60,15 +61,18 @@ body { background: #000; display: flex; justify-content: center; align-items: ce
 /* --- App 视图 --- */
 #app-view { background: #000; z-index: 200; }
 .app-header { display: flex; justify-content: space-between; align-items: center; padding: 60px 20px 15px; background: rgba(30, 30, 30, 0.95); font-weight: 600; border-bottom: 1px solid #222; }
-.back-btn { background: none; border: none; color: #0a84ff; font-size: 16px; cursor: pointer; width: 80px; text-align: left;}
+.back-btn { background: none; border: none; color: #0a84ff; font-size: 16px; cursor: pointer; width: 80px; text-align: left; display: flex; align-items: center; gap: 4px;}
 .app-title { font-size: 17px; }
 .app-body { flex: 1; overflow-y: auto; position: relative; padding-bottom: 60px;}
+
+/* 相机头部 */
+#camera-header { position: absolute; top: 40px; left: 10px; z-index: 999; background: rgba(0,0,0,0.5); border-radius: 20px; padding: 5px 15px;}
 
 /* --- 通知横幅 --- */
 .banner-notification { position: absolute; top: -120px; left: 10px; right: 10px; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(25px); border-radius: 20px; padding: 15px; display: flex; gap: 12px; align-items: flex-start; z-index: 9999; transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 10px 30px rgba(0,0,0,0.3); cursor: pointer;}
 .banner-notification.show { top: 60px; }
 
-/* --- KKT 聊天界面 --- */
+/* --- KKT --- */
 .kkt-list { padding: 0 15px; }
 .kkt-room { display: flex; align-items: center; gap: 15px; padding: 15px 0; border-bottom: 1px solid #222; cursor: pointer; }
 .avatar { width: 50px; height: 50px; border-radius: 50%; background: #333; display: flex; justify-content: center; align-items: center; font-size: 24px; }
@@ -76,39 +80,28 @@ body { background: #000; display: flex; justify-content: center; align-items: ce
 .room-name { font-size: 16px; font-weight: 500; }
 .room-preview { font-size: 13px; color: #888; margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .kkt-unread { background: #FF3B30; color: #fff; font-size: 12px; font-weight: bold; min-width: 20px; height: 20px; border-radius: 10px; display: flex; justify-content: center; align-items: center; }
-
-/* KKT 底部导航 */
 .kkt-bottom-nav { position: absolute; bottom: 0; left: 0; right: 0; height: 70px; background: rgba(20,20,20,0.95); display: flex; justify-content: space-around; align-items: center; border-top: 1px solid #222; padding-bottom: 15px; z-index: 10;}
 .nav-item { display: flex; flex-direction: column; align-items: center; font-size: 11px; color: #888; gap: 4px; }
 .nav-item.active { color: #FEE500; }
-
-/* 聊天气泡 */
 .chat-area { display: flex; flex-direction: column; gap: 10px; padding: 20px 15px 80px; }
 .msg { max-width: 70%; padding: 10px 14px; border-radius: 18px; font-size: 15px; line-height: 1.4; word-wrap: break-word;}
 .msg.them { background: #2c2c2e; align-self: flex-start; border-bottom-left-radius: 4px; }
 .msg.me { background: #FEE500; color: #000; align-self: flex-end; border-bottom-right-radius: 4px; }
 .msg img { max-width: 100%; border-radius: 10px; margin-top: 5px; display: block; }
-
-/* 聊天输入框 */
-.chat-input-area { position: absolute; bottom: 0; left: 0; right: 0; background: #111; padding: 10px 15px 25px; display: flex; gap: 10px; align-items: center; border-top: 1px solid #222; z-index: 999; /* 提高层级，绝对不被盖住 */ }
+.chat-input-area { position: absolute; bottom: 0; left: 0; right: 0; background: #111; padding: 10px 15px 25px; display: flex; gap: 10px; align-items: center; border-top: 1px solid #222; z-index: 999; }
 .chat-input-box { flex: 1; background: #2c2c2e; border-radius: 20px; display: flex; align-items: center; padding: 8px 12px; gap: 10px; }
 .plus-icon { font-size: 24px; color: #888; cursor: pointer;}
 .chat-input-box input { flex: 1; background: transparent; border: none; color: #fff; font-size: 15px; outline: none; }
 .send-btn { background: #FEE500; color: #000; border: none; border-radius: 15px; padding: 8px 15px; font-size: 14px; font-weight: bold; cursor: pointer; z-index: 1000;}
 
-/* 备忘录 */
-.memo-item { padding: 15px; border-bottom: 1px solid #222; }
-.memo-title { font-size: 16px; font-weight: 600; margin-bottom: 5px; }
-.memo-body { font-size: 14px; color: #888; }
-
-/* ================= 终极杀招：暴力隐藏 Netlify 角标 ================= */
-#netlify-badge, 
-[id^="netlify"], 
-[class^="netlify-badge"],
-.netlify-badge,
-iframe[src*="netlify"] { 
-    display: none !important; 
-    opacity: 0 !important;
-    pointer-events: none !important;
-    visibility: hidden !important;
-}
+/* --- 备忘录 (全新 iOS 风格) --- */
+.memo-group-title { font-size: 22px; font-weight: bold; margin: 15px 20px 10px; }
+.memo-list-group { background: #1c1c1e; border-radius: 12px; margin: 0 20px 20px; overflow: hidden; }
+.memo-list-item { padding: 12px 15px; border-bottom: 1px solid #333; cursor: pointer; }
+.memo-list-item:last-child { border-bottom: none; }
+.memo-list-title { font-size: 16px; font-weight: 600; margin-bottom: 4px; color: #fff; }
+.memo-list-preview { font-size: 13px; color: #888; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.memo-detail-header { display: flex; justify-content: space-between; align-items: center; padding: 60px 20px 10px; }
+.memo-detail-date { text-align: center; font-size: 12px; color: #888; margin-bottom: 15px; }
+.memo-detail-content { padding: 0 20px; font-size: 16px; line-height: 1.6; white-space: pre-wrap; color: #fff; outline: none; }
+.memo-share-btn { background: none; border: none; color: #FEE500; font-size: 15px; cursor: pointer; }

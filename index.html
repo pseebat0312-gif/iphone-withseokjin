@@ -3,25 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>my iphone</title>
+    <title>金硕珍女友的手机</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- 手机外框 -->
     <div id="phone">
         <!-- 状态栏 -->
         <div class="status-bar">
             <span id="status-time">9:41</span>
             <div class="status-icons">
-                <span>📶</span>
-                <span>🔋</span>
+                <span>📶</span><span>🔋</span>
             </div>
         </div>
 
         <!-- 锁屏界面 -->
         <section id="lock-screen" class="screen active">
-            <div class="lock-time" id="lock-time">9:41</div>
-            <div class="lock-date" id="lock-date">12月4日 星期三</div>
+            <!-- 锁屏通知区（支持滑动） -->
+            <div class="lock-notifications" id="lock-notifications"></div>
+            
+            <div class="lock-time-area">
+                <div class="lock-date" id="lock-date">12月4日 星期三</div>
+                <div class="lock-time" id="lock-time">9:41</div>
+            </div>
             
             <div class="passcode-area">
                 <div class="dots" id="dots"></div>
@@ -29,16 +32,30 @@
             </div>
         </section>
 
-        <!-- 主屏幕 -->
+        <!-- 主屏幕 (支持左右滑动两页) -->
         <section id="home-screen" class="screen">
-            <div class="app-grid" id="app-grid"></div>
+            <div class="home-pages-container" id="home-pages">
+                <!-- 第一页 -->
+                <div class="home-page" id="page-1"></div>
+                <!-- 第二页 -->
+                <div class="home-page" id="page-2"></div>
+            </div>
+            
+            <!-- 页面指示器 -->
+            <div class="page-dots">
+                <span class="page-dot active"></span>
+                <span class="page-dot"></span>
+            </div>
+
             <!-- 底部 Dock 栏 -->
             <div class="dock" id="dock"></div>
-            <!-- 底部小白条 -->
             <div class="home-indicator" id="home-indicator"></div>
         </section>
 
-        <!-- App 容器（全屏覆盖） -->
+        <!-- 全局弹窗通知 (如微信/KKT横幅) -->
+        <div id="banner-notification" class="banner-notification"></div>
+
+        <!-- App 容器 -->
         <section id="app-view" class="screen"></section>
     </div>
 

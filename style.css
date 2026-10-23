@@ -1,0 +1,360 @@
+/* 基础重置 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent; /* 去除手机点击高亮 */
+}
+
+body {
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    height: 100dvh; /* 适配手机浏览器地址栏 */
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+    overflow: hidden;
+}
+
+/* 手机屏幕框 */
+#phone {
+    position: relative;
+    width: 100%;
+    max-width: 430px; /* 模拟 iPhone 尺寸 */
+    height: 100%;
+    max-height: 932px;
+    background-color: #000;
+    overflow: hidden;
+    color: #fff;
+}
+
+/* 仅在电脑端显示手机边框 */
+@media (min-width: 500px) {
+    #phone {
+        border-radius: 50px;
+        border: 12px solid #333;
+        height: 90vh;
+    }
+}
+
+/* 状态栏 */
+.status-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 54px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 24px 8px;
+    font-size: 15px;
+    font-weight: 600;
+    z-index: 100;
+    pointer-events: none; /* 让点击穿透到下面 */
+}
+
+/* 屏幕层 */
+.screen {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: none;
+    flex-direction: column;
+}
+.screen.active {
+    display: flex;
+}
+
+/* ================== 锁屏界面 ================== */
+#lock-screen {
+    background: linear-gradient(160deg, #1a1a2e, #16213e, #0f3460);
+    align-items: center;
+    padding-top: 120px;
+    z-index: 10;
+}
+
+.lock-time {
+    font-size: 80px;
+    font-weight: 300;
+    letter-spacing: -2px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.lock-date {
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 5px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.passcode-area {
+    position: absolute;
+    bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.dots {
+    display: flex;
+    gap: 20px;
+}
+.dot {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    border: 1.5px solid #fff;
+    transition: background-color 0.1s;
+}
+.dot.filled {
+    background-color: #fff;
+}
+
+.keypad {
+    display: grid;
+    grid-template-columns: repeat(3, 75px);
+    gap: 15px;
+}
+.keypad button {
+    width: 75px; height: 75px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    font-size: 32px;
+    font-weight: 300;
+    backdrop-filter: blur(10px); /* 毛玻璃效果 */
+    cursor: pointer;
+}
+.keypad button:active {
+    background: rgba(255, 255, 255, 0.4);
+}
+.keypad button.empty {
+    background: transparent;
+    pointer-events: none;
+}
+
+/* 密码错误抖动动画 */
+.shake {
+    animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+}
+@keyframes shake {
+    10%, 90% { transform: translate3d(-4px, 0, 0); }
+    20%, 80% { transform: translate3d(6px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-8px, 0, 0); }
+    40%, 60% { transform: translate3d(8px, 0, 0); }
+}
+
+/* ================== 主屏幕 ================== */
+#home-screen {
+    background: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop') no-repeat center center / cover;
+    padding-top: 60px;
+    z-index: 5;
+}
+/* 壁纸暗色遮罩，防止图标看不清 */
+#home-screen::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: -1;
+}
+
+.app-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px 15px;
+    padding: 0 20px;
+}
+
+.app-icon {
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+.app-icon:active .icon-bg {
+    transform: scale(0.9);
+    opacity: 0.8;
+}
+
+.icon-bg {
+    width: 62px; height: 62px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+    transition: transform 0.1s, opacity 0.1s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.app-name {
+    color: #fff;
+    font-size: 12px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+}
+
+/* 底部 Dock 栏 */
+.dock {
+    position: absolute;
+    bottom: 30px; left: 15px; right: 15px;
+    height: 90px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 10px;
+}
+
+/* 底部小白条 */
+.home-indicator {
+    position: absolute;
+    bottom: 8px; left: 50%;
+    transform: translateX(-50%);
+    width: 130px; height: 5px;
+    background: #fff;
+    border-radius: 10px;
+    z-index: 999;
+    cursor: pointer;
+}
+
+/* ================== App 界面 ================== */
+#app-view {
+    background: #000;
+    z-index: 200;
+}
+
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 60px 20px 15px;
+    background: rgba(30, 30, 30, 0.95);
+    backdrop-filter: blur(10px);
+    font-weight: 600;
+    border-bottom: 1px solid #333;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: #0a84ff;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    width: 80px;
+}
+.app-title {
+    font-size: 17px;
+}
+
+.app-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+/* 相册 */
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+}
+.photo-item {
+    aspect-ratio: 1; /* 正方形 */
+    background: #1c1c1e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
+    overflow: hidden;
+}
+.photo-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+}
+
+/* KKT */
+.kkt-list {
+    display: flex;
+    flex-direction: column;
+}
+.kkt-room {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #222;
+    cursor: pointer;
+}
+.avatar {
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    background: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}
+.room-name {
+    font-size: 16px;
+    font-weight: 500;
+}
+.room-preview {
+    font-size: 13px;
+    color: #888;
+    margin-top: 4px;
+}
+
+/* KKT 聊天窗口 */
+.chat-area {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.msg {
+    max-width: 75%;
+    padding: 10px 14px;
+    border-radius: 18px;
+    font-size: 15px;
+    line-height: 1.4;
+    position: relative;
+}
+.msg.them {
+    background: #2c2c2e;
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+}
+.msg.me {
+    background: #0a84ff;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+}
+.msg-time {
+    font-size: 10px;
+    opacity: 0.6;
+    margin-top: 4px;
+    text-align: right;
+}
+
+/* 备忘录 */
+.memo-item {
+    padding: 15px 0;
+    border-bottom: 1px solid #222;
+}
+.memo-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+.memo-body {
+    font-size: 14px;
+    color: #888;
+    white-space: pre-wrap;
+}

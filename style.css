@@ -1,27 +1,24 @@
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 body { background: #000; display: flex; justify-content: center; align-items: center; height: 100vh; height: 100dvh; font-family: -apple-system, sans-serif; overflow: hidden; }
 
-/* 彻底封印 Netlify */
+/* 隐藏所有滚动条，防止挤压居中元素 */
+::-webkit-scrollbar { display: none; width: 0; height: 0; }
+* { scrollbar-width: none; -ms-overflow-style: none; }
+
+/* 封印 Netlify */
 iframe[id*="netlify"], iframe[src*="netlify"], #netlify-badge, .netlify-badge, a[href*="netlify"] {
     display: none !important; visibility: hidden !important; opacity: 0 !important; clip-path: inset(100%) !important; pointer-events: none !important; z-index: -9999 !important;
 }
-/* 终极防遮挡钢板：盖住右下角 */
-.netlify-blocker { 
-    position: fixed; bottom: -10px; right: -10px; width: 300px; height: 120px; 
-    z-index: 2147483647; pointer-events: auto; background: transparent; 
-}
+.netlify-blocker { position: fixed; bottom: -10px; right: -10px; width: 300px; height: 120px; z-index: 2147483647; pointer-events: auto; background: transparent; }
 
 #phone { position: relative; width: 100%; max-width: 430px; height: 100%; max-height: 932px; background: #000; overflow: hidden; color: #fff; z-index: 1; display: flex; flex-direction: column;}
 @media (min-width: 500px) { #phone { border-radius: 50px; border: 12px solid #333; height: 90vh; } }
 
-.status-bar { position: absolute; top: 0; left: 0; right: 0; height: 54px; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 24px 8px; font-size: 15px; font-weight: 600; z-index: 999; pointer-events: none; }
+.status-bar { position: absolute; top: 0; left: 0; right: 0; height: 54px; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 24px 8px; font-size: 15px; font-weight: 600; z-index: 9999; pointer-events: none; }
 .screen { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: none; flex-direction: column; }
 .screen.active { display: flex; }
 
-/* 省略基础锁屏/密码/主屏样式，保持原样 */
-/* ... 如果你有之前的 style.css，这部分可以保留，下面直接替换核心的 App 区域即可 ... */
-/* 但我还是给你全量覆盖，保证不乱 */
-
+/* 锁屏等基础样式... */
 #lock-screen { z-index: 10; }
 .lock-time-area { text-align: center; margin-top: 60px; }
 .lock-date { font-size: 18px; font-weight: 600; }
@@ -49,7 +46,7 @@ iframe[id*="netlify"], iframe[src*="netlify"], #netlify-badge, .netlify-badge, a
 .shake { animation: shake 0.4s; }
 @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
 #home-screen { z-index: 5; }
-.home-pages-container { display: flex; width: 100%; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 120px; padding-top: 100px;}
+.home-pages-container { display: flex; width: 100%; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 120px; padding-top: 100px;}
 .home-page { min-width: 100%; scroll-snap-align: start; display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: min-content; gap: 25px 15px; padding: 0 20px; }
 .page-dots { position: absolute; bottom: 130px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; }
 .page-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4); }
@@ -68,25 +65,26 @@ iframe[id*="netlify"], iframe[src*="netlify"], #netlify-badge, .netlify-badge, a
 .banner-notification { position: absolute; top: -120px; left: 10px; right: 10px; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(25px); border-radius: 20px; padding: 15px; display: flex; gap: 12px; align-items: flex-start; z-index: 9999; transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 10px 30px rgba(0,0,0,0.3); cursor: pointer;}
 .banner-notification.show { top: 60px; }
 
-/* ================= App 视图 (彻底拯救) ================= */
+/* ================= 终极 App 视图 ================= */
 #app-view { background: #000; z-index: 200; overflow: hidden; }
 
-/* 顶部物理锁定：高度加大到 110px 适配刘海，背景不透明 */
+/* 顶部物理锁定：实心背景，固定高度，极高层级 */
 .app-header { 
     display: flex; 
     align-items: center; 
     justify-content: space-between;
     padding: 50px 20px 15px; 
-    background: #1c1c1e; 
+    background: #1c1c1e; /* 实心背景，不透明 */
     border-bottom: 1px solid #333; 
     height: 110px;
     flex-shrink: 0; 
-    z-index: 999; 
+    z-index: 99999; /* 最高层级 */
     position: relative;
+    width: 100%;
 }
-.back-btn { background: none; border: none; color: #0a84ff; font-size: 16px; cursor: pointer; width: 80px; text-align: left; z-index: 10;}
-.app-title { font-size: 17px; font-weight: 600; color: #fff; flex: 1; text-align: center; position: absolute; left: 50%; transform: translateX(-50%); bottom: 15px;}
-.app-body { flex: 1; overflow-y: auto; position: relative; display: flex; flex-direction: column; overflow-x: hidden; /* 锁死横向不许拉伸 */ }
+.back-btn { background: none; border: none; color: #0a84ff; font-size: 16px; cursor: pointer; width: 80px; text-align: left;}
+.app-title { font-size: 17px; font-weight: 600; color: #fff; position: absolute; left: 50%; transform: translateX(-50%); bottom: 15px;}
+.app-body { flex: 1; overflow-y: auto; position: relative; display: flex; flex-direction: column; overflow-x: hidden; width: 100%;}
 
 .kkt-wrapper { display: flex; flex-direction: column; height: 100%; width: 100%; }
 .kkt-list { flex: 1; overflow-y: auto; padding: 0 15px 80px; } 
@@ -100,13 +98,13 @@ iframe[id*="netlify"], iframe[src*="netlify"], #netlify-badge, .netlify-badge, a
 .nav-item { display: flex; flex-direction: column; align-items: center; font-size: 11px; color: #888; gap: 4px; }
 .nav-item.active { color: #FEE500; }
 
-/* 聊天区域绝对锁定： overflow-x 彻底断了变宽的念头 */
+/* 物理锁死聊天区域 */
 .chat-wrapper { display: flex !important; flex-direction: column !important; height: 100% !important; width: 100% !important; overflow: hidden !important; }
-.chat-area { flex: 1; overflow-y: auto; overflow-x: hidden; /* 核心修复 */ padding: 15px 15px; display: flex; flex-direction: column; gap: 10px; width: 100%; }
+.chat-area { flex: 1; overflow-y: auto; overflow-x: hidden; padding: 15px 15px; display: flex; flex-direction: column; gap: 10px; width: 100%; }
 
-/* 气泡绝对物理收缩：宽度自适应文字，最大不超过 70% */
+/* 物理锁死气泡 */
 .msg { 
-    display: inline-block !important; 
+    display: block !important; 
     max-width: 75% !important; 
     padding: 10px 14px; 
     border-radius: 16px; 
@@ -115,14 +113,14 @@ iframe[id*="netlify"], iframe[src*="netlify"], #netlify-badge, .netlify-badge, a
     word-break: break-word !important; 
     white-space: pre-wrap; 
     text-align: left;
-    width: fit-content !important; /* 核心修复 */
+    width: fit-content !important;
     flex-shrink: 0 !important;
 }
-.msg.them { background: #2c2c2e; align-self: flex-start; border-bottom-left-radius: 4px; }
-.msg.me { background: #FEE500; color: #000; align-self: flex-end; border-bottom-right-radius: 4px; }
+.msg.them { background: #2c2c2e; margin-right: auto; border-bottom-left-radius: 4px; }
+.msg.me { background: #FEE500; color: #000; margin-left: auto; border-bottom-right-radius: 4px; }
 .msg img { max-width: 100%; border-radius: 10px; margin-top: 5px; display: block; }
 
-/* 底部输入框：抬高 50px 留出安全距离 */
+/* 底部输入框 */
 .chat-input-area { 
     background: #111; 
     padding: 10px 15px 50px; 

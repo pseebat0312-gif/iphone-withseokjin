@@ -13,15 +13,8 @@ setInterval(() => {
     });
 }, 1000);
 
-// 强杀旧版大框数据！
-let currentVersion = "v6.0_FINAL"; 
-let savedVersion = localStorage.getItem("appVersion");
-if (savedVersion !== currentVersion) {
-    localStorage.removeItem("phoneData");
-    localStorage.setItem("appVersion", currentVersion);
-}
-
-let savedData = localStorage.getItem("phoneData");
+// 🚨 终极换锁！换了一个全新的存储名字，旧的那些变形的坏记录读都读不出来！
+let savedData = localStorage.getItem("phoneDataFinal"); 
 if (savedData) {
     const parsed = JSON.parse(savedData);
     PHONE_DATA.kkt = parsed.kkt || PHONE_DATA.kkt;
@@ -33,12 +26,18 @@ if (savedData) {
         $("#wallpaper-layer").style.backgroundImage = `url(${parsed.wallpaper})`;
         $("#lock-wallpaper-layer").style.backgroundImage = `url(${parsed.wallpaper})`;
     }
+} else {
+    // 第一次用，把干净的初始数据存进去
+    localStorage.setItem("phoneDataFinal", JSON.stringify({
+        kkt: PHONE_DATA.kkt, appsPage1: PHONE_DATA.appsPage1, memos: PHONE_DATA.memos,
+        sms: PHONE_DATA.sms, userName: PHONE_DATA.userName, wallpaper: ""
+    }));
 }
 $("#settings-name").textContent = PHONE_DATA.userName;
 
 function saveData() {
     const bg = $("#wallpaper-layer").style.backgroundImage.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
-    localStorage.setItem("phoneData", JSON.stringify({
+    localStorage.setItem("phoneDataFinal", JSON.stringify({
         kkt: PHONE_DATA.kkt, appsPage1: PHONE_DATA.appsPage1, memos: PHONE_DATA.memos,
         sms: PHONE_DATA.sms, userName: PHONE_DATA.userName, wallpaper: bg
     }));

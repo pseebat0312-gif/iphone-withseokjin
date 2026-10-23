@@ -13,12 +13,12 @@ setInterval(() => {
     });
 }, 1000);
 
-// 🚨 终极换锁！换了一个全新的存储名字，旧的那些变形的坏记录读都读不出来！
-let savedData = localStorage.getItem("phoneDataFinal"); 
+let savedData = localStorage.getItem("phoneDataV8");
 if (savedData) {
     const parsed = JSON.parse(savedData);
     PHONE_DATA.kkt = parsed.kkt || PHONE_DATA.kkt;
     PHONE_DATA.appsPage1 = parsed.appsPage1 || PHONE_DATA.appsPage1;
+    PHONE_DATA.appsPage2 = parsed.appsPage2 || PHONE_DATA.appsPage2;
     PHONE_DATA.memos = parsed.memos || PHONE_DATA.memos;
     PHONE_DATA.sms = parsed.sms || PHONE_DATA.sms;
     PHONE_DATA.userName = parsed.userName || PHONE_DATA.userName;
@@ -27,18 +27,16 @@ if (savedData) {
         $("#lock-wallpaper-layer").style.backgroundImage = `url(${parsed.wallpaper})`;
     }
 } else {
-    // 第一次用，把干净的初始数据存进去
-    localStorage.setItem("phoneDataFinal", JSON.stringify({
-        kkt: PHONE_DATA.kkt, appsPage1: PHONE_DATA.appsPage1, memos: PHONE_DATA.memos,
+    localStorage.setItem("phoneDataV8", JSON.stringify({
+        kkt: PHONE_DATA.kkt, appsPage1: PHONE_DATA.appsPage1, appsPage2: PHONE_DATA.appsPage2, memos: PHONE_DATA.memos,
         sms: PHONE_DATA.sms, userName: PHONE_DATA.userName, wallpaper: ""
     }));
 }
-$("#settings-name").textContent = PHONE_DATA.userName;
 
 function saveData() {
     const bg = $("#wallpaper-layer").style.backgroundImage.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
-    localStorage.setItem("phoneDataFinal", JSON.stringify({
-        kkt: PHONE_DATA.kkt, appsPage1: PHONE_DATA.appsPage1, memos: PHONE_DATA.memos,
+    localStorage.setItem("phoneDataV8", JSON.stringify({
+        kkt: PHONE_DATA.kkt, appsPage1: PHONE_DATA.appsPage1, appsPage2: PHONE_DATA.appsPage2, memos: PHONE_DATA.memos,
         sms: PHONE_DATA.sms, userName: PHONE_DATA.userName, wallpaper: bg
     }));
 }
@@ -187,39 +185,47 @@ function renderPage(pageId, apps) {
 function createIcon(app) {
     const btn = document.createElement("button");
     btn.className = "app-icon";
-    btn.innerHTML = `<div class="icon-wrapper"><div class="icon-bg" style="background: ${app.bg}">${app.icon}</div>${app.unread ? `<div class="badge">${app.unread}</div>` : ""}</div><span class="app-name">${app.name}</span>`;
+    
+    let iconContent = "";
+    if (app.icon.includes("images/") || app.icon.includes(".jpg") || app.icon.includes(".png")) {
+        iconContent = `<div class="icon-bg" style="background: ${app.bg}; overflow: hidden;"><img src="${app.icon}" style="width:100%; height:100%; object-fit:cover;"></div>`;
+    } else {
+        iconContent = `<div class="icon-bg" style="background: ${app.bg}">${app.icon}</div>`;
+    }
+
+    btn.innerHTML = `
+        <div class="icon-wrapper">
+            ${iconContent}
+            ${app.unread ? `<div class="badge">${app.unread}</div>` : ""}
+        </div>
+        <span class="app-name">${app.name}</span>
+    `;
     btn.onclick = () => openApp(app.id);
     return btn;
 }
 
 function setHeader(title, backAction) {
-    const header = document.querySelector(".app-header");
-    header.innerHTML = `
-        <button class="back-btn">‹ 返回</button>
-        <span class="app-title">${title}</span>
-        <span style="width: 60px;"></span>
-    `;
-    header.querySelector(".back-btn").onclick = backAction;
+    document.getElementById("app-title-text").textContent = title;
+    document.getElementById("app-back-btn").onclick = backAction;
 }
 
 function openApp(id) {
     const view = $("#app-view");
     view.classList.add("active");
-    view.innerHTML = "";
+    const body = $("#app-body-content");
+    body.innerHTML = "";
 
     if (id === "ig") { window.open("https://www.instagram.com/", "_blank"); view.classList.remove("active"); return; }
-    if (id === "settings") { $("#settings-screen").style.display = "flex"; $("#settings-screen").classList.add("active"); return; }
+    
     if (id === "camera") {
-        view.innerHTML = `<div style="width:100%; height:100%; background:#111; display:flex; justify-content:center; align-items:center; color:#666;">相机未接入视频</div><div style="position:absolute; top:50px; left:10px; z-index:10;"><button class="back-btn" onclick="closeApp()">‹ 返回</button></div>`;
+        if (PHONE_DATA.cameraVideo && PHONE_DATA.cameraVideo !== "") {
+            body.innerHTML = `<video src="${PHONE_DATA.cameraVideo}" autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover; background:#000;"></video>`;
+        } else {
+            body.innerHTML = `<div style="width:100%; height:100%; background:#111; display:flex; justify-content:center; align-items:center; color:#666;">相机未接入视频</div>`;
+        }
+        setHeader('相机', closeApp);
         return;
     }
-
-    const header = document.createElement("div");
-    header.className = "app-header";
-    view.appendChild(header);
-    const body = document.createElement("div");
-    body.className = "app-body";
-    view.appendChild(body);
 
     let title = id;
     if (id === 'kkt') title = 'KakaoTalk';
@@ -239,9 +245,7 @@ function openApp(id) {
 
 function closeApp() {
     $("#app-view").classList.remove("active");
-    $("#app-view").innerHTML = "";
-    $("#settings-screen").style.display = "none";
-    $("#settings-screen").classList.remove("active");
+    $("#app-body-content").innerHTML = "";
     currentRoomId = null;
     renderHome(); 
 }
@@ -274,7 +278,7 @@ function openChat(roomId) {
 
     setHeader(room.name, backToChatList);
 
-    const body = document.querySelector(".app-body");
+    const body = $("#app-body-content");
     body.innerHTML = `
         <div class="chat-wrapper">
             <div class="chat-area" id="chat-area">
@@ -301,7 +305,7 @@ function openChat(roomId) {
 function backToChatList() {
     currentRoomId = null;
     setHeader('KakaoTalk', closeApp);
-    renderKKT(document.querySelector(".app-body"));
+    renderKKT($("#app-body-content"));
     renderHome();
 }
 
@@ -321,9 +325,9 @@ function sendImage(event) {
         saveData();
         document.getElementById("chat-area").innerHTML += `<div class="msg me"><img src="${imageData}"></div>`;
         scrollToBottom();
-        document.querySelector(".app-title").textContent = "对方正在输入...";
+        document.getElementById("app-title-text").textContent = "对方正在输入...";
         setTimeout(() => {
-            document.querySelector(".app-title").textContent = room.name;
+            document.getElementById("app-title-text").textContent = room.name;
             const reply = room.name === "金硕珍" ? "发这图什么意思？" : "看到了。";
             room.messages.push({ from: "them", text: reply });
             saveData();
@@ -349,7 +353,7 @@ async function sendMessage() {
     input.value = "";
     scrollToBottom();
 
-    document.querySelector(".app-title").textContent = "对方正在输入...";
+    document.getElementById("app-title-text").textContent = "对方正在输入...";
 
     try {
         let finalPrompt = room.prompt + ` 用户的名字是：${PHONE_DATA.userName}。顺着话题聊。严禁提及自己是AI。回复必须极简。如果你有多句话要说，必须用竖线 | 分隔开！`;
@@ -366,7 +370,7 @@ async function sendMessage() {
         });
 
         const data = await response.json();
-        document.querySelector(".app-title").textContent = room.name;
+        document.getElementById("app-title-text").textContent = room.name;
         
         let replies = data.reply.split('|').map(t => t.trim()).filter(t => t !== '');
         if (replies.length === 1 && replies[0].length > 15) {
@@ -386,7 +390,7 @@ async function sendMessage() {
         });
 
     } catch (error) {
-        document.querySelector(".app-title").textContent = room.name;
+        document.getElementById("app-title-text").textContent = room.name;
     }
 }
 
@@ -395,20 +399,55 @@ function renderMemoList(container) {
 }
 function openMemoDetail(memoId) {
     const memo = PHONE_DATA.memos.find(m => m.id === memoId);
-    document.querySelector(".app-header").innerHTML = `<button class="back-btn" onclick="backToMemoList()">‹ 备忘录</button><button style="background:none; border:none; color:#FEE500; font-size:15px;" onclick="shareMemo(${memo.id})">分享 ➔</button>`;
-    document.querySelector(".app-body").innerHTML = `<div style="text-align: center; font-size: 12px; color: #888; margin-top: 10px;">${memo.date || '今天'}</div><div class="memo-detail-content" contenteditable="true" onblur="updateMemoBody(${memo.id}, this.innerText)"><div style="font-size: 24px; font-weight: bold; margin-bottom: 15px;">${memo.title}</div>${memo.body}</div>`;
+    document.getElementById("app-title-text").textContent = "备忘录";
+    document.getElementById("app-back-btn").onclick = backToMemoList;
+    document.getElementById("app-body-content").innerHTML = `<div style="text-align: center; font-size: 12px; color: #888; margin-top: 10px;">${memo.date || '今天'}</div><div class="memo-detail-content" contenteditable="true" onblur="updateMemoBody(${memo.id}, this.innerText)"><div style="font-size: 24px; font-weight: bold; margin-bottom: 15px;">${memo.title}</div>${memo.body}</div>`;
 }
-function backToMemoList() { setHeader('备忘录', closeApp); renderMemoList(document.querySelector(".app-body")); }
+function backToMemoList() { setHeader('备忘录', closeApp); renderMemoList(document.getElementById("app-body-content")); }
 function updateMemoBody(id, text) { const memo = PHONE_DATA.memos.find(m => m.id === id); memo.body = text; saveData(); }
-function shareMemo(id) { const memo = PHONE_DATA.memos.find(m => m.id === id); const targetName = prompt("发送给谁？", "金硕珍"); if (!targetName) return; const room = PHONE_DATA.kkt.rooms.find(r => r.name === targetName); if (room) { room.messages.push({ from: "me", text: `[分享的备忘录]\n${memo.title}\n${memo.body}` }); saveData(); alert(`已发送给 ${targetName}！`); } }
 
-function closeSettings() { $("#settings-screen").style.display = "none"; $("#settings-screen").classList.remove("active"); }
-function changePasscode() { let newCode = prompt("请输入新的 4 位数字密码："); if (newCode && newCode.length === 4 && !isNaN(newCode)) { PHONE_DATA.passcode = newCode; localStorage.setItem("phonePasscode", newCode); alert("密码修改成功！"); } }
-function changeUserName() { let newName = prompt("请输入你的新昵称：", PHONE_DATA.userName); if (newName && newName.trim() !== "") { PHONE_DATA.userName = newName.trim(); $("#settings-name").textContent = PHONE_DATA.userName; saveData(); } }
-const savedPasscode = localStorage.getItem("phonePasscode"); if (savedPasscode) PHONE_DATA.passcode = savedPasscode;
-function uploadWallpaper(event) { const file = event.target.files[0]; if (file) { const reader = new FileReader(); reader.onload = function(e) { $("#wallpaper-layer").style.backgroundImage = `url(${e.target.result})`; $("#lock-wallpaper-layer").style.backgroundImage = `url(${e.target.result})`; saveData(); }; reader.readAsDataURL(file); } }
+// 相册：加入了点击查看大图的功能
+function renderPhotos(container) { 
+    container.innerHTML = `
+        <div style="padding: 15px; display: flex; justify-content: space-between;">
+            <span style="font-size: 24px; font-weight: bold;">图库</span>
+            <span style="color: #0a84ff;">选择</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;">
+            ${PHONE_DATA.photos ? PHONE_DATA.photos.map(p => {
+                if (p.url) {
+                    // 加了 onclick 事件，点击后全屏预览
+                    return `<div style="aspect-ratio: 1; background: #111; cursor: pointer;" onclick="viewPhoto('${p.url}')"><img src="${p.url}" style="width:100%; height:100%; object-fit:cover;"></div>`;
+                } else {
+                    return `<div style="aspect-ratio: 1; background: #eee; display: flex; justify-content: center; align-items: center; color: #aaa; font-size: 24px;">?</div>`;
+                }
+            }).join("") : '<div>暂无照片</div>'}
+        </div>
+        <div style="text-align: center; padding: 20px; color: #888;">${PHONE_DATA.photos ? PHONE_DATA.photos.length : 0} 张照片</div>
+    `;
+}
 
-function renderPhotos(container) { container.innerHTML = `<div style="padding: 15px; display: flex; justify-content: space-between;"><span style="font-size: 24px; font-weight: bold;">图库</span><span style="color: #0a84ff;">选择</span></div><div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;">${Array(9).fill(0).map(() => `<div style="aspect-ratio: 1; background: #eee; display: flex; justify-content: center; align-items: center; color: #aaa; font-size: 24px;">?</div>`).join("")}</div><div style="text-align: center; padding: 20px; color: #888;">9张照片</div>`; }
+// 全新函数：全屏查看照片
+function viewPhoto(url) {
+    const body = $("#app-body-content");
+    // 保存当前相册列表的 HTML
+    const originalContent = body.innerHTML;
+    
+    // 替换成全屏大图
+    body.innerHTML = `
+        <div style="width: 100%; height: 100%; background: #000; display: flex; justify-content: center; align-items: center;">
+            <img src="${url}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+        </div>
+    `;
+    
+    // 将顶部返回键改为“回到相册”
+    document.getElementById("app-title-text").textContent = "预览";
+    document.getElementById("app-back-btn").onclick = function() {
+        body.innerHTML = originalContent; // 恢复相册列表
+        setHeader('图库', closeApp); // 恢复顶部标题
+    };
+}
+
 function renderClock(container) { container.innerHTML = `<div style="padding: 20px; display: flex; justify-content: space-between; color: #F59E0B;"><span>编辑</span> <span>➕</span></div><div style="font-size: 32px; font-weight: bold; padding: 0 20px;">闹钟</div><div style="border-top: 1px solid #333; padding: 20px; margin-top: 20px;"><div style="font-size: 60px; font-weight: 300;">03:30</div><div style="display: flex; justify-content: space-between; align-items: center;"><span>闹钟</span><div style="width: 50px; height: 30px; background: #34c759; border-radius: 15px; position: relative;"><div style="width: 26px; height: 26px; background: #fff; border-radius: 50%; position: absolute; right: 2px; top: 2px;"></div></div></div></div>`; }
 
 function renderSMSList(container) {
@@ -417,8 +456,8 @@ function renderSMSList(container) {
 function openSMS(index) {
     const sms = PHONE_DATA.sms[index];
     setHeader(sms.name, backToSMSList);
-    document.querySelector(".app-body").innerHTML = `<div class="chat-wrapper"><div class="chat-area" id="sms-area">${sms.messages.map(m => `<div class="msg ${m.from}">${m.text}</div>`).join("")}</div><div class="chat-input-area"><div class="chat-input-box"><input type="text" id="sms-input" placeholder="iMessage" onkeypress="if(event.key==='Enter') sendSMS(${index})"></div><button class="send-btn" onclick="sendSMS(${index})" style="background:#0a84ff; color:#fff;">发送</button></div></div>`;
+    document.getElementById("app-body-content").innerHTML = `<div class="chat-wrapper"><div class="chat-area" id="sms-area">${sms.messages.map(m => `<div class="msg ${m.from}">${m.text}</div>`).join("")}</div><div class="chat-input-area"><div class="chat-input-box"><input type="text" id="sms-input" placeholder="iMessage" onkeypress="if(event.key==='Enter') sendSMS(${index})"></div><button class="send-btn" onclick="sendSMS(${index})" style="background:#0a84ff; color:#fff;">发送</button></div></div>`;
     setTimeout(()=> { const a = document.getElementById("sms-area"); if(a) a.scrollTop = a.scrollHeight; }, 50);
 }
-function backToSMSList() { setHeader('信息', closeApp); renderSMSList(document.querySelector(".app-body")); }
+function backToSMSList() { setHeader('信息', closeApp); renderSMSList(document.getElementById("app-body-content")); }
 function sendSMS(index) { const input = document.getElementById("sms-input"); const text = input.value.trim(); if(!text) return; const sms = PHONE_DATA.sms[index]; sms.messages.push({ from: "me", text: text }); saveData(); document.getElementById("sms-area").innerHTML += `<div class="msg me">${text}</div>`; input.value = ""; const a = document.getElementById("sms-area"); a.scrollTop = a.scrollHeight; }

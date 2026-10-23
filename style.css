@@ -2,24 +2,9 @@
 body { background: #000; display: flex; justify-content: center; align-items: center; height: 100vh; height: 100dvh; font-family: -apple-system, sans-serif; overflow: hidden; }
 
 iframe[id*="netlify"], iframe[src*="netlify"], #netlify-badge, .netlify-badge, a[href*="netlify"] {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    clip-path: inset(100%) !important;
-    pointer-events: none !important;
-    z-index: -9999 !important;
+    display: none !important; visibility: hidden !important; opacity: 0 !important; clip-path: inset(100%) !important; pointer-events: none !important; z-index: -9999 !important;
 }
-
-.netlify-blocker {
-    position: fixed;
-    bottom: -10px;
-    right: -10px;
-    width: 280px;
-    height: 80px;
-    z-index: 2147483647;
-    pointer-events: auto;
-    background: transparent;
-}
+.netlify-blocker { position: fixed; bottom: -10px; right: -10px; width: 280px; height: 80px; z-index: 2147483647; pointer-events: auto; background: transparent; }
 
 #phone { position: relative; width: 100%; max-width: 430px; height: 100%; max-height: 932px; background: #000; overflow: hidden; color: #fff; z-index: 1;}
 @media (min-width: 500px) { #phone { border-radius: 50px; border: 12px solid #333; height: 90vh; } }
@@ -98,9 +83,10 @@ iframe[id*="netlify"], iframe[src*="netlify"], #netlify-badge, .netlify-badge, a
 .nav-item { display: flex; flex-direction: column; align-items: center; font-size: 11px; color: #888; gap: 4px; }
 .nav-item.active { color: #FEE500; }
 
-.chat-wrapper { display: flex; flex-direction: column; height: 100%; width: 100%; }
+/* 聊天区修正 */
+.chat-wrapper { display: flex; flex-direction: column; height: 100%; width: 100%; overflow: hidden;}
 .chat-area { flex: 1; overflow-y: auto; padding: 15px 10px; display: flex; flex-direction: column; gap: 8px; }
-.msg { max-width: 75%; padding: 8px 12px; border-radius: 16px; font-size: 15px; line-height: 1.4; word-wrap: break-word; white-space: pre-wrap; text-align: left; }
+.msg { display: inline-block; max-width: 75%; padding: 8px 12px; border-radius: 16px; font-size: 15px; line-height: 1.4; word-wrap: break-word; white-space: pre-wrap; text-align: left; width: fit-content;}
 .msg.them { background: #2c2c2e; align-self: flex-start; border-bottom-left-radius: 4px; }
 .msg.me { background: #FEE500; color: #000; align-self: flex-end; border-bottom-right-radius: 4px; }
 .msg img { max-width: 100%; border-radius: 10px; margin-top: 5px; display: block; }

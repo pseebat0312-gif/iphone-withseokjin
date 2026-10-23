@@ -3,7 +3,6 @@ let inputCode = "";
 let currentRoomId = null;
 let isBannerHovered = false;
 
-// 终极清理 Netlify
 setInterval(() => {
     document.querySelectorAll('*').forEach(el => {
         if (el.id && el.id.includes('netlify')) el.remove();
@@ -13,7 +12,6 @@ setInterval(() => {
     });
 }, 1000);
 
-// 数据加载
 let savedData = localStorage.getItem("phoneData");
 if (savedData) {
     const parsed = JSON.parse(savedData);
@@ -258,10 +256,10 @@ function openApp(id) {
     if (id === 'sms') title = '信息';
     if (id === 'photos') title = '图库';
     
-    // 初始进入 App，左上角统一是返回桌面
+    // 初始化外部 App 的 Header 为返回桌面
     header.innerHTML = `
         <button class="back-btn" onclick="closeApp()">‹ 返回</button>
-        <span class="app-title" id="header-main-title">${title}</span>
+        <span class="app-title" id="main-app-title">${title}</span>
         <span style="width: 60px;"></span>
     `;
     view.appendChild(header);
@@ -278,7 +276,7 @@ function openApp(id) {
     else body.innerHTML = `<div style="color:#888;text-align:center;padding:20px;">功能开发中</div>`;
 }
 
-// 唯一能够彻底关闭 App 回到桌面的人
+// 退出整个 App 进桌面
 function closeApp() {
     $("#app-view").classList.remove("active");
     $("#app-view").innerHTML = "";
@@ -322,7 +320,8 @@ function openChat(roomId) {
     PHONE_DATA.appsPage1.find(a => a.id === 'kkt').unread = 0;
     saveData();
 
-    // 重点修复：顶部标题动态变成聊天对象的名字，左上角按钮绑定向 chat list 退出的专属函数 backToChatList
+    // 关键修复：这个函数里，绝对不再调用 renderHome()。只改 Header 和 Body！
+    // 标题变成 room.name，返回按钮死死绑定 backToChatList
     document.querySelector(".app-header").innerHTML = `
         <button class="back-btn" onclick="backToChatList()">‹ 聊天</button>
         <span class="app-title" id="chat-title">${room.name}</span>
@@ -353,16 +352,16 @@ function openChat(roomId) {
     scrollToBottom();
 }
 
-// 专属函数：退回聊天列表，绝对不关掉 KKT
+// 关键修复：只有点这按钮才会返回列表，不关掉 KKT
 function backToChatList() {
     currentRoomId = null;
-    // 恢复 Header 的大标题
+    // 把 Header 恢复成列表样式
     document.querySelector(".app-header").innerHTML = `
         <button class="back-btn" onclick="closeApp()">‹ 返回</button>
-        <span class="app-title" id="header-main-title">KakaoTalk</span>
+        <span class="app-title">KakaoTalk</span>
         <span style="width: 60px;"></span>
     `;
-    // 重新渲染列表页
+    // 重新渲染列表
     renderKKT(document.querySelector(".app-body"));
     renderHome();
 }
@@ -414,9 +413,10 @@ async function sendMessage() {
     document.getElementById("chat-title").textContent = "对方正在输入...";
 
     try {
-        let finalPrompt = room.prompt + ` 用户的名字是：${PHONE_DATA.userName}。请仔细阅读我发你的历史聊天记录，顺着上一句的话题继续聊！回复必须极简（不超过15字），必须口语化，严禁括号动作！如果你有多句话想发，请用竖线 | 分割开。`;
+        let finalPrompt = room.prompt + ` 用户的名字是：${PHONE_DATA.userName}。请仔细阅读历史聊天记录，顺着上一句的话题继续聊！回复必须极简（不超过15字），必须口语化，严禁括号动作！如果你有多句话想发，请用竖线 | 分割开。`;
         
-        const recentMessages = room.messages.filter(m => !m.image).map(m => ({
+        // 这里是重点：把你能看到的完整历史（最多前10条）发给 AI，不让它失忆
+        const recentMessages = room.messages.slice(-10).filter(m => !m.image).map(m => ({
             role: m.from === 'me' ? 'user' : 'assistant',
             content: m.text || "发了一张图片"
         }));

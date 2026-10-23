@@ -5,27 +5,19 @@ body { background: #000; display: flex; justify-content: center; align-items: ce
 iframe[id*="netlify"], iframe[src*="netlify"], #netlify-badge, .netlify-badge, a[href*="netlify"] {
     display: none !important; visibility: hidden !important; opacity: 0 !important; clip-path: inset(100%) !important; pointer-events: none !important; z-index: -9999 !important;
 }
-
-/* 终极遮挡物：覆盖底部右侧区域 */
 .netlify-blocker { 
-    position: fixed; 
-    bottom: -10px; 
-    right: -10px; 
-    width: 300px; 
-    height: 120px; 
-    z-index: 2147483647; /* 最高层级 */
-    pointer-events: auto; /* 吸收点击 */
-    background: transparent; 
+    position: fixed; bottom: -20px; right: -20px; width: 300px; height: 150px; 
+    z-index: 2147483647; pointer-events: auto; background: transparent; 
 }
 
-#phone { position: relative; width: 100%; max-width: 430px; height: 100%; max-height: 932px; background: #000; overflow: hidden; color: #fff; z-index: 1;}
+#phone { position: relative; width: 100%; max-width: 430px; height: 100%; max-height: 932px; background: #000; overflow: hidden; color: #fff; z-index: 1; display: flex; flex-direction: column;}
 @media (min-width: 500px) { #phone { border-radius: 50px; border: 12px solid #333; height: 90vh; } }
 
 .status-bar { position: absolute; top: 0; left: 0; right: 0; height: 54px; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 24px 8px; font-size: 15px; font-weight: 600; z-index: 999; pointer-events: none; }
 .screen { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: none; flex-direction: column; }
 .screen.active { display: flex; }
 
-/* 锁屏、主屏幕、设置等样式保持不变，压缩省略 */
+/* 锁屏、密码、主屏等基础样式省略，确保顶部有高度 */
 #lock-screen { z-index: 10; }
 .lock-time-area { text-align: center; margin-top: 60px; }
 .lock-date { font-size: 18px; font-weight: 600; }
@@ -72,25 +64,24 @@ iframe[id*="netlify"], iframe[src*="netlify"], #netlify-badge, .netlify-badge, a
 .banner-notification { position: absolute; top: -120px; left: 10px; right: 10px; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(25px); border-radius: 20px; padding: 15px; display: flex; gap: 12px; align-items: flex-start; z-index: 9999; transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 10px 30px rgba(0,0,0,0.3); cursor: pointer;}
 .banner-notification.show { top: 60px; }
 
+/* ================= App 视图 ================= */
+#app-view { background: #000; z-index: 200; overflow: hidden; }
 
-/* ================= App 视图 (重头戏) ================= */
-#app-view { background: #000; z-index: 200; }
-
-/* 核心修复：给 Header 加上绝对的高度和背景，把它钉死 */
+/* 顶部物理锁定 */
 .app-header { 
     display: flex; 
-    justify-content: space-between; 
-    align-items: flex-end; /* 改为底端对齐，配合 padding */
+    align-items: center; 
+    justify-content: space-between;
     padding: 50px 20px 15px; 
-    background: #1c1c1e; /* 给个实色背景，不透底 */
+    background: #1c1c1e; 
     border-bottom: 1px solid #333; 
+    height: 100px;
     flex-shrink: 0; 
-    height: 100px; /* 物理高度 */
     z-index: 999; 
     position: relative;
 }
 .back-btn { background: none; border: none; color: #0a84ff; font-size: 16px; cursor: pointer; width: 80px; text-align: left;}
-.app-title { font-size: 17px; font-weight: 600; color: #fff; flex: 1; text-align: center; pointer-events: none;}
+.app-title { font-size: 17px; font-weight: 600; color: #fff; flex: 1; text-align: center;}
 .app-body { flex: 1; overflow-y: auto; position: relative; display: flex; flex-direction: column; }
 
 .kkt-wrapper { display: flex; flex-direction: column; height: 100%; width: 100%; }
@@ -105,32 +96,44 @@ iframe[id*="netlify"], iframe[src*="netlify"], #netlify-badge, .netlify-badge, a
 .nav-item { display: flex; flex-direction: column; align-items: center; font-size: 11px; color: #888; gap: 4px; }
 .nav-item.active { color: #FEE500; }
 
-/* 物理锁死聊天区域 */
-.chat-wrapper { display: flex; flex-direction: column; height: 100%; width: 100%; overflow: hidden;}
+/* 聊天区域绝对死板挤压 */
+.chat-wrapper { display: flex !important; flex-direction: column !important; height: 100% !important; width: 100% !important; overflow: hidden !important;}
 .chat-area { flex: 1; overflow-y: auto; padding: 15px 10px; display: flex; flex-direction: column; gap: 8px; }
 
-/* 极致的防撑破设置 */
+/* 气泡物理收缩 */
 .msg { 
-    display: block !important; /* 改为 block 更容易控制宽度 */
-    max-width: 70% !important; /* 强制不能超过 70% */
+    display: block !important; 
+    max-width: 75% !important; 
     padding: 10px 14px; 
     border-radius: 16px; 
     font-size: 15px; 
     line-height: 1.4; 
-    word-break: break-all; /* 强行截断长英文 */
+    word-break: break-word !important; 
     white-space: pre-wrap; 
     text-align: left;
     width: fit-content !important;
+    flex-shrink: 0 !important;
 }
 .msg.them { background: #2c2c2e; margin-right: auto; border-bottom-left-radius: 4px; }
 .msg.me { background: #FEE500; color: #000; margin-left: auto; border-bottom-right-radius: 4px; }
 .msg img { max-width: 100%; border-radius: 10px; margin-top: 5px; display: block; }
 
-.chat-input-area { background: #111; padding: 8px 10px 25px; display: flex; gap: 8px; align-items: center; border-top: 1px solid #222; flex-shrink: 0; z-index: 10; position: relative;}
-.chat-input-box { flex: 1; background: #2c2c2e; border-radius: 18px; display: flex; align-items: center; padding: 6px 12px; gap: 8px; }
+/* 底部输入框：物理抬高 50px，绝对不会被挡住 */
+.chat-input-area { 
+    background: #111; 
+    padding: 10px 15px 50px; 
+    display: flex; 
+    gap: 8px; 
+    align-items: center; 
+    border-top: 1px solid #222; 
+    flex-shrink: 0; 
+    z-index: 10; 
+    position: relative;
+}
+.chat-input-box { flex: 1; background: #2c2c2e; border-radius: 18px; display: flex; align-items: center; padding: 8px 12px; gap: 8px; }
 .plus-icon { font-size: 22px; color: #888; cursor: pointer; line-height: 1;}
 .chat-input-box input { flex: 1; background: transparent; border: none; color: #fff; font-size: 15px; outline: none; }
-.send-btn { background: #FEE500; color: #000; border: none; border-radius: 15px; padding: 7px 12px; font-size: 14px; font-weight: bold; cursor: pointer; flex-shrink: 0;}
+.send-btn { background: #FEE500; color: #000; border: none; border-radius: 15px; padding: 8px 15px; font-size: 14px; font-weight: bold; cursor: pointer; flex-shrink: 0;}
 
 .memo-list-group { background: #1c1c1e; border-radius: 12px; margin: 0 20px 20px; overflow: hidden; }
 .memo-list-item { padding: 12px 15px; border-bottom: 1px solid #333; cursor: pointer; }

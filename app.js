@@ -13,7 +13,14 @@ setInterval(() => {
     });
 }, 1000);
 
-// 数据加载
+// 数据加载 (强行清除一次旧版的大框数据)
+let currentVersion = "v5.0"; 
+let savedVersion = localStorage.getItem("appVersion");
+if (savedVersion !== currentVersion) {
+    localStorage.removeItem("phoneData");
+    localStorage.setItem("appVersion", currentVersion);
+}
+
 let savedData = localStorage.getItem("phoneData");
 if (savedData) {
     const parsed = JSON.parse(savedData);
@@ -87,7 +94,7 @@ function handleKeyPress(k) {
             $("#passcode-screen").classList.remove("active");
             $("#home-screen").classList.add("active");
             renderHome();
-            startProactiveMessages(); // 启动全员主动发消息
+            startProactiveMessages(); 
         } else {
             $("#passcode-screen").classList.add("shake");
             setTimeout(() => { $("#passcode-screen").classList.remove("shake"); inputCode = ""; $("#dots").innerHTML = ""; }, 400);
@@ -95,7 +102,7 @@ function handleKeyPress(k) {
     }
 }
 
-// ================= 核心：全员主动发消息 & 弹窗 =================
+// 主动发消息
 let bannerTimeout;
 let proactiveInterval;
 
@@ -120,14 +127,9 @@ function pushNewMessage(roomId, text) {
 
 function startProactiveMessages() {
     if (proactiveInterval) clearInterval(proactiveInterval);
-    // 每 3 分钟（180000 毫秒），随机挑选一个好友主动发消息
     proactiveInterval = setInterval(() => {
-        if ($("#app-view").classList.contains("active") && currentRoomId !== null) {
-            return; // 如果用户正在某人的聊天室里，就不打扰
-        }
-        // 随机选一个好友
+        if ($("#app-view").classList.contains("active") && currentRoomId !== null) return; 
         const randomRoom = PHONE_DATA.kkt.rooms[Math.floor(Math.random() * PHONE_DATA.kkt.rooms.length)];
-        // 优先从主动台词里随机选，如果没有就发一句“在干嘛”
         let textToSend = "在干嘛";
         if (randomRoom.proactiveTexts && randomRoom.proactiveTexts.length > 0) {
             textToSend = randomRoom.proactiveTexts[Math.floor(Math.random() * randomRoom.proactiveTexts.length)];
@@ -143,9 +145,7 @@ function showBanner(n) {
     $("#banner-title").textContent = n.title;
     $("#banner-msg").textContent = n.message;
     banner.classList.add("show");
-    banner.onclick = () => {
-        if (!isBannerHovered) { hideBanner(); openApp("kkt"); openChat(n.roomId); }
-    };
+    banner.onclick = () => { if (!isBannerHovered) { hideBanner(); openApp("kkt"); openChat(n.roomId); } };
     if (navigator.vibrate) navigator.vibrate(100);
     clearTimeout(bannerTimeout);
     bannerTimeout = setTimeout(hideBanner, 2500);
@@ -153,9 +153,7 @@ function showBanner(n) {
 
 function hideBanner() { $("#banner-notification").classList.remove("show"); isBannerHovered = false; clearTimeout(bannerTimeout); }
 $("#banner-notification").addEventListener("touchstart", e => { touchStartY = e.touches[0].clientY; isBannerHovered = true; });
-$("#banner-notification").addEventListener("touchend", e => {
-    if (touchStartY - e.changedTouches[0].clientY > 30) { hideBanner(); } else { isBannerHovered = false; }
-});
+$("#banner-notification").addEventListener("touchend", e => { if (touchStartY - e.changedTouches[0].clientY > 30) { hideBanner(); } else { isBannerHovered = false; } });
 
 function renderHomeNotifications() {
     const wrapper = $("#home-notifications-wrapper");
@@ -176,7 +174,6 @@ function renderHomeNotifications() {
     } else { wrapper.style.display = 'none'; }
 }
 
-// ================= 基础渲染 =================
 function renderHome() {
     renderPage("page-1", PHONE_DATA.appsPage1);
     renderPage("page-2", PHONE_DATA.appsPage2);
@@ -199,11 +196,7 @@ function createIcon(app) {
 
 function setHeader(title, backAction) {
     const header = document.querySelector(".app-header");
-    header.innerHTML = `
-        <button class="back-btn">‹ 返回</button>
-        <span class="app-title">${title}</span>
-        <span style="width: 60px;"></span>
-    `;
+    header.innerHTML = `<button class="back-btn">‹ 返回</button><span class="app-title">${title}</span><span style="width: 60px;"></span>`;
     header.querySelector(".back-btn").onclick = backAction;
 }
 
@@ -340,7 +333,6 @@ function sendImage(event) {
     event.target.value = ""; 
 }
 
-// ================= 核心：发送消息并强制连发 2-8 条 =================
 async function sendMessage() {
     const input = document.getElementById("chat-input");
     const text = input.value.trim();
@@ -358,8 +350,7 @@ async function sendMessage() {
     document.querySelector(".app-title").textContent = "对方正在输入...";
 
     try {
-        // 极端严厉的 Prompt，强迫 AI 分出多句话
-        let finalPrompt = room.prompt + ` 用户的名字是：${PHONE_DATA.userName}。请仔细阅读历史聊天记录，顺着话题继续聊。回复必须极简，口语化，绝对禁止括号动作描写！你每次必须连续发 2 到 3 句话，中间用竖线 | 隔开！`;
+        let finalPrompt = room.prompt + ` 用户的名字是：${PHONE_DATA.userName}。顺着话题聊。严禁提及自己是AI（如果用户提到了，你要生气地反驳）。回复必须极简口语化。如果你有多句话要说，必须用竖线 | 分隔开！`;
         
         const recentMessages = room.messages.slice(-15).map(m => ({
             role: m.from === 'me' ? 'user' : 'assistant',
@@ -375,15 +366,10 @@ async function sendMessage() {
         const data = await response.json();
         document.querySelector(".app-title").textContent = room.name;
         
-        // 按照竖线分割
         let replies = data.reply.split('|').map(t => t.trim()).filter(t => t !== '');
-        
-        // 如果 AI 偷懒只发了一条，我们强制把它按句号拆分
         if (replies.length === 1 && replies[0].length > 15) {
             replies = replies[0].split('。').map(t => t.trim() + '。').filter(t => t !== '。');
         }
-        
-        // 限制最多发 4 条，防止刷屏
         replies = replies.slice(0, 4); 
 
         let delay = 0;
@@ -394,7 +380,7 @@ async function sendMessage() {
                 chatArea.innerHTML += `<div class="msg them">${replyText}</div>`;
                 scrollToBottom();
             }, delay);
-            delay += 800; // 每条间隔 0.8 秒
+            delay += 800; 
         });
 
     } catch (error) {
@@ -402,12 +388,8 @@ async function sendMessage() {
     }
 }
 
-// 备忘录、相册等
 function renderMemoList(container) {
-    container.innerHTML = `
-        <div style="padding: 15px; display: flex; justify-content: space-between;"><span style="font-size: 24px; font-weight: bold;">备忘录</span><span style="color: #FEE500;">➕</span></div>
-        <div class="memo-list-group">${PHONE_DATA.memos.map(m => `<div class="memo-list-item" onclick="openMemoDetail(${m.id})"><div class="memo-list-title">${m.title}</div><div class="memo-list-preview">${m.date || ''} ${m.body.replace(/\n/g, ' ')}</div></div>`).join("")}</div>
-    `;
+    container.innerHTML = `<div style="padding: 15px; display: flex; justify-content: space-between;"><span style="font-size: 24px; font-weight: bold;">备忘录</span><span style="color: #FEE500;">➕</span></div><div class="memo-list-group">${PHONE_DATA.memos.map(m => `<div class="memo-list-item" onclick="openMemoDetail(${m.id})"><div class="memo-list-title">${m.title}</div><div class="memo-list-preview">${m.date || ''} ${m.body.replace(/\n/g, ' ')}</div></div>`).join("")}</div>`;
 }
 function openMemoDetail(memoId) {
     const memo = PHONE_DATA.memos.find(m => m.id === memoId);

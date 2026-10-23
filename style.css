@@ -1,8 +1,13 @@
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 body { background: #000; display: flex; justify-content: center; align-items: center; height: 100vh; height: 100dvh; font-family: -apple-system, sans-serif; overflow: hidden; }
 
-/* 暴力移除 Netlify */
-#netlify-badge, [id^="netlify"], [class^="netlify-badge"], .netlify-badge, iframe[src*="netlify"], div[style*="position: fixed"][style*="bottom"][style*="right"] { display: none !important; opacity: 0 !important; visibility: hidden !important; z-index: -9999 !important; }
+/* 用物理裁切干掉 Netlify 的任何残留 */
+#netlify-badge, [id^="netlify"], [class*="netlify"], iframe[src*="netlify"], a[href*="netlify"] { 
+    display: none !important; 
+    clip-path: inset(100%) !important; 
+    visibility: hidden !important; 
+    z-index: -9999 !important; 
+}
 
 #phone { position: relative; width: 100%; max-width: 430px; height: 100%; max-height: 932px; background: #000; overflow: hidden; color: #fff; }
 @media (min-width: 500px) { #phone { border-radius: 50px; border: 12px solid #333; height: 90vh; } }
@@ -44,7 +49,7 @@ body { background: #000; display: flex; justify-content: center; align-items: ce
 
 /* --- 主屏幕 --- */
 #home-screen { z-index: 5; }
-.home-pages-container { display: flex; width: 100%; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 120px; padding-top: 80px;}
+.home-pages-container { display: flex; width: 100%; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 120px; padding-top: 100px;}
 .home-page { min-width: 100%; scroll-snap-align: start; display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: min-content; gap: 25px 15px; padding: 0 20px; }
 .page-dots { position: absolute; bottom: 130px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; }
 .page-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4); }
@@ -59,24 +64,24 @@ body { background: #000; display: flex; justify-content: center; align-items: ce
 .home-indicator-btn { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); width: 130px; height: 5px; background: #fff; border-radius: 10px; z-index: 999; cursor: pointer; }
 
 /* 桌面折叠消息 */
-.home-notifications-wrapper { position: absolute; top: 60px; left: 10px; right: 10px; z-index: 60; display: flex; flex-direction: column; gap: 8px; pointer-events: none;}
+.home-notifications-wrapper { position: absolute; top: 60px; left: 10px; right: 10px; z-index: 60; display: none; flex-direction: column; gap: 8px; pointer-events: none;}
 .home-notif-card { background: rgba(40, 40, 40, 0.7); backdrop-filter: blur(20px); border-radius: 18px; padding: 12px; display: flex; gap: 12px; align-items: center; pointer-events: auto; cursor: pointer; animation: slideDown 0.3s; }
 @keyframes slideDown { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
 /* --- App 视图 --- */
 #app-view { background: #000; z-index: 200; }
-.app-header { display: flex; justify-content: space-between; align-items: center; padding: 60px 20px 15px; background: rgba(30, 30, 30, 0.95); font-weight: 600; border-bottom: 1px solid #222; }
+.app-header { display: flex; justify-content: space-between; align-items: center; padding: 60px 20px 15px; background: rgba(30, 30, 30, 0.95); font-weight: 600; border-bottom: 1px solid #222; flex-shrink: 0; }
 .back-btn { background: none; border: none; color: #0a84ff; font-size: 16px; cursor: pointer; width: 80px; text-align: left; display: flex; align-items: center; gap: 4px;}
 .app-title { font-size: 17px; }
-.app-body { flex: 1; overflow-y: auto; position: relative; }
+.app-body { flex: 1; overflow-y: auto; position: relative; display: flex; flex-direction: column; }
 
 /* --- 通知横幅 --- */
 .banner-notification { position: absolute; top: -120px; left: 10px; right: 10px; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(25px); border-radius: 20px; padding: 15px; display: flex; gap: 12px; align-items: flex-start; z-index: 9999; transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 10px 30px rgba(0,0,0,0.3); cursor: pointer;}
 .banner-notification.show { top: 60px; }
 
-/* --- KKT 界面 (卡死修复) --- */
-.kkt-wrapper { display: flex; flex-direction: column; height: 100%; }
-.kkt-list { flex: 1; overflow-y: auto; padding: 0 15px 80px; } /* 底部留出导航栏空间 */
+/* --- KKT --- */
+.kkt-wrapper { display: flex; flex-direction: column; height: 100%; width: 100%; }
+.kkt-list { flex: 1; overflow-y: auto; padding: 0 15px 80px; } /* 留出底部空间 */
 .kkt-room { display: flex; align-items: center; gap: 15px; padding: 15px 0; border-bottom: 1px solid #222; cursor: pointer; }
 .avatar { width: 50px; height: 50px; border-radius: 50%; background: #333; display: flex; justify-content: center; align-items: center; font-size: 24px; flex-shrink: 0;}
 .room-info { flex: 1; overflow: hidden; }
@@ -88,9 +93,9 @@ body { background: #000; display: flex; justify-content: center; align-items: ce
 .nav-item { display: flex; flex-direction: column; align-items: center; font-size: 11px; color: #888; gap: 4px; }
 .nav-item.active { color: #FEE500; }
 
-.chat-wrapper { display: flex; flex-direction: column; height: 100%; }
+.chat-wrapper { display: flex; flex-direction: column; height: 100%; width: 100%; }
 .chat-area { flex: 1; overflow-y: auto; padding: 20px 15px; display: flex; flex-direction: column; gap: 10px; }
-.msg { max-width: 70%; padding: 10px 14px; border-radius: 18px; font-size: 15px; line-height: 1.4; word-wrap: break-word;}
+.msg { max-width: 75%; padding: 10px 14px; border-radius: 18px; font-size: 15px; line-height: 1.4; word-wrap: break-word;}
 .msg.them { background: #2c2c2e; align-self: flex-start; border-bottom-left-radius: 4px; }
 .msg.me { background: #FEE500; color: #000; align-self: flex-end; border-bottom-right-radius: 4px; }
 .msg img { max-width: 100%; border-radius: 10px; margin-top: 5px; display: block; }
@@ -101,8 +106,7 @@ body { background: #000; display: flex; justify-content: center; align-items: ce
 .chat-input-box input { flex: 1; background: transparent; border: none; color: #fff; font-size: 15px; outline: none; }
 .send-btn { background: #FEE500; color: #000; border: none; border-radius: 15px; padding: 8px 15px; font-size: 14px; font-weight: bold; cursor: pointer; }
 
-/* --- 备忘录 --- */
-.memo-header { padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; color: #888; font-size: 15px; }
+/* --- 备忘录 / 信息 等共用样式 --- */
 .memo-list-group { background: #1c1c1e; border-radius: 12px; margin: 0 20px 20px; overflow: hidden; }
 .memo-list-item { padding: 12px 15px; border-bottom: 1px solid #333; cursor: pointer; }
 .memo-list-title { font-size: 16px; font-weight: 600; margin-bottom: 4px; color: #fff; }

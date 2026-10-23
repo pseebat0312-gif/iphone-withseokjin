@@ -1,10 +1,11 @@
 const $ = (selector) => document.querySelector(selector);
 let inputCode = "";
+let currentRoomId = null;
+let isBannerHovered = false;
 
 // 0. 终极防线：暴力移除 Netlify
 setInterval(() => {
-    const allElements = document.querySelectorAll('*');
-    allElements.forEach(el => {
+    document.querySelectorAll('*').forEach(el => {
         if (el.id && el.id.includes('netlify')) el.remove();
         if (el.className && typeof el.className === 'string' && el.className.includes('netlify')) el.remove();
         if (el.tagName === 'IFRAME' && el.src && el.src.includes('netlify')) el.remove();
@@ -12,17 +13,19 @@ setInterval(() => {
     });
 }, 1000);
 
-// 1. 初始化与缓存
+// 1. 数据加载与保存 (重点：完全保存聊天记录，清理旧版本)
 let savedData = localStorage.getItem("phoneData");
 if (savedData) {
     const parsed = JSON.parse(savedData);
     if (parsed.version !== PHONE_DATA.version) {
+        // 强制清理旧版本缓存，因为逻辑变了
         localStorage.removeItem("phoneData");
+        saveData(); 
     } else {
         PHONE_DATA.kkt = parsed.kkt;
         PHONE_DATA.appsPage1 = parsed.appsPage1;
         PHONE_DATA.memos = parsed.memos;
-        PHONE_DATA.sms = parsed.sms || PHONE_DATA.sms;
+        PHONE_DATA.sms = parsed.sms;
         if(parsed.userName) PHONE_DATA.userName = parsed.userName;
         if(parsed.wallpaper) {
             $("#wallpaper-layer").style.backgroundImage = `url(${parsed.wallpaper})`;
@@ -30,7 +33,6 @@ if (savedData) {
         }
     }
 }
-
 $("#settings-name").textContent = PHONE_DATA.userName;
 
 function saveData() {
@@ -58,7 +60,7 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// 3. 解锁逻辑
+// 3. 解锁
 let touchStartY = 0;
 $("#lock-screen").addEventListener("touchstart", e => touchStartY = e.touches[0].clientY);
 $("#lock-screen").addEventListener("touchend", e => {
@@ -67,13 +69,14 @@ $("#lock-screen").addEventListener("touchend", e => {
         $("#passcode-screen").classList.add("active");
     }
 });
-$("#lock-screen").addEventListener("click", () => {
-    $("#lock-screen").classList.remove("active");
-    $("#passcode-screen").classList.add("active");
-});
 $("#swipe-down-trigger").addEventListener("click", () => {
     $("#passcode-screen").classList.remove("active");
     $("#lock-screen").classList.add("active");
+});
+// 电脑端点击测试解锁
+$("#lock-screen").addEventListener("click", () => {
+    $("#lock-screen").classList.remove("active");
+    $("#passcode-screen").classList.add("active");
 });
 
 const keypad = $("#keypad");
@@ -98,7 +101,7 @@ function handleKeyPress(k) {
             $("#passcode-screen").classList.remove("active");
             $("#home-screen").classList.add("active");
             renderHome();
-            startJinBombing(); // 启动金硕珍轰炸
+            startJinBombing();
         } else {
             $("#passcode-screen").classList.add("shake");
             setTimeout(() => {
@@ -109,7 +112,7 @@ function handleKeyPress(k) {
     }
 }
 
-// 4. 真实推送机制 & 金硕珍轰炸
+// 4. 真实推送逻辑 (10分钟轰炸、日常吵架)
 let bannerTimeout;
 let jinInterval;
 
@@ -117,37 +120,36 @@ function pushNewMessage(roomId, text) {
     const room = PHONE_DATA.kkt.rooms.find(r => r.id === roomId);
     if (!room) return;
 
-    // 存入数据
     room.messages.push({ from: "them", text: text });
     room.unread += 1;
     const kktApp = PHONE_DATA.appsPage1.find(a => a.id === 'kkt');
     kktApp.unread = (kktApp.unread || 0) + 1;
     saveData();
 
-    // 如果当前正好在这个聊天室，直接刷新聊天界面
+    // 如果在当前聊天室，直接刷新，不弹窗
     if ($("#app-view").classList.contains("active") && currentRoomId === roomId) {
         document.getElementById("chat-area").innerHTML += `<div class="msg them">${text}</div>`;
         scrollToBottom();
-        room.unread = 0; // 当前在看，标记已读
+        room.unread = 0; 
         kktApp.unread = 0;
         saveData();
     } else {
-        // 不在聊天室，弹出横幅
-        showBanner({ icon: room.avatar, bg: "#FEE500", title: room.name, message: text });
-        renderHomeNotifications(); // 更新桌面折叠卡片
+        // 不在聊天室，弹窗
+        showBanner({ icon: room.avatar, bg: "#FEE500", title: room.name, message: text, roomId: roomId });
+        renderHomeNotifications();
     }
 }
 
 function startJinBombing() {
     if (jinInterval) clearInterval(jinInterval);
-    // 每 45 秒金硕珍发一条消息
+    // 改成了 10 分钟 (600000 毫秒)，每次发点日常或者发点小脾气
     jinInterval = setInterval(() => {
         if (!$("#app-view").classList.contains("active") || currentRoomId !== "r1") {
-            const texts = ["宝宝理理我🥺", "你在干嘛呀？", "是不是在忙？", "我有点想你了...", "今晚见一面好不好？"];
+            const texts = ["你是不是又没看手机？", "电影票要过期了。", "算了，不去就算了。", "喂。", "理我一下行不行。"];
             const randomText = texts[Math.floor(Math.random() * texts.length)];
             pushNewMessage("r1", randomText);
         }
-    }, 45000);
+    }, 600000);
 }
 
 function showBanner(n) {
@@ -158,38 +160,50 @@ function showBanner(n) {
     $("#banner-msg").textContent = n.message;
     banner.classList.add("show");
     
-    // 横幅点击直接进入聊天
+    // 只有在没被划走的时候才跳转
     banner.onclick = () => {
-        hideBanner();
-        const room = PHONE_DATA.kkt.rooms.find(r => r.name === n.title);
-        if (room) {
+        if (!isBannerHovered) {
+            hideBanner();
             openApp("kkt");
-            openChat(room.id);
+            openChat(n.roomId);
         }
     };
 
     if (navigator.vibrate) navigator.vibrate(100);
     clearTimeout(bannerTimeout);
-    bannerTimeout = setTimeout(hideBanner, 4000);
+    // 弹窗 2.5 秒后自动消失
+    bannerTimeout = setTimeout(hideBanner, 2500);
 }
 
-function hideBanner() { $("#banner-notification").classList.remove("show"); }
-$("#banner-notification").addEventListener("touchstart", e => touchStartY = e.touches[0].clientY);
+function hideBanner() { 
+    $("#banner-notification").classList.remove("show"); 
+    isBannerHovered = false;
+    clearTimeout(bannerTimeout);
+}
+
+// 滑动划掉弹窗
+$("#banner-notification").addEventListener("touchstart", e => {
+    touchStartY = e.touches[0].clientY;
+    isBannerHovered = true; // 手指按住时，取消点击跳转
+});
 $("#banner-notification").addEventListener("touchend", e => {
-    if (touchStartY - e.changedTouches[0].clientY > 30) hideBanner();
+    if (touchStartY - e.changedTouches[0].clientY > 30) {
+        hideBanner();
+    } else {
+        isBannerHovered = false; // 如果没滑，恢复点击功能
+    }
 });
 
-// 桌面折叠通知卡片渲染
+// 桌面折叠通知
 function renderHomeNotifications() {
     const wrapper = $("#home-notifications-wrapper");
     const kktApp = PHONE_DATA.appsPage1.find(a => a.id === 'kkt');
     
     if (kktApp.unread > 0) {
-        // 找到最新发消息的房间
         const latestRoom = PHONE_DATA.kkt.rooms.find(r => r.unread > 0) || PHONE_DATA.kkt.rooms[0];
         const lastMsg = latestRoom.messages[latestRoom.messages.length-1].text;
         wrapper.innerHTML = `
-            <div class="home-notif-card" onclick="openApp('kkt')">
+            <div class="home-notif-card" onclick="openApp('kkt'); openChat('${latestRoom.id}')">
                 <div class="notif-icon" style="background:#FEE500; color:#000;">${latestRoom.avatar}</div>
                 <div class="notif-content" style="color:#fff;">
                     <div class="notif-header" style="color:#aaa;"><span>${latestRoom.name}</span><span>现在</span></div>
@@ -203,13 +217,13 @@ function renderHomeNotifications() {
     }
 }
 
-// 5. 渲染主屏幕
+// 5. 主屏幕
 function renderHome() {
     renderPage("page-1", PHONE_DATA.appsPage1);
     renderPage("page-2", PHONE_DATA.appsPage2);
     $("#dock").innerHTML = "";
     PHONE_DATA.dock.forEach(app => $("#dock").appendChild(createIcon(app)));
-    renderHomeNotifications(); // 刷新桌面折叠卡片
+    renderHomeNotifications(); 
 }
 function renderPage(pageId, apps) {
     const container = $(`#${pageId}`);
@@ -230,7 +244,7 @@ function createIcon(app) {
     return btn;
 }
 
-// 6. App 路由
+// 6. App 路由 (完美退回上一步)
 function openApp(id) {
     const view = $("#app-view");
     view.classList.add("active");
@@ -244,8 +258,8 @@ function openApp(id) {
 
     if (id === "camera") {
         view.innerHTML = `
-            <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;background:#111;"></video>
-            <div id="camera-header" style="position:absolute; top:40px; left:10px; z-index:10;"><button class="back-btn" onclick="closeApp()">‹ 返回</button></div>
+            <div style="width:100%; height:100%; background:#111; display:flex; justify-content:center; align-items:center; color:#666;">相机未接入视频</div>
+            <div style="position:absolute; top:50px; left:10px; z-index:10;"><button class="back-btn" onclick="closeApp()">‹ 返回</button></div>
         `;
         return;
     }
@@ -280,8 +294,7 @@ function closeApp() {
 }
 $("#home-indicator").onclick = closeApp;
 
-// 7. KKT 逻辑
-let currentRoomId = null;
+// 7. KKT 聊天逻辑 (彻底修复卡死)
 function renderKKT(container) {
     const rooms = [...PHONE_DATA.kkt.rooms].sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0));
     container.innerHTML = `
@@ -315,6 +328,7 @@ function openChat(roomId) {
     PHONE_DATA.appsPage1.find(a => a.id === 'kkt').unread = 0;
     saveData();
 
+    // 只改 Header 到聊天界面
     document.querySelector(".app-header").innerHTML = `
         <button class="back-btn" onclick="backToChatList()">‹ 聊天</button>
         <span class="app-title" id="chat-title">${room.name}</span>
@@ -347,13 +361,14 @@ function openChat(roomId) {
 
 function backToChatList() {
     currentRoomId = null;
+    // 退回聊天列表的 Header
     document.querySelector(".app-header").innerHTML = `
         <button class="back-btn" onclick="closeApp()">‹ 返回</button>
         <span class="app-title">KakaoTalk</span>
         <span style="width: 60px;"></span>
     `;
     renderKKT(document.querySelector(".app-body"));
-    renderHome(); // 刷新红点
+    renderHome();
 }
 
 function scrollToBottom() {
@@ -361,7 +376,6 @@ function scrollToBottom() {
     if (chatArea) chatArea.scrollTop = chatArea.scrollHeight;
 }
 
-// 发图逻辑 (DeepSeek不支持图片，假装看一眼)
 function sendImage(event) {
     const file = event.target.files[0];
     if (!file) return;
@@ -373,12 +387,10 @@ function sendImage(event) {
         saveData();
         document.getElementById("chat-area").innerHTML += `<div class="msg me"><img src="${imageData}"></div>`;
         scrollToBottom();
-        
         document.getElementById("chat-title").textContent = "对方正在输入...";
         setTimeout(() => {
             document.getElementById("chat-title").textContent = room.name;
-            // 瞎编一个回复，根据人设
-            const reply = room.name === "金硕珍" ? "宝宝你发的是什么呀？我没看清🥺" : "姐姐这照片真好看！";
+            const reply = room.name === "金硕珍" ? "发这图什么意思？" : "看到了。";
             room.messages.push({ from: "them", text: reply });
             saveData();
             document.getElementById("chat-area").innerHTML += `<div class="msg them">${reply}</div>`;
@@ -406,9 +418,12 @@ async function sendMessage() {
     document.getElementById("chat-title").textContent = "对方正在输入...";
 
     try {
-        let finalPrompt = room.prompt + ` 用户的名字是：${PHONE_DATA.userName}。如果你不知道怎么回，就顺着上一条消息随便聊点日常。`;
+        // 严格限制字数，严禁废话
+        let finalPrompt = room.prompt + ` 用户的名字是：${PHONE_DATA.userName}。回复必须极其简短（不超过15个字），像真人发微信一样，严禁使用括号动作描写！顺着聊天记录聊。`;
         
-        const history = room.messages.filter(m => !m.image).map(m => ({
+        // 取最近的 10 条记录发给 AI，让它有上下文
+        const recentMessages = room.messages.slice(-10);
+        const history = recentMessages.filter(m => !m.image).map(m => ({
             role: m.from === 'me' ? 'user' : 'assistant',
             content: m.text || "发了一张图片"
         }));
@@ -434,10 +449,9 @@ async function sendMessage() {
 // 8. 备忘录
 function renderMemoList(container) {
     container.innerHTML = `
-        <div class="memo-header"><span>📁 文件夹</span> <span style="color:#FEE500;">➕</span></div>
-        <div style="font-size: 28px; font-weight: bold; margin: 10px 20px;">备忘录</div>
-        <div style="background: #1c1c1e; border-radius: 10px; margin: 0 20px 15px; padding: 10px; display: flex; align-items: center; color: #888; gap: 10px;">
-            🔍 搜索
+        <div style="padding: 15px; display: flex; justify-content: space-between;">
+            <span style="font-size: 24px; font-weight: bold;">备忘录</span>
+            <span style="color: #FEE500;">➕</span>
         </div>
         <div class="memo-list-group">
             ${PHONE_DATA.memos.map(m => `
@@ -493,8 +507,6 @@ function shareMemo(id) {
         room.messages.push({ from: "me", text: `[分享的备忘录]\n${memo.title}\n${memo.body}` });
         saveData();
         alert(`已发送给 ${targetName}！`);
-    } else {
-        alert("没找到这个联系人。");
     }
 }
 
@@ -543,9 +555,9 @@ function renderPhotos(container) {
             <span style="color: #0a84ff;">选择</span>
         </div>
         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;">
-            ${Array(9).fill(0).map(() => `<div style="aspect-ratio: 1; background: #eee; display: flex; justify-content: center; align-items: center; color: #aaa;">?</div>`).join("")}
+            ${Array(9).fill(0).map(() => `<div style="aspect-ratio: 1; background: #eee; display: flex; justify-content: center; align-items: center; color: #aaa; font-size: 24px;">?</div>`).join("")}
         </div>
-        <div style="text-align: center; padding: 20px; color: #888;">13张照片</div>
+        <div style="text-align: center; padding: 20px; color: #888;">9张照片</div>
     `;
 }
 
@@ -555,19 +567,11 @@ function renderClock(container) {
             <span>编辑</span> <span>➕</span>
         </div>
         <div style="font-size: 32px; font-weight: bold; padding: 0 20px;">闹钟</div>
-        <div style="padding: 20px; color: #fff;">睡眠 | 起床闹钟 <span style="float: right; color: #888;">设置</span></div>
-        <div style="border-top: 1px solid #333; padding: 20px;">
+        <div style="border-top: 1px solid #333; padding: 20px; margin-top: 20px;">
             <div style="font-size: 60px; font-weight: 300;">03:30</div>
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <span>闹钟</span>
                 <div style="width: 50px; height: 30px; background: #34c759; border-radius: 15px; position: relative;"><div style="width: 26px; height: 26px; background: #fff; border-radius: 50%; position: absolute; right: 2px; top: 2px;"></div></div>
-            </div>
-        </div>
-        <div style="border-top: 1px solid #333; padding: 20px;">
-            <div style="font-size: 60px; font-weight: 300; color: #888;">07:00</div>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span style="color: #888;">闹钟 · 工作日</span>
-                <div style="width: 50px; height: 30px; background: #333; border-radius: 15px; position: relative;"><div style="width: 26px; height: 26px; background: #fff; border-radius: 50%; position: absolute; left: 2px; top: 2px;"></div></div>
             </div>
         </div>
     `;

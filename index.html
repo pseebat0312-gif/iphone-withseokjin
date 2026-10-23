@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>金硕珍的手机</title>
+    <title>金硕珍女友的手机</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- 终极防遮挡遮罩层：强行盖住右下角的任何第三方挂件 -->
+    <!-- 物理级防遮挡遮罩：盖住右下角 -->
     <div class="netlify-blocker"></div>
 
     <div id="phone">
@@ -16,7 +16,6 @@
             <div class="status-icons"><span>📶</span><span>🔋</span></div>
         </div>
 
-        <!-- 锁屏 -->
         <section id="lock-screen" class="screen active">
             <div id="lock-wallpaper-layer" style="position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop') center/cover; z-index: -1;"></div>
             <div class="lock-notifications" id="lock-notifications"></div>
@@ -30,7 +29,6 @@
             </div>
         </section>
 
-        <!-- 密码 -->
         <section id="passcode-screen" class="screen">
             <div class="passcode-area">
                 <div class="dots" id="dots"></div>
@@ -41,7 +39,6 @@
             </div>
         </section>
 
-        <!-- 主屏幕 -->
         <section id="home-screen" class="screen">
             <div id="wallpaper-layer" style="position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop') center/cover; z-index: -1;"></div>
             <div id="home-notifications-wrapper" class="home-notifications-wrapper"></div>
@@ -57,7 +54,6 @@
             <div class="home-indicator-btn" id="home-indicator"></div>
         </section>
 
-        <!-- 设置 -->
         <section id="settings-screen" class="screen" style="background: #000; z-index: 300; color: #fff; padding: 60px 20px 20px; overflow-y: auto;">
             <div class="app-header" style="padding: 0 0 20px 0; margin-top: -20px;">
                 <button class="back-btn" onclick="closeSettings()">‹ 设置</button>
@@ -81,7 +77,6 @@
             <input type="file" id="wallpaper-input" accept="image/*" style="display: none;" onchange="uploadWallpaper(event)">
         </section>
 
-        <!-- 全局弹窗 -->
         <div id="banner-notification" class="banner-notification">
             <div class="notif-icon" id="banner-icon">💬</div>
             <div class="notif-content">
@@ -90,7 +85,6 @@
             </div>
         </div>
 
-        <!-- App 视图 -->
         <section id="app-view" class="screen"></section>
     </div>
 

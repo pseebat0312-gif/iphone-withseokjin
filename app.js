@@ -3,7 +3,7 @@ let inputCode = "";
 let currentRoomId = null;
 let isBannerHovered = false;
 
-// 0. 暴力移除 Netlify (双管齐下)
+// 终极清理 Netlify
 setInterval(() => {
     document.querySelectorAll('*').forEach(el => {
         if (el.id && el.id.includes('netlify')) el.remove();
@@ -13,11 +13,10 @@ setInterval(() => {
     });
 }, 1000);
 
-// 1. 数据加载与保存 (绝对不再清空你的数据)
+// 数据加载
 let savedData = localStorage.getItem("phoneData");
 if (savedData) {
     const parsed = JSON.parse(savedData);
-    // 只要存在就合并，不再因为 version 改变而清空！
     PHONE_DATA.kkt = parsed.kkt || PHONE_DATA.kkt;
     PHONE_DATA.appsPage1 = parsed.appsPage1 || PHONE_DATA.appsPage1;
     PHONE_DATA.memos = parsed.memos || PHONE_DATA.memos;
@@ -42,7 +41,6 @@ function saveData() {
     }));
 }
 
-// 2. 时钟
 function updateClock() {
     const now = new Date();
     const timeStr = `${now.getHours()}:${String(now.getMinutes()).padStart(2, "0")}`;
@@ -54,7 +52,6 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// 3. 解锁
 let touchStartY = 0;
 $("#lock-screen").addEventListener("touchstart", e => touchStartY = e.touches[0].clientY);
 $("#lock-screen").addEventListener("touchend", e => {
@@ -105,7 +102,6 @@ function handleKeyPress(k) {
     }
 }
 
-// 4. 真实推送与轰炸
 let bannerTimeout;
 let jinInterval;
 
@@ -133,10 +129,9 @@ function pushNewMessage(roomId, text) {
 
 function startJinBombing() {
     if (jinInterval) clearInterval(jinInterval);
-    // 10 分钟一次
     jinInterval = setInterval(() => {
         if (!$("#app-view").classList.contains("active") || currentRoomId !== "r1") {
-            const texts = ["你是不是又没看手机？", "电影票要过期了。", "算了，不去就算了。", "喂。", "理我一下行不行。"];
+            const texts = ["宝宝？", "电影票要过期了。", "算了，不去就算了。", "喂。", "理我一下行不行。"];
             const randomText = texts[Math.floor(Math.random() * texts.length)];
             pushNewMessage("r1", randomText);
         }
@@ -204,7 +199,6 @@ function renderHomeNotifications() {
     }
 }
 
-// 5. 主屏幕
 function renderHome() {
     renderPage("page-1", PHONE_DATA.appsPage1);
     renderPage("page-2", PHONE_DATA.appsPage2);
@@ -231,13 +225,11 @@ function createIcon(app) {
     return btn;
 }
 
-// 6. App 路由
 function openApp(id) {
     const view = $("#app-view");
     view.classList.add("active");
     view.innerHTML = "";
 
-    // IG 直接跳转！
     if (id === "ig") {
         window.open("https://www.instagram.com/", "_blank");
         view.classList.remove("active");
@@ -260,9 +252,16 @@ function openApp(id) {
 
     const header = document.createElement("div");
     header.className = "app-header";
+    let title = id;
+    if (id === 'kkt') title = 'KakaoTalk';
+    if (id === 'memo') title = '备忘录';
+    if (id === 'sms') title = '信息';
+    if (id === 'photos') title = '图库';
+    
+    // 初始进入 App，左上角统一是返回桌面
     header.innerHTML = `
         <button class="back-btn" onclick="closeApp()">‹ 返回</button>
-        <span class="app-title">${id === 'kkt' ? 'KakaoTalk' : (id === 'memo' ? '备忘录' : (id === 'sms' ? '信息' : (id === 'photos' ? '图库' : id)))}</span>
+        <span class="app-title" id="header-main-title">${title}</span>
         <span style="width: 60px;"></span>
     `;
     view.appendChild(header);
@@ -279,16 +278,17 @@ function openApp(id) {
     else body.innerHTML = `<div style="color:#888;text-align:center;padding:20px;">功能开发中</div>`;
 }
 
+// 唯一能够彻底关闭 App 回到桌面的人
 function closeApp() {
     $("#app-view").classList.remove("active");
     $("#app-view").innerHTML = "";
     $("#settings-screen").style.display = "none";
     $("#settings-screen").classList.remove("active");
+    currentRoomId = null;
     renderHome(); 
 }
 $("#home-indicator").onclick = closeApp;
 
-// 7. KKT 聊天 (完美返回上一级)
 function renderKKT(container) {
     const rooms = [...PHONE_DATA.kkt.rooms].sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0));
     container.innerHTML = `
@@ -322,7 +322,7 @@ function openChat(roomId) {
     PHONE_DATA.appsPage1.find(a => a.id === 'kkt').unread = 0;
     saveData();
 
-    // 核心修复：只改 Header 返回列表
+    // 重点修复：顶部标题动态变成聊天对象的名字，左上角按钮绑定向 chat list 退出的专属函数 backToChatList
     document.querySelector(".app-header").innerHTML = `
         <button class="back-btn" onclick="backToChatList()">‹ 聊天</button>
         <span class="app-title" id="chat-title">${room.name}</span>
@@ -353,14 +353,16 @@ function openChat(roomId) {
     scrollToBottom();
 }
 
+// 专属函数：退回聊天列表，绝对不关掉 KKT
 function backToChatList() {
     currentRoomId = null;
-    // 退回列表时恢复 Header
+    // 恢复 Header 的大标题
     document.querySelector(".app-header").innerHTML = `
         <button class="back-btn" onclick="closeApp()">‹ 返回</button>
-        <span class="app-title">KakaoTalk</span>
+        <span class="app-title" id="header-main-title">KakaoTalk</span>
         <span style="width: 60px;"></span>
     `;
+    // 重新渲染列表页
     renderKKT(document.querySelector(".app-body"));
     renderHome();
 }
@@ -412,10 +414,9 @@ async function sendMessage() {
     document.getElementById("chat-title").textContent = "对方正在输入...";
 
     try {
-        let finalPrompt = room.prompt + ` 用户的名字是：${PHONE_DATA.userName}。回复必须极其简短，像真人发微信一样，严禁使用括号动作描写！你可以多分几句话发，请用换行符分隔。`;
+        let finalPrompt = room.prompt + ` 用户的名字是：${PHONE_DATA.userName}。请仔细阅读我发你的历史聊天记录，顺着上一句的话题继续聊！回复必须极简（不超过15字），必须口语化，严禁括号动作！如果你有多句话想发，请用竖线 | 分割开。`;
         
-        const recentMessages = room.messages.slice(-10);
-        const history = recentMessages.filter(m => !m.image).map(m => ({
+        const recentMessages = room.messages.filter(m => !m.image).map(m => ({
             role: m.from === 'me' ? 'user' : 'assistant',
             content: m.text || "发了一张图片"
         }));
@@ -423,24 +424,22 @@ async function sendMessage() {
         const response = await fetch('/.netlify/functions/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ messages: history, systemPrompt: finalPrompt })
+            body: JSON.stringify({ messages: recentMessages, systemPrompt: finalPrompt })
         });
 
         const data = await response.json();
         document.getElementById("chat-title").textContent = room.name;
         
-        // 多发消息支持：将返回的文字按换行符分割
-        const replies = data.reply.split('\n').filter(t => t.trim() !== '');
-        
+        const replies = data.reply.split('|').filter(t => t.trim() !== '');
         let delay = 0;
         replies.forEach((replyText) => {
             setTimeout(() => {
-                room.messages.push({ from: "them", text: replyText });
+                room.messages.push({ from: "them", text: replyText.trim() });
                 saveData();
-                chatArea.innerHTML += `<div class="msg them">${replyText}</div>`;
+                chatArea.innerHTML += `<div class="msg them">${replyText.trim()}</div>`;
                 scrollToBottom();
             }, delay);
-            delay += 800; // 每句话延迟 0.8 秒发送，模拟真人打字
+            delay += 800; 
         });
 
     } catch (error) {
@@ -448,7 +447,6 @@ async function sendMessage() {
     }
 }
 
-// 8. 备忘录
 function renderMemoList(container) {
     container.innerHTML = `
         <div style="padding: 15px; display: flex; justify-content: space-between;">
@@ -512,7 +510,6 @@ function shareMemo(id) {
     }
 }
 
-// 9. 设置
 function closeSettings() {
     $("#settings-screen").style.display = "none";
     $("#settings-screen").classList.remove("active");
@@ -549,7 +546,6 @@ function uploadWallpaper(event) {
     }
 }
 
-// 10. 相册、闹钟、信息
 function renderPhotos(container) {
     container.innerHTML = `
         <div style="padding: 15px; display: flex; justify-content: space-between;">

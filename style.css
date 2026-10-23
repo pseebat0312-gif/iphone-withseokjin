@@ -1,32 +1,33 @@
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 body { background: #000; display: flex; justify-content: center; align-items: center; height: 100vh; height: 100dvh; font-family: -apple-system, sans-serif; overflow: hidden; }
 
-/* 遮罩层：强行盖住右下角任何不明的悬浮窗（Netlify 角标） */
-.netlify-blocker {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    width: 250px;
-    height: 120px;
-    z-index: 9999999;
-    pointer-events: auto; /* 吸收所有点击 */
-    background: transparent;
-}
-/* 同时极力隐藏它自带的 iframe */
-iframe[name="netlify-deploy-status"], #netlify-badge, [id*="netlify"], [class*="netlify"] {
+iframe[id*="netlify"], iframe[src*="netlify"], #netlify-badge, .netlify-badge, a[href*="netlify"] {
     display: none !important;
     visibility: hidden !important;
+    opacity: 0 !important;
     clip-path: inset(100%) !important;
+    pointer-events: none !important;
+    z-index: -9999 !important;
 }
 
-#phone { position: relative; width: 100%; max-width: 430px; height: 100%; max-height: 932px; background: #000; overflow: hidden; color: #fff; }
+.netlify-blocker {
+    position: fixed;
+    bottom: -10px;
+    right: -10px;
+    width: 280px;
+    height: 80px;
+    z-index: 2147483647;
+    pointer-events: auto;
+    background: transparent;
+}
+
+#phone { position: relative; width: 100%; max-width: 430px; height: 100%; max-height: 932px; background: #000; overflow: hidden; color: #fff; z-index: 1;}
 @media (min-width: 500px) { #phone { border-radius: 50px; border: 12px solid #333; height: 90vh; } }
 
 .status-bar { position: absolute; top: 0; left: 0; right: 0; height: 54px; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 24px 8px; font-size: 15px; font-weight: 600; z-index: 100; pointer-events: none; }
 .screen { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: none; flex-direction: column; }
 .screen.active { display: flex; }
 
-/* --- 锁屏 --- */
 #lock-screen { z-index: 10; }
 .lock-time-area { text-align: center; margin-top: 60px; }
 .lock-date { font-size: 18px; font-weight: 600; }
@@ -43,7 +44,6 @@ iframe[name="netlify-deploy-status"], #netlify-badge, [id*="netlify"], [class*="
 .swipe-up-area span { font-size: 14px; opacity: 0.7; margin-bottom: 10px; animation: pulse 2s infinite; }
 @keyframes pulse { 0%, 100% { opacity: 0.3; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-5px); } }
 
-/* --- 密码屏 --- */
 #passcode-screen { background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(30px); z-index: 15; justify-content: center; align-items: center; }
 .passcode-area { display: flex; flex-direction: column; align-items: center; gap: 25px; }
 .dots { display: flex; gap: 20px; }
@@ -57,7 +57,6 @@ iframe[name="netlify-deploy-status"], #netlify-badge, [id*="netlify"], [class*="
 .shake { animation: shake 0.4s; }
 @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
 
-/* --- 主屏幕 --- */
 #home-screen { z-index: 5; }
 .home-pages-container { display: flex; width: 100%; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 120px; padding-top: 100px;}
 .home-page { min-width: 100%; scroll-snap-align: start; display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: min-content; gap: 25px 15px; padding: 0 20px; }
@@ -73,23 +72,19 @@ iframe[name="netlify-deploy-status"], #netlify-badge, [id*="netlify"], [class*="
 .dock { position: absolute; bottom: 30px; left: 15px; right: 15px; height: 90px; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(20px); border-radius: 30px; display: flex; justify-content: space-around; align-items: center; }
 .home-indicator-btn { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); width: 130px; height: 5px; background: #fff; border-radius: 10px; z-index: 999; cursor: pointer; }
 
-/* 桌面折叠消息 */
 .home-notifications-wrapper { position: absolute; top: 60px; left: 10px; right: 10px; z-index: 60; display: none; flex-direction: column; gap: 8px; pointer-events: none;}
 .home-notif-card { background: rgba(40, 40, 40, 0.7); backdrop-filter: blur(20px); border-radius: 18px; padding: 12px; display: flex; gap: 12px; align-items: center; pointer-events: auto; cursor: pointer; animation: slideDown 0.3s; }
 @keyframes slideDown { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-/* --- App 视图 --- */
 #app-view { background: #000; z-index: 200; }
 .app-header { display: flex; justify-content: space-between; align-items: center; padding: 60px 20px 15px; background: rgba(30, 30, 30, 0.95); font-weight: 600; border-bottom: 1px solid #222; flex-shrink: 0; }
 .back-btn { background: none; border: none; color: #0a84ff; font-size: 16px; cursor: pointer; width: 80px; text-align: left; display: flex; align-items: center; gap: 4px;}
-.app-title { font-size: 17px; }
+.app-title { font-size: 17px; font-weight: 600; color: #fff; flex: 1; text-align: center;}
 .app-body { flex: 1; overflow-y: auto; position: relative; display: flex; flex-direction: column; }
 
-/* --- 通知横幅 --- */
 .banner-notification { position: absolute; top: -120px; left: 10px; right: 10px; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(25px); border-radius: 20px; padding: 15px; display: flex; gap: 12px; align-items: flex-start; z-index: 9999; transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 10px 30px rgba(0,0,0,0.3); cursor: pointer;}
 .banner-notification.show { top: 60px; }
 
-/* --- KKT --- */
 .kkt-wrapper { display: flex; flex-direction: column; height: 100%; width: 100%; }
 .kkt-list { flex: 1; overflow-y: auto; padding: 0 15px 80px; } 
 .kkt-room { display: flex; align-items: center; gap: 15px; padding: 15px 0; border-bottom: 1px solid #222; cursor: pointer; }
@@ -104,19 +99,18 @@ iframe[name="netlify-deploy-status"], #netlify-badge, [id*="netlify"], [class*="
 .nav-item.active { color: #FEE500; }
 
 .chat-wrapper { display: flex; flex-direction: column; height: 100%; width: 100%; }
-.chat-area { flex: 1; overflow-y: auto; padding: 20px 15px; display: flex; flex-direction: column; gap: 10px; }
-.msg { max-width: 75%; padding: 10px 14px; border-radius: 18px; font-size: 15px; line-height: 1.4; word-wrap: break-word; white-space: pre-wrap;}
+.chat-area { flex: 1; overflow-y: auto; padding: 15px 10px; display: flex; flex-direction: column; gap: 8px; }
+.msg { max-width: 75%; padding: 8px 12px; border-radius: 16px; font-size: 15px; line-height: 1.4; word-wrap: break-word; white-space: pre-wrap; text-align: left; }
 .msg.them { background: #2c2c2e; align-self: flex-start; border-bottom-left-radius: 4px; }
 .msg.me { background: #FEE500; color: #000; align-self: flex-end; border-bottom-right-radius: 4px; }
 .msg img { max-width: 100%; border-radius: 10px; margin-top: 5px; display: block; }
 
-.chat-input-area { background: #111; padding: 10px 15px 25px; display: flex; gap: 10px; align-items: center; border-top: 1px solid #222; flex-shrink: 0; }
-.chat-input-box { flex: 1; background: #2c2c2e; border-radius: 20px; display: flex; align-items: center; padding: 8px 12px; gap: 10px; }
-.plus-icon { font-size: 24px; color: #888; cursor: pointer;}
+.chat-input-area { background: #111; padding: 8px 10px 25px; display: flex; gap: 8px; align-items: center; border-top: 1px solid #222; flex-shrink: 0; }
+.chat-input-box { flex: 1; background: #2c2c2e; border-radius: 18px; display: flex; align-items: center; padding: 6px 12px; gap: 8px; }
+.plus-icon { font-size: 22px; color: #888; cursor: pointer; line-height: 1;}
 .chat-input-box input { flex: 1; background: transparent; border: none; color: #fff; font-size: 15px; outline: none; }
-.send-btn { background: #FEE500; color: #000; border: none; border-radius: 15px; padding: 8px 15px; font-size: 14px; font-weight: bold; cursor: pointer; }
+.send-btn { background: #FEE500; color: #000; border: none; border-radius: 15px; padding: 7px 12px; font-size: 14px; font-weight: bold; cursor: pointer; flex-shrink: 0;}
 
-/* --- 备忘录 / 信息 等共用样式 --- */
 .memo-list-group { background: #1c1c1e; border-radius: 12px; margin: 0 20px 20px; overflow: hidden; }
 .memo-list-item { padding: 12px 15px; border-bottom: 1px solid #333; cursor: pointer; }
 .memo-list-title { font-size: 16px; font-weight: 600; margin-bottom: 4px; color: #fff; }

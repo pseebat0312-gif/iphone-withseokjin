@@ -3,7 +3,7 @@ let inputCode = "";
 let currentRoomId = null;
 let isBannerHovered = false;
 
-// 0. 终极防线：暴力移除 Netlify
+// 0. 暴力移除 Netlify (双管齐下)
 setInterval(() => {
     document.querySelectorAll('*').forEach(el => {
         if (el.id && el.id.includes('netlify')) el.remove();
@@ -13,24 +13,19 @@ setInterval(() => {
     });
 }, 1000);
 
-// 1. 数据加载与保存 (重点：完全保存聊天记录，清理旧版本)
+// 1. 数据加载与保存 (绝对不再清空你的数据)
 let savedData = localStorage.getItem("phoneData");
 if (savedData) {
     const parsed = JSON.parse(savedData);
-    if (parsed.version !== PHONE_DATA.version) {
-        // 强制清理旧版本缓存，因为逻辑变了
-        localStorage.removeItem("phoneData");
-        saveData(); 
-    } else {
-        PHONE_DATA.kkt = parsed.kkt;
-        PHONE_DATA.appsPage1 = parsed.appsPage1;
-        PHONE_DATA.memos = parsed.memos;
-        PHONE_DATA.sms = parsed.sms;
-        if(parsed.userName) PHONE_DATA.userName = parsed.userName;
-        if(parsed.wallpaper) {
-            $("#wallpaper-layer").style.backgroundImage = `url(${parsed.wallpaper})`;
-            $("#lock-wallpaper-layer").style.backgroundImage = `url(${parsed.wallpaper})`;
-        }
+    // 只要存在就合并，不再因为 version 改变而清空！
+    PHONE_DATA.kkt = parsed.kkt || PHONE_DATA.kkt;
+    PHONE_DATA.appsPage1 = parsed.appsPage1 || PHONE_DATA.appsPage1;
+    PHONE_DATA.memos = parsed.memos || PHONE_DATA.memos;
+    PHONE_DATA.sms = parsed.sms || PHONE_DATA.sms;
+    PHONE_DATA.userName = parsed.userName || PHONE_DATA.userName;
+    if(parsed.wallpaper) {
+        $("#wallpaper-layer").style.backgroundImage = `url(${parsed.wallpaper})`;
+        $("#lock-wallpaper-layer").style.backgroundImage = `url(${parsed.wallpaper})`;
     }
 }
 $("#settings-name").textContent = PHONE_DATA.userName;
@@ -38,7 +33,6 @@ $("#settings-name").textContent = PHONE_DATA.userName;
 function saveData() {
     const bg = $("#wallpaper-layer").style.backgroundImage.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
     localStorage.setItem("phoneData", JSON.stringify({
-        version: PHONE_DATA.version,
         kkt: PHONE_DATA.kkt,
         appsPage1: PHONE_DATA.appsPage1,
         memos: PHONE_DATA.memos,
@@ -73,7 +67,6 @@ $("#swipe-down-trigger").addEventListener("click", () => {
     $("#passcode-screen").classList.remove("active");
     $("#lock-screen").classList.add("active");
 });
-// 电脑端点击测试解锁
 $("#lock-screen").addEventListener("click", () => {
     $("#lock-screen").classList.remove("active");
     $("#passcode-screen").classList.add("active");
@@ -112,7 +105,7 @@ function handleKeyPress(k) {
     }
 }
 
-// 4. 真实推送逻辑 (10分钟轰炸、日常吵架)
+// 4. 真实推送与轰炸
 let bannerTimeout;
 let jinInterval;
 
@@ -126,7 +119,6 @@ function pushNewMessage(roomId, text) {
     kktApp.unread = (kktApp.unread || 0) + 1;
     saveData();
 
-    // 如果在当前聊天室，直接刷新，不弹窗
     if ($("#app-view").classList.contains("active") && currentRoomId === roomId) {
         document.getElementById("chat-area").innerHTML += `<div class="msg them">${text}</div>`;
         scrollToBottom();
@@ -134,7 +126,6 @@ function pushNewMessage(roomId, text) {
         kktApp.unread = 0;
         saveData();
     } else {
-        // 不在聊天室，弹窗
         showBanner({ icon: room.avatar, bg: "#FEE500", title: room.name, message: text, roomId: roomId });
         renderHomeNotifications();
     }
@@ -142,7 +133,7 @@ function pushNewMessage(roomId, text) {
 
 function startJinBombing() {
     if (jinInterval) clearInterval(jinInterval);
-    // 改成了 10 分钟 (600000 毫秒)，每次发点日常或者发点小脾气
+    // 10 分钟一次
     jinInterval = setInterval(() => {
         if (!$("#app-view").classList.contains("active") || currentRoomId !== "r1") {
             const texts = ["你是不是又没看手机？", "电影票要过期了。", "算了，不去就算了。", "喂。", "理我一下行不行。"];
@@ -160,7 +151,6 @@ function showBanner(n) {
     $("#banner-msg").textContent = n.message;
     banner.classList.add("show");
     
-    // 只有在没被划走的时候才跳转
     banner.onclick = () => {
         if (!isBannerHovered) {
             hideBanner();
@@ -171,7 +161,6 @@ function showBanner(n) {
 
     if (navigator.vibrate) navigator.vibrate(100);
     clearTimeout(bannerTimeout);
-    // 弹窗 2.5 秒后自动消失
     bannerTimeout = setTimeout(hideBanner, 2500);
 }
 
@@ -181,20 +170,18 @@ function hideBanner() {
     clearTimeout(bannerTimeout);
 }
 
-// 滑动划掉弹窗
 $("#banner-notification").addEventListener("touchstart", e => {
     touchStartY = e.touches[0].clientY;
-    isBannerHovered = true; // 手指按住时，取消点击跳转
+    isBannerHovered = true; 
 });
 $("#banner-notification").addEventListener("touchend", e => {
     if (touchStartY - e.changedTouches[0].clientY > 30) {
         hideBanner();
     } else {
-        isBannerHovered = false; // 如果没滑，恢复点击功能
+        isBannerHovered = false; 
     }
 });
 
-// 桌面折叠通知
 function renderHomeNotifications() {
     const wrapper = $("#home-notifications-wrapper");
     const kktApp = PHONE_DATA.appsPage1.find(a => a.id === 'kkt');
@@ -244,11 +231,18 @@ function createIcon(app) {
     return btn;
 }
 
-// 6. App 路由 (完美退回上一步)
+// 6. App 路由
 function openApp(id) {
     const view = $("#app-view");
     view.classList.add("active");
     view.innerHTML = "";
+
+    // IG 直接跳转！
+    if (id === "ig") {
+        window.open("https://www.instagram.com/", "_blank");
+        view.classList.remove("active");
+        return;
+    }
 
     if (id === "settings") {
         $("#settings-screen").style.display = "flex";
@@ -294,7 +288,7 @@ function closeApp() {
 }
 $("#home-indicator").onclick = closeApp;
 
-// 7. KKT 聊天逻辑 (彻底修复卡死)
+// 7. KKT 聊天 (完美返回上一级)
 function renderKKT(container) {
     const rooms = [...PHONE_DATA.kkt.rooms].sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0));
     container.innerHTML = `
@@ -328,7 +322,7 @@ function openChat(roomId) {
     PHONE_DATA.appsPage1.find(a => a.id === 'kkt').unread = 0;
     saveData();
 
-    // 只改 Header 到聊天界面
+    // 核心修复：只改 Header 返回列表
     document.querySelector(".app-header").innerHTML = `
         <button class="back-btn" onclick="backToChatList()">‹ 聊天</button>
         <span class="app-title" id="chat-title">${room.name}</span>
@@ -361,7 +355,7 @@ function openChat(roomId) {
 
 function backToChatList() {
     currentRoomId = null;
-    // 退回聊天列表的 Header
+    // 退回列表时恢复 Header
     document.querySelector(".app-header").innerHTML = `
         <button class="back-btn" onclick="closeApp()">‹ 返回</button>
         <span class="app-title">KakaoTalk</span>
@@ -418,10 +412,8 @@ async function sendMessage() {
     document.getElementById("chat-title").textContent = "对方正在输入...";
 
     try {
-        // 严格限制字数，严禁废话
-        let finalPrompt = room.prompt + ` 用户的名字是：${PHONE_DATA.userName}。回复必须极其简短（不超过15个字），像真人发微信一样，严禁使用括号动作描写！顺着聊天记录聊。`;
+        let finalPrompt = room.prompt + ` 用户的名字是：${PHONE_DATA.userName}。回复必须极其简短，像真人发微信一样，严禁使用括号动作描写！你可以多分几句话发，请用换行符分隔。`;
         
-        // 取最近的 10 条记录发给 AI，让它有上下文
         const recentMessages = room.messages.slice(-10);
         const history = recentMessages.filter(m => !m.image).map(m => ({
             role: m.from === 'me' ? 'user' : 'assistant',
@@ -436,10 +428,20 @@ async function sendMessage() {
 
         const data = await response.json();
         document.getElementById("chat-title").textContent = room.name;
-        room.messages.push({ from: "them", text: data.reply });
-        saveData();
-        chatArea.innerHTML += `<div class="msg them">${data.reply}</div>`;
-        scrollToBottom();
+        
+        // 多发消息支持：将返回的文字按换行符分割
+        const replies = data.reply.split('\n').filter(t => t.trim() !== '');
+        
+        let delay = 0;
+        replies.forEach((replyText) => {
+            setTimeout(() => {
+                room.messages.push({ from: "them", text: replyText });
+                saveData();
+                chatArea.innerHTML += `<div class="msg them">${replyText}</div>`;
+                scrollToBottom();
+            }, delay);
+            delay += 800; // 每句话延迟 0.8 秒发送，模拟真人打字
+        });
 
     } catch (error) {
         document.getElementById("chat-title").textContent = "连接失败";

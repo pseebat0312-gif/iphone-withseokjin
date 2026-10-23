@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- 终极防遮挡遮罩层：强行盖住右下角的任何第三方挂件 -->
+    <div class="netlify-blocker"></div>
+
     <div id="phone">
         <div class="status-bar">
             <span id="status-time">15:54</span>
@@ -41,10 +44,7 @@
         <!-- 主屏幕 -->
         <section id="home-screen" class="screen">
             <div id="wallpaper-layer" style="position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop') center/cover; z-index: -1;"></div>
-            
-            <!-- 桌面折叠提示 -->
             <div id="home-notifications-wrapper" class="home-notifications-wrapper"></div>
-
             <div class="home-pages-container" id="home-pages">
                 <div class="home-page" id="page-1"></div>
                 <div class="home-page" id="page-2"></div>

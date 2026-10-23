@@ -3,17 +3,8 @@ let inputCode = "";
 let currentRoomId = null;
 let isBannerHovered = false;
 
-// 清理 Netlify 残留
-setInterval(() => {
-    document.querySelectorAll('*').forEach(el => {
-        if (el.id && el.id.includes('netlify')) el.remove();
-        if (el.className && typeof el.className === 'string' && el.className.includes('netlify')) el.remove();
-        if (el.tagName === 'IFRAME' && el.src && el.src.includes('netlify')) el.remove();
-        if (el.tagName === 'A' && el.innerHTML.includes('Netlify')) el.remove();
-    });
-}, 1000);
-
-let savedData = localStorage.getItem("phoneDataV8");
+// 🚨 注意：这次使用了 V10 版本号，会帮你清理掉之前长按测试留下的丑陋大框，加载一次完美的新记录
+let savedData = localStorage.getItem("phoneDataV10");
 if (savedData) {
     const parsed = JSON.parse(savedData);
     PHONE_DATA.kkt = parsed.kkt || PHONE_DATA.kkt;
@@ -27,7 +18,7 @@ if (savedData) {
         $("#lock-wallpaper-layer").style.backgroundImage = `url(${parsed.wallpaper})`;
     }
 } else {
-    localStorage.setItem("phoneDataV8", JSON.stringify({
+    localStorage.setItem("phoneDataV10", JSON.stringify({
         kkt: PHONE_DATA.kkt, appsPage1: PHONE_DATA.appsPage1, appsPage2: PHONE_DATA.appsPage2, memos: PHONE_DATA.memos,
         sms: PHONE_DATA.sms, userName: PHONE_DATA.userName, wallpaper: ""
     }));
@@ -35,7 +26,7 @@ if (savedData) {
 
 function saveData() {
     const bg = $("#wallpaper-layer").style.backgroundImage.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
-    localStorage.setItem("phoneDataV8", JSON.stringify({
+    localStorage.setItem("phoneDataV10", JSON.stringify({
         kkt: PHONE_DATA.kkt, appsPage1: PHONE_DATA.appsPage1, appsPage2: PHONE_DATA.appsPage2, memos: PHONE_DATA.memos,
         sms: PHONE_DATA.sms, userName: PHONE_DATA.userName, wallpaper: bg
     }));
@@ -100,39 +91,17 @@ function handleKeyPress(k) {
 }
 
 let bannerTimeout;
-let proactiveInterval;
-
-function pushNewMessage(roomId, text) {
-    const room = PHONE_DATA.kkt.rooms.find(r => r.id === roomId);
-    if (!room) return;
-    room.messages.push({ from: "them", text: text });
-    room.unread += 1;
-    const kktApp = PHONE_DATA.appsPage1.find(a => a.id === 'kkt');
-    kktApp.unread = (kktApp.unread || 0) + 1;
-    saveData();
-
-    if ($("#app-view").classList.contains("active") && currentRoomId === roomId) {
-        document.getElementById("chat-area").innerHTML += `<div class="msg them">${text}</div>`;
-        scrollToBottom();
-        room.unread = 0; kktApp.unread = 0; saveData();
-    } else {
-        showBanner({ icon: room.avatar, bg: "#FEE500", title: room.name, message: text, roomId: roomId });
-        renderHomeNotifications();
-    }
-}
-
-function startProactiveMessages() {
-    if (proactiveInterval) clearInterval(proactiveInterval);
-    proactiveInterval = setInterval(() => {
-        if ($("#app-view").classList.contains("active") && currentRoomId !== null) return; 
-        const randomRoom = PHONE_DATA.kkt.rooms[Math.floor(Math.random() * PHONE_DATA.kkt.rooms.length)];
-        let textToSend = "在干嘛";
-        if (randomRoom.proactiveTexts && randomRoom.proactiveTexts.length > 0) {
-            textToSend = randomRoom.proactiveTexts[Math.floor(Math.random() * randomRoom.proactiveTexts.length)];
-        }
-        pushNewMessage(randomRoom.id, textToSend);
-    }, 180000); 
-}
+$("#banner-notification").addEventListener("touchstart", e => { 
+    touchStartY = e.touches[0].clientY; 
+    isBannerHovered = true; 
+});
+$("#banner-notification").addEventListener("touchend", e => { 
+    if (touchStartY - e.changedTouches[0].clientY > 20) { 
+        hideBanner(); 
+    } else { 
+        isBannerHovered = false; 
+    } 
+});
 
 function showBanner(n) {
     const banner = $("#banner-notification");
@@ -144,12 +113,36 @@ function showBanner(n) {
     banner.onclick = () => { if (!isBannerHovered) { hideBanner(); openApp("kkt"); openChat(n.roomId); } };
     if (navigator.vibrate) navigator.vibrate(100);
     clearTimeout(bannerTimeout);
-    bannerTimeout = setTimeout(hideBanner, 2500);
+    bannerTimeout = setTimeout(hideBanner, 2500); 
+}
+function hideBanner() { $("#banner-notification").classList.remove("show"); isBannerHovered = false; clearTimeout(bannerTimeout); }
+
+function startProactiveMessages() {
+    setTimeout(() => {
+        triggerRandomMessage();
+        setInterval(triggerRandomMessage, 60000); // 每 60 秒主动发消息
+    }, 15000);
 }
 
-function hideBanner() { $("#banner-notification").classList.remove("show"); isBannerHovered = false; clearTimeout(bannerTimeout); }
-$("#banner-notification").addEventListener("touchstart", e => { touchStartY = e.touches[0].clientY; isBannerHovered = true; });
-$("#banner-notification").addEventListener("touchend", e => { if (touchStartY - e.changedTouches[0].clientY > 30) { hideBanner(); } else { isBannerHovered = false; } });
+function triggerRandomMessage() {
+    if ($("#app-view").classList.contains("active") && currentRoomId !== null) return; 
+    const randomRoom = PHONE_DATA.kkt.rooms[Math.floor(Math.random() * PHONE_DATA.kkt.rooms.length)];
+    const texts = randomRoom.proactiveTexts || ["在干嘛", "理理我"];
+    const textToSend = texts[Math.floor(Math.random() * texts.length)];
+    
+    randomRoom.messages.push({ from: "them", text: textToSend });
+    randomRoom.unread = (randomRoom.unread || 0) + 1;
+    const kktApp = PHONE_DATA.appsPage1.find(a => a.id === 'kkt');
+    kktApp.unread = (kktApp.unread || 0) + 1;
+    saveData();
+    
+    showBanner({ icon: randomRoom.avatar, bg: "#FEE500", title: randomRoom.name, message: textToSend, roomId: randomRoom.id });
+    renderHomeNotifications();
+    
+    if ($("#app-view").classList.contains("active") && currentRoomId === null) {
+        renderKKT($("#app-body-content")); 
+    }
+}
 
 function renderHomeNotifications() {
     const wrapper = $("#home-notifications-wrapper");
@@ -219,7 +212,8 @@ function openApp(id) {
     
     if (id === "camera") {
         if (PHONE_DATA.cameraVideo && PHONE_DATA.cameraVideo !== "") {
-            body.innerHTML = `<video src="${PHONE_DATA.cameraVideo}" autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover; background:#000;"></video>`;
+            // 让视频居中显示，不要强行覆盖全屏导致画面被切
+            body.innerHTML = `<div style="width:100%; height:100%; background:#000; display:flex; justify-content:center; align-items:center;"><video src="${PHONE_DATA.cameraVideo}" autoplay muted loop playsinline style="max-width:100%; max-height:100%; object-fit:contain;"></video></div>`;
         } else {
             body.innerHTML = `<div style="width:100%; height:100%; background:#111; display:flex; justify-content:center; align-items:center; color:#666;">相机未接入视频</div>`;
         }
@@ -339,6 +333,7 @@ function sendImage(event) {
     event.target.value = ""; 
 }
 
+// ======= 核心：发送消息与连发逻辑 =======
 async function sendMessage() {
     const input = document.getElementById("chat-input");
     const text = input.value.trim();
@@ -356,7 +351,7 @@ async function sendMessage() {
     document.getElementById("app-title-text").textContent = "对方正在输入...";
 
     try {
-        let finalPrompt = room.prompt + ` 用户的名字是：${PHONE_DATA.userName}。顺着话题聊。严禁提及自己是AI。回复必须极简。如果你有多句话要说，必须用竖线 | 分隔开！`;
+        let finalPrompt = room.prompt + ` 用户的名字是：${PHONE_DATA.userName}。顺着话题聊。严禁提及自己是AI。如果你有多句话要说，必须用竖线 | 分隔开！`;
         
         const recentMessages = room.messages.slice(-15).map(m => ({
             role: m.from === 'me' ? 'user' : 'assistant',
@@ -370,6 +365,10 @@ async function sendMessage() {
         });
 
         const data = await response.json();
+        
+        // 如果有报错或者没返回，直接走 catch
+        if (!data.reply) throw new Error("No reply");
+
         document.getElementById("app-title-text").textContent = room.name;
         
         let replies = data.reply.split('|').map(t => t.trim()).filter(t => t !== '');
@@ -390,7 +389,23 @@ async function sendMessage() {
         });
 
     } catch (error) {
+        // 额度耗尽或断网时的终极兜底：本土化连发 2-3 条，绝对不会变成哑巴
         document.getElementById("app-title-text").textContent = room.name;
+        
+        // 随便捞两句他平时主动发的话
+        let localReplies = ["嗯嗯", "我在听", "然后呢？"];
+        if (room.proactiveTexts && room.proactiveTexts.length >= 2) {
+            localReplies = [room.proactiveTexts[0], "怎么啦？", room.proactiveTexts[1]];
+        }
+
+        localReplies.forEach((r, i) => {
+            setTimeout(() => {
+                room.messages.push({ from: "them", text: r });
+                saveData();
+                chatArea.innerHTML += `<div class="msg them">${r}</div>`;
+                scrollToBottom();
+            }, i * 800);
+        });
     }
 }
 
@@ -406,7 +421,7 @@ function openMemoDetail(memoId) {
 function backToMemoList() { setHeader('备忘录', closeApp); renderMemoList(document.getElementById("app-body-content")); }
 function updateMemoBody(id, text) { const memo = PHONE_DATA.memos.find(m => m.id === id); memo.body = text; saveData(); }
 
-// 相册：加入了点击查看大图的功能
+// ======= 相册渲染 (带错误提示) =======
 function renderPhotos(container) { 
     container.innerHTML = `
         <div style="padding: 15px; display: flex; justify-content: space-between;">
@@ -416,8 +431,10 @@ function renderPhotos(container) {
         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;">
             ${PHONE_DATA.photos ? PHONE_DATA.photos.map(p => {
                 if (p.url) {
-                    // 加了 onclick 事件，点击后全屏预览
-                    return `<div style="aspect-ratio: 1; background: #111; cursor: pointer;" onclick="viewPhoto('${p.url}')"><img src="${p.url}" style="width:100%; height:100%; object-fit:cover;"></div>`;
+                    // 如果有图，加上 onerror 报错提示
+                    return `<div style="aspect-ratio: 1; background: #1c1c1e; cursor: pointer;" onclick="viewPhoto('${p.url}')">
+                                <img src="${p.url}" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\\'display:flex;justify-content:center;align-items:center;width:100%;height:100%;color:#ff3b30;font-size:12px;text-align:center;\\'>路径或文件名不对<br>${p.url}</div>'">
+                            </div>`;
                 } else {
                     return `<div style="aspect-ratio: 1; background: #eee; display: flex; justify-content: center; align-items: center; color: #aaa; font-size: 24px;">?</div>`;
                 }
@@ -427,24 +444,14 @@ function renderPhotos(container) {
     `;
 }
 
-// 全新函数：全屏查看照片
 function viewPhoto(url) {
     const body = $("#app-body-content");
-    // 保存当前相册列表的 HTML
     const originalContent = body.innerHTML;
-    
-    // 替换成全屏大图
-    body.innerHTML = `
-        <div style="width: 100%; height: 100%; background: #000; display: flex; justify-content: center; align-items: center;">
-            <img src="${url}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
-        </div>
-    `;
-    
-    // 将顶部返回键改为“回到相册”
+    body.innerHTML = `<div style="width: 100%; height: 100%; background: #000; display: flex; justify-content: center; align-items: center;"><img src="${url}" style="max-width: 100%; max-height: 100%; object-fit: contain;" onerror="alert('大图加载失败，请检查文件是否存在！')"></div>`;
     document.getElementById("app-title-text").textContent = "预览";
     document.getElementById("app-back-btn").onclick = function() {
-        body.innerHTML = originalContent; // 恢复相册列表
-        setHeader('图库', closeApp); // 恢复顶部标题
+        body.innerHTML = originalContent; 
+        setHeader('图库', closeApp); 
     };
 }
 

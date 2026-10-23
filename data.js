@@ -6,15 +6,15 @@ const PHONE_DATA = {
     // ===== 我为你新加的：视频和相册配置 =====
     cameraVideo: "images/videos/111.mp4", 
     photos: [
-        { id: 1, url: "images/apps/3.jpg", caption: "" },
-        { id: 2, url: "images/apps/4.jpg", caption: "" },
-        { id: 3, url: "images/apps/5.jpg", caption: "" },
-        { id: 4, url: "images/apps/6.jpg", caption: "" },
-        { id: 5, url: "images/apps/7.jpg", caption: "" },
-        { id: 6, url: "images/apps/8.jpg", caption: "" },
-        { id: 7, url: "images/apps/9.jpg", caption: "" },
-        { id: 8, url: "images/apps/10.jpg", caption: "" },
-        { id: 9, url: "images/apps/11.jpg", caption: "" }
+        { id: 1, url: "images/photos/3.jpg", caption: "" },
+        { id: 2, url: "images/photos/4.jpg", caption: "" },
+        { id: 3, url: "images/photos/5.jpg", caption: "" },
+        { id: 4, url: "images/photos/6.jpg", caption: "" },
+        { id: 5, url: "images/photos/7.jpg", caption: "" },
+        { id: 6, url: "images/photos/8.jpg", caption: "" },
+        { id: 7, url: "images/photos/9.jpg", caption: "" },
+        { id: 8, url: "images/photos/10.jpg", caption: "" },
+        { id: 9, url: "images/photos/11.jpg", caption: "" }
     ],
 
     appsPage1: [

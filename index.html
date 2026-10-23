@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>金硕珍女友的手机</title>
+    <title>金硕珍的手机</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,9 +14,7 @@
         </div>
 
         <section id="lock-screen" class="screen active">
-            <div class="lock-notifications" id="lock-notifications">
-                <!-- 这里用JS注入的锁屏通知 -->
-            </div>
+            <div class="lock-notifications" id="lock-notifications"></div>
             <div class="lock-time-area">
                 <div class="lock-date" id="lock-date">5月21日 星期六</div>
                 <div class="lock-time" id="lock-time">23:48</div>
@@ -38,6 +36,7 @@
         </section>
 
         <section id="home-screen" class="screen">
+            <div id="wallpaper-layer" style="position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop') center/cover; z-index: -1;"></div>
             <div class="home-pages-container" id="home-pages">
                 <div class="home-page" id="page-1"></div>
                 <div class="home-page" id="page-2"></div>
@@ -48,6 +47,37 @@
             </div>
             <div class="dock" id="dock"></div>
             <div class="home-indicator-btn" id="home-indicator"></div>
+        </section>
+
+        <section id="settings-screen" class="screen" style="background: #000; z-index: 300; color: #fff; padding: 60px 20px 20px; overflow-y: auto;">
+            <div style="font-size: 32px; font-weight: bold; margin-bottom: 20px;">Ajustes</div>
+            
+            <div style="background: #1c1c1e; border-radius: 12px; padding: 15px; margin-bottom: 20px; display: flex; align-items: center; gap: 15px;">
+                <div style="width: 60px; height: 60px; border-radius: 50%; background: #0a84ff; display: flex; justify-content: center; align-items: center; font-size: 24px; font-weight: bold;">BC</div>
+                <div>
+                    <div style="font-size: 18px; font-weight: bold;" id="settings-name">beta Chen</div>
+                    <div style="font-size: 13px; color: #888;">Cuenta de Apple, iCloud y más</div>
+                </div>
+            </div>
+
+            <div style="background: #1c1c1e; border-radius: 12px; padding: 15px; margin-bottom: 20px;" onclick="changePasscode()">
+                <div style="font-size: 16px; display: flex; justify-content: space-between;">
+                    <span>🔒 修改锁屏密码</span>
+                    <span style="color: #888;">></span>
+                </div>
+            </div>
+
+            <div style="background: #1c1c1e; border-radius: 12px; padding: 15px; margin-bottom: 20px;" onclick="document.getElementById('wallpaper-input').click()">
+                <div style="font-size: 16px; display: flex; justify-content: space-between;">
+                    <span>🖼️ 更换壁纸</span>
+                    <span style="color: #888;">></span>
+                </div>
+            </div>
+            <input type="file" id="wallpaper-input" accept="image/*" style="display: none;" onchange="uploadWallpaper(event)">
+
+            <div style="background: #1c1c1e; border-radius: 12px; padding: 15px; color: #0a84ff; text-align: center; cursor: pointer;" onclick="closeSettings()">
+                返回主屏幕
+            </div>
         </section>
 
         <div id="banner-notification" class="banner-notification" onclick="openApp('kkt')">

@@ -3,7 +3,7 @@ body { background: #000; display: flex; justify-content: center; align-items: ce
 
 ::-webkit-scrollbar { display: none; width: 0; height: 0; }
 
-/* 强行封印 Netlify 的任何残留 */
+/* 强行封印 Netlify */
 iframe[id*="netlify"], iframe[src*="netlify"], #netlify-badge, .netlify-badge, a[href*="netlify"] {
     display: none !important; visibility: hidden !important; opacity: 0 !important; clip-path: inset(100%) !important; pointer-events: none !important; z-index: -9999 !important;
 }
@@ -94,11 +94,11 @@ iframe[id*="netlify"], iframe[src*="netlify"], #netlify-badge, .netlify-badge, a
 .chat-wrapper { display: flex !important; flex-direction: column !important; height: 100% !important; width: 100% !important; overflow: hidden !important; }
 .chat-area { flex: 1; overflow-y: auto; overflow-x: hidden; padding: 15px 15px; display: flex; flex-direction: column; gap: 10px; width: 100%; }
 
-/* 极限压制气泡：绝对不许大框 */
+/* 🚨 物理锁死：绝对不许变成大方块 */
 .msg { 
     display: block !important; 
     max-width: 70% !important; 
-    width: fit-content !important;
+    width: fit-content !important; /* 自适应文字大小，绝不铺满全屏 */
     padding: 10px 14px; 
     border-radius: 16px; 
     font-size: 15px; 
@@ -112,7 +112,7 @@ iframe[id*="netlify"], iframe[src*="netlify"], #netlify-badge, .netlify-badge, a
 .msg.me { background: #FEE500; color: #000; margin-left: auto; border-bottom-right-radius: 4px; }
 .msg img { max-width: 100%; border-radius: 10px; margin-top: 5px; display: block; }
 
-/* 输入框物理抬高 50px，彻底避开 Netlify */
+/* 输入框抬高，避开角标 */
 .chat-input-area { 
     background: #111; 
     padding: 10px 15px 50px !important; 

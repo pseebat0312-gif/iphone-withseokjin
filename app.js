@@ -3,8 +3,22 @@ let inputCode = "";
 let currentRoomId = null;
 let isBannerHovered = false;
 
-// 🚨 注意：这次使用了 V10 版本号，会帮你清理掉之前长按测试留下的丑陋大框，加载一次完美的新记录
-let savedData = localStorage.getItem("phoneDataV10");
+// 清理 Netlify 残留
+setInterval(() => {
+    document.querySelectorAll('*').forEach(el => {
+        if (el.id && el.id.includes('netlify')) el.remove();
+        if (el.className && typeof el.className === 'string' && el.className.includes('netlify')) el.remove();
+        if (el.tagName === 'IFRAME' && el.src && el.src.includes('netlify')) el.remove();
+        if (el.tagName === 'A' && el.innerHTML.includes('Netlify')) el.remove();
+    });
+}, 1000);
+
+// 🚨 终极必杀：抛弃旧版大框缓存，使用全新 V_FINAL_999！
+localStorage.removeItem("phoneDataV10"); 
+localStorage.removeItem("phoneDataV9");
+localStorage.removeItem("phoneDataV8");
+
+let savedData = localStorage.getItem("phoneData_V_FINAL_999");
 if (savedData) {
     const parsed = JSON.parse(savedData);
     PHONE_DATA.kkt = parsed.kkt || PHONE_DATA.kkt;
@@ -18,7 +32,7 @@ if (savedData) {
         $("#lock-wallpaper-layer").style.backgroundImage = `url(${parsed.wallpaper})`;
     }
 } else {
-    localStorage.setItem("phoneDataV10", JSON.stringify({
+    localStorage.setItem("phoneData_V_FINAL_999", JSON.stringify({
         kkt: PHONE_DATA.kkt, appsPage1: PHONE_DATA.appsPage1, appsPage2: PHONE_DATA.appsPage2, memos: PHONE_DATA.memos,
         sms: PHONE_DATA.sms, userName: PHONE_DATA.userName, wallpaper: ""
     }));
@@ -26,7 +40,7 @@ if (savedData) {
 
 function saveData() {
     const bg = $("#wallpaper-layer").style.backgroundImage.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
-    localStorage.setItem("phoneDataV10", JSON.stringify({
+    localStorage.setItem("phoneData_V_FINAL_999", JSON.stringify({
         kkt: PHONE_DATA.kkt, appsPage1: PHONE_DATA.appsPage1, appsPage2: PHONE_DATA.appsPage2, memos: PHONE_DATA.memos,
         sms: PHONE_DATA.sms, userName: PHONE_DATA.userName, wallpaper: bg
     }));
@@ -120,7 +134,7 @@ function hideBanner() { $("#banner-notification").classList.remove("show"); isBa
 function startProactiveMessages() {
     setTimeout(() => {
         triggerRandomMessage();
-        setInterval(triggerRandomMessage, 60000); // 每 60 秒主动发消息
+        setInterval(triggerRandomMessage, 60000); 
     }, 15000);
 }
 
@@ -181,7 +195,7 @@ function createIcon(app) {
     
     let iconContent = "";
     if (app.icon.includes("images/") || app.icon.includes(".jpg") || app.icon.includes(".png")) {
-        iconContent = `<div class="icon-bg" style="background: ${app.bg}; overflow: hidden;"><img src="${app.icon}" style="width:100%; height:100%; object-fit:cover;"></div>`;
+        iconContent = `<div class="icon-bg" style="background: ${app.bg}; overflow: hidden;"><img src="${app.icon}" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'; this.parentNode.style.background='#ff3b30';"></div>`;
     } else {
         iconContent = `<div class="icon-bg" style="background: ${app.bg}">${app.icon}</div>`;
     }
@@ -212,8 +226,8 @@ function openApp(id) {
     
     if (id === "camera") {
         if (PHONE_DATA.cameraVideo && PHONE_DATA.cameraVideo !== "") {
-            // 让视频居中显示，不要强行覆盖全屏导致画面被切
-            body.innerHTML = `<div style="width:100%; height:100%; background:#000; display:flex; justify-content:center; align-items:center;"><video src="${PHONE_DATA.cameraVideo}" autoplay muted loop playsinline style="max-width:100%; max-height:100%; object-fit:contain;"></video></div>`;
+            // 🚨 相机：视频铺满，底部死死贴住屏幕下沿
+            body.innerHTML = `<div style="width:100%; height:100%; background:#000; display:flex; justify-content:center; align-items:center; overflow:hidden;"><video src="${PHONE_DATA.cameraVideo}" autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover; object-position: bottom;"></video></div>`;
         } else {
             body.innerHTML = `<div style="width:100%; height:100%; background:#111; display:flex; justify-content:center; align-items:center; color:#666;">相机未接入视频</div>`;
         }
@@ -333,7 +347,7 @@ function sendImage(event) {
     event.target.value = ""; 
 }
 
-// ======= 核心：发送消息与连发逻辑 =======
+// 保持 AI 与本土兜底双轨并行
 async function sendMessage() {
     const input = document.getElementById("chat-input");
     const text = input.value.trim();
@@ -365,8 +379,6 @@ async function sendMessage() {
         });
 
         const data = await response.json();
-        
-        // 如果有报错或者没返回，直接走 catch
         if (!data.reply) throw new Error("No reply");
 
         document.getElementById("app-title-text").textContent = room.name;
@@ -389,10 +401,7 @@ async function sendMessage() {
         });
 
     } catch (error) {
-        // 额度耗尽或断网时的终极兜底：本土化连发 2-3 条，绝对不会变成哑巴
         document.getElementById("app-title-text").textContent = room.name;
-        
-        // 随便捞两句他平时主动发的话
         let localReplies = ["嗯嗯", "我在听", "然后呢？"];
         if (room.proactiveTexts && room.proactiveTexts.length >= 2) {
             localReplies = [room.proactiveTexts[0], "怎么啦？", room.proactiveTexts[1]];
@@ -421,7 +430,6 @@ function openMemoDetail(memoId) {
 function backToMemoList() { setHeader('备忘录', closeApp); renderMemoList(document.getElementById("app-body-content")); }
 function updateMemoBody(id, text) { const memo = PHONE_DATA.memos.find(m => m.id === id); memo.body = text; saveData(); }
 
-// ======= 相册渲染 (带错误提示) =======
 function renderPhotos(container) { 
     container.innerHTML = `
         <div style="padding: 15px; display: flex; justify-content: space-between;">
@@ -431,9 +439,8 @@ function renderPhotos(container) {
         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;">
             ${PHONE_DATA.photos ? PHONE_DATA.photos.map(p => {
                 if (p.url) {
-                    // 如果有图，加上 onerror 报错提示
                     return `<div style="aspect-ratio: 1; background: #1c1c1e; cursor: pointer;" onclick="viewPhoto('${p.url}')">
-                                <img src="${p.url}" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\\'display:flex;justify-content:center;align-items:center;width:100%;height:100%;color:#ff3b30;font-size:12px;text-align:center;\\'>路径或文件名不对<br>${p.url}</div>'">
+                                <img src="${p.url}" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\\'display:flex;justify-content:center;align-items:center;width:100%;height:100%;color:#ff3b30;font-size:12px;text-align:center;\\'>图片加载失败<br>${p.url}</div>'">
                             </div>`;
                 } else {
                     return `<div style="aspect-ratio: 1; background: #eee; display: flex; justify-content: center; align-items: center; color: #aaa; font-size: 24px;">?</div>`;

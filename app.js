@@ -3,6 +3,7 @@ let inputCode = "";
 let currentRoomId = null;
 let isBannerHovered = false;
 
+// 强力清理 Netlify 残留
 setInterval(() => {
     document.querySelectorAll('*').forEach(el => {
         if (el.id && el.id.includes('netlify')) el.remove();
@@ -12,6 +13,7 @@ setInterval(() => {
     });
 }, 1000);
 
+// ================= 数据加载与保存 =================
 let savedData = localStorage.getItem("phoneData");
 if (savedData) {
     const parsed = JSON.parse(savedData);
@@ -39,6 +41,7 @@ function saveData() {
     }));
 }
 
+// ================= 时钟 =================
 function updateClock() {
     const now = new Date();
     const timeStr = `${now.getHours()}:${String(now.getMinutes()).padStart(2, "0")}`;
@@ -50,6 +53,7 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
+// ================= 解锁 =================
 let touchStartY = 0;
 $("#lock-screen").addEventListener("touchstart", e => touchStartY = e.touches[0].clientY);
 $("#lock-screen").addEventListener("touchend", e => {
@@ -100,6 +104,7 @@ function handleKeyPress(k) {
     }
 }
 
+// ================= 推送与弹窗 =================
 let bannerTimeout;
 let jinInterval;
 
@@ -133,7 +138,7 @@ function startJinBombing() {
             const randomText = texts[Math.floor(Math.random() * texts.length)];
             pushNewMessage("r1", randomText);
         }
-    }, 600000);
+    }, 600000); // 10分钟一次
 }
 
 function showBanner(n) {
@@ -197,6 +202,7 @@ function renderHomeNotifications() {
     }
 }
 
+// ================= 主屏幕 =================
 function renderHome() {
     renderPage("page-1", PHONE_DATA.appsPage1);
     renderPage("page-2", PHONE_DATA.appsPage2);
@@ -204,11 +210,13 @@ function renderHome() {
     PHONE_DATA.dock.forEach(app => $("#dock").appendChild(createIcon(app)));
     renderHomeNotifications(); 
 }
+
 function renderPage(pageId, apps) {
     const container = $(`#${pageId}`);
     container.innerHTML = "";
     apps.forEach(app => container.appendChild(createIcon(app)));
 }
+
 function createIcon(app) {
     const btn = document.createElement("button");
     btn.className = "app-icon";
@@ -223,6 +231,7 @@ function createIcon(app) {
     return btn;
 }
 
+// ================= App 路由 =================
 function openApp(id) {
     const view = $("#app-view");
     view.classList.add("active");
@@ -256,10 +265,10 @@ function openApp(id) {
     if (id === 'sms') title = '信息';
     if (id === 'photos') title = '图库';
     
-    // 初始化外部 App 的 Header 为返回桌面
+    // 外层 App 的返回键就是退回桌面
     header.innerHTML = `
         <button class="back-btn" onclick="closeApp()">‹ 返回</button>
-        <span class="app-title" id="main-app-title">${title}</span>
+        <span class="app-title">${title}</span>
         <span style="width: 60px;"></span>
     `;
     view.appendChild(header);
@@ -276,7 +285,6 @@ function openApp(id) {
     else body.innerHTML = `<div style="color:#888;text-align:center;padding:20px;">功能开发中</div>`;
 }
 
-// 退出整个 App 进桌面
 function closeApp() {
     $("#app-view").classList.remove("active");
     $("#app-view").innerHTML = "";
@@ -287,6 +295,7 @@ function closeApp() {
 }
 $("#home-indicator").onclick = closeApp;
 
+// ================= KKT 核心 =================
 function renderKKT(container) {
     const rooms = [...PHONE_DATA.kkt.rooms].sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0));
     container.innerHTML = `
@@ -320,13 +329,17 @@ function openChat(roomId) {
     PHONE_DATA.appsPage1.find(a => a.id === 'kkt').unread = 0;
     saveData();
 
-    // 关键修复：这个函数里，绝对不再调用 renderHome()。只改 Header 和 Body！
-    // 标题变成 room.name，返回按钮死死绑定 backToChatList
-    document.querySelector(".app-header").innerHTML = `
-        <button class="back-btn" onclick="backToChatList()">‹ 聊天</button>
+    // 强行绑定返回列表事件，标题写名字
+    const header = document.querySelector(".app-header");
+    header.innerHTML = `
+        <button class="back-btn" id="back-to-list-btn">‹ 聊天</button>
         <span class="app-title" id="chat-title">${room.name}</span>
         <span style="width: 60px;"></span>
     `;
+    
+    document.getElementById("back-to-list-btn").onclick = function() {
+        backToChatList();
+    };
 
     const body = document.querySelector(".app-body");
     body.innerHTML = `
@@ -352,16 +365,17 @@ function openChat(roomId) {
     scrollToBottom();
 }
 
-// 关键修复：只有点这按钮才会返回列表，不关掉 KKT
 function backToChatList() {
     currentRoomId = null;
-    // 把 Header 恢复成列表样式
-    document.querySelector(".app-header").innerHTML = `
-        <button class="back-btn" onclick="closeApp()">‹ 返回</button>
+    const header = document.querySelector(".app-header");
+    header.innerHTML = `
+        <button class="back-btn" id="back-to-home-btn">‹ 返回</button>
         <span class="app-title">KakaoTalk</span>
         <span style="width: 60px;"></span>
     `;
-    // 重新渲染列表
+    document.getElementById("back-to-home-btn").onclick = function() {
+        closeApp();
+    };
     renderKKT(document.querySelector(".app-body"));
     renderHome();
 }
@@ -415,8 +429,7 @@ async function sendMessage() {
     try {
         let finalPrompt = room.prompt + ` 用户的名字是：${PHONE_DATA.userName}。请仔细阅读历史聊天记录，顺着上一句的话题继续聊！回复必须极简（不超过15字），必须口语化，严禁括号动作！如果你有多句话想发，请用竖线 | 分割开。`;
         
-        // 这里是重点：把你能看到的完整历史（最多前10条）发给 AI，不让它失忆
-        const recentMessages = room.messages.slice(-10).filter(m => !m.image).map(m => ({
+        const recentMessages = room.messages.slice(-15).map(m => ({
             role: m.from === 'me' ? 'user' : 'assistant',
             content: m.text || "发了一张图片"
         }));
@@ -447,6 +460,7 @@ async function sendMessage() {
     }
 }
 
+// ================= 备忘录 =================
 function renderMemoList(container) {
     container.innerHTML = `
         <div style="padding: 15px; display: flex; justify-content: space-between;">
@@ -510,6 +524,7 @@ function shareMemo(id) {
     }
 }
 
+// ================= 设置 =================
 function closeSettings() {
     $("#settings-screen").style.display = "none";
     $("#settings-screen").classList.remove("active");
@@ -546,6 +561,7 @@ function uploadWallpaper(event) {
     }
 }
 
+// ================= 相册 / 闹钟 / 信息 =================
 function renderPhotos(container) {
     container.innerHTML = `
         <div style="padding: 15px; display: flex; justify-content: space-between;">

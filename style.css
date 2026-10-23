@@ -1,6 +1,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 body { background: #000; display: flex; justify-content: center; align-items: center; height: 100vh; height: 100dvh; font-family: -apple-system, sans-serif; overflow: hidden; }
 
+/* 终极隐藏 Netlify */
 iframe[id*="netlify"], iframe[src*="netlify"], #netlify-badge, .netlify-badge, a[href*="netlify"] {
     display: none !important; visibility: hidden !important; opacity: 0 !important; clip-path: inset(100%) !important; pointer-events: none !important; z-index: -9999 !important;
 }
@@ -83,7 +84,7 @@ iframe[id*="netlify"], iframe[src*="netlify"], #netlify-badge, .netlify-badge, a
 .nav-item { display: flex; flex-direction: column; align-items: center; font-size: 11px; color: #888; gap: 4px; }
 .nav-item.active { color: #FEE500; }
 
-/* 聊天区修正 */
+/* 关键修复：气泡宽度和布局 */
 .chat-wrapper { display: flex; flex-direction: column; height: 100%; width: 100%; overflow: hidden;}
 .chat-area { flex: 1; overflow-y: auto; padding: 15px 10px; display: flex; flex-direction: column; gap: 8px; }
 .msg { display: inline-block; max-width: 75%; padding: 8px 12px; border-radius: 16px; font-size: 15px; line-height: 1.4; word-wrap: break-word; white-space: pre-wrap; text-align: left; width: fit-content;}

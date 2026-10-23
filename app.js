@@ -13,8 +13,8 @@ setInterval(() => {
     });
 }, 1000);
 
-// 数据加载 (强行清除一次旧版的大框数据)
-let currentVersion = "v5.0"; 
+// 强杀旧版大框数据！
+let currentVersion = "v6.0_FINAL"; 
 let savedVersion = localStorage.getItem("appVersion");
 if (savedVersion !== currentVersion) {
     localStorage.removeItem("phoneData");
@@ -102,7 +102,6 @@ function handleKeyPress(k) {
     }
 }
 
-// 主动发消息
 let bannerTimeout;
 let proactiveInterval;
 
@@ -196,7 +195,11 @@ function createIcon(app) {
 
 function setHeader(title, backAction) {
     const header = document.querySelector(".app-header");
-    header.innerHTML = `<button class="back-btn">‹ 返回</button><span class="app-title">${title}</span><span style="width: 60px;"></span>`;
+    header.innerHTML = `
+        <button class="back-btn">‹ 返回</button>
+        <span class="app-title">${title}</span>
+        <span style="width: 60px;"></span>
+    `;
     header.querySelector(".back-btn").onclick = backAction;
 }
 
@@ -350,7 +353,7 @@ async function sendMessage() {
     document.querySelector(".app-title").textContent = "对方正在输入...";
 
     try {
-        let finalPrompt = room.prompt + ` 用户的名字是：${PHONE_DATA.userName}。顺着话题聊。严禁提及自己是AI（如果用户提到了，你要生气地反驳）。回复必须极简口语化。如果你有多句话要说，必须用竖线 | 分隔开！`;
+        let finalPrompt = room.prompt + ` 用户的名字是：${PHONE_DATA.userName}。顺着话题聊。严禁提及自己是AI。回复必须极简。如果你有多句话要说，必须用竖线 | 分隔开！`;
         
         const recentMessages = room.messages.slice(-15).map(m => ({
             role: m.from === 'me' ? 'user' : 'assistant',

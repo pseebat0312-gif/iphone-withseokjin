@@ -58,3 +58,21 @@ Browser QA verified real route-back behavior, a fixed outer document, upward dis
 ## Current foundation pass
 
 See `CODEX_HANDOFF.md` for current feature status, remaining work, build instructions and hosting boundaries. The main interface is Chinese; the language preference controls chat only.
+
+## 虚构 X、秘密恋爱与音频增量（2026-10-25）
+
+在 `codex/with-you-foundation` 原有界面上继续开发，未重新创建网站。原购物、订单、银行短信、聊天、Spotify、相册、备忘录、官方 Instagram / Weverse 链接均保留。上传的源码 ZIP 与本次开发前分支的 51 个文件完全一致。
+
+- 第二页「提及」替换为本地虚构 X：推荐/关注、搜索与趋势、个人主页、关注、通知、私信、发帖、评论、点赞、转发、引用、@；支持静音/屏蔽。旧提及帖子、评论和玩家回复迁移保留。账号不连接真实 X，NPC 互动是有节流的本地上下文规则模拟，不是实时真人或实时 AI 社区。快速连续发帖会分批回应。
+- Instagram / Weverse 保留原有官方入口，同时新增明确标记的游戏动态；动态可主动分享到虚构 X，配图可保存至相册，相册照片也能分享到 X。不会替玩家自动公开私人照片或恋情。
+- 设置或 Jin 聊天中打开「人物与故事」，填写成年角色身份、选择从零认识或已有交集。已有恋人聊天保留关系。聊天表达推动相识、暧昧、心意、秘密恋爱与 Happy Ending；拒绝不当同意，结局后可继续聊天。关系识别是本地规则，AI 对话继续使用原 DeepSeek/Gemini 接口和多轮历史；不是保证理解所有自然语言的剧情导演。显式偏好、边界、近期剧情和私人购物记忆加入后续上下文。
+- 原创本地合成配乐可选开启，按日常/甜蜜/紧张氛围切换，支持音量、静音、淡入淡出；语音播放时降低配乐，Spotify 正在播放时停下配乐。锁屏或后台暂停。没有新增未经授权的商业歌曲。
+- 每条角色消息提供点按韩语语音，包含韩语字幕和原文。新增服务端 `TTS_API_KEY`（OpenAI 通用 Onyx 声线，不克隆真人），并复用 DeepSeek 翻译选中的实际消息。两项均按服务用量计费；未配置时明确报错，不伪造语音，不自动生成。现有站长后台只管理 DeepSeek，不管理 TTS；TTS 密钥应通过托管平台 Secret 配置。
+
+数据仍使用原 `withyou-v2` localStorage，世界状态包含在原 JSON 导出/恢复中；支持旧备份恢复和重置。新增长期偏好也属于个人浏览器数据，请勿把自己的备份提交到仓库。游戏短信依旧只读。
+
+本地运行：Node 22+，`npm run build`、`npm test`、`npm run dev -- --port 3000`。无需 npm 依赖。开发服务器只向 Worker 传入进程中的 `DEEPSEEK_API_KEY`、`DEEPSEEK_MODEL`、`TTS_API_KEY`；不会自动读取 `.env`。使用托管 Secret 或安全注入，不将密钥写到前端、GitHub 或聊天中。
+
+验证：29 项 Node 测试（外部模型/语音使用模拟），桌面与移动视口浏览器检查覆盖 X 互动、动态联动、购物→短信、聊天多气泡、旧记录迁移、备份/恢复/重置、配乐与缺少语音服务提示。真实韩语音质与原站在线模型调用尚未在此开发环境验证；需要密钥和真实服务。真实 iPhone 音频/Safari 也需实机检查。
+
+GitHub 更新不会自动更新原 `chatgpt.site` 网站。发布时保留 `.openai/hosting.json`，由原 Sites 项目部署构建输出，并保留原私有 R2/站长配置；不能通过源码取出原站密钥。环境设置发布也不等于网站部署。

@@ -99,12 +99,11 @@ function decorateWorld(){
   const app=$('[data-app="mentions"]');if(app){app.querySelector('.app-badge')?.remove();if(state.world.unread)app.insertAdjacentHTML('beforeend',`<span class="app-badge">${state.world.unread}</span>`)}
   const today=$('.home-today');if(today&&!today.querySelector('[data-world]'))today.insertAdjacentHTML('beforeend','<button data-world="setup">你与故事 ›</button>');
  }
- if(page==='settings'&&!$('#world-settings'))$('.page-scroll')?.insertAdjacentHTML('beforeend','<div class="settings-group" id="world-settings"><button class="setting-row" data-world="setup">♡ 人物与秘密恋爱故事 <span class="chevron">›</span></button><button class="setting-row" data-world="audio">♫ 韩语语音与原创配乐 <span class="chevron">›</span></button></div>');
+ if(page==='settings'&&!$('#world-settings'))$('.page-scroll')?.insertAdjacentHTML('beforeend','<div class="settings-group" id="world-settings"><button class="setting-row" data-world="setup">♡ 人物与秘密恋爱故事 <span class="chevron">›</span></button><button class="setting-row" data-world="audio">♫ 原创剧情配乐 <span class="chevron">›</span></button></div>');
  if(page==='chat'){
   const m=members.find(m=>m.id===roomId);if(m?.id==='jin'&&!pending.has('jin'))$('.heading small').textContent=WORLD_LABELS[state.romance.stage]+' · 虚构角色';
-  if(!$('#world-chat-tools'))$('.conv-head')?.insertAdjacentHTML('afterend',`<div class="world-chat-tools" id="world-chat-tools"><button data-world="setup">人物与故事</button><button data-world="audio">语音 / 配乐</button></div>`);
-  const rows=[...document.querySelectorAll('#messages .message-row:not(:has(.typing))')];const messages=state.chats[roomId];
-  rows.forEach((row,i)=>{const msg=messages[i];if(!msg||msg.role!=='assistant'||!msg.text||row.querySelector('[data-world-voice]'))return;const bubble=row.querySelector('.bubble');if(msg.story)bubble.insertAdjacentHTML('beforeend','<small class="world-scene-label">虚构生活事件</small>');bubble.insertAdjacentHTML('beforeend',`<button class="voice-message" data-world-voice="${escape(msg.id)}" data-member="${roomId}" aria-label="播放韩语语音">${voiceBubble===msg.id?'■ 停止语音':'▷ 韩语语音'} <small>原创通用男声</small></button><span class="voice-subtitle" aria-live="polite">${escape(msg.voiceKorean||msg.korean||'点按后生成韩语语音；原文为字幕')}</span>`)});
+  if(!$('#world-chat-tools'))$('.conv-head')?.insertAdjacentHTML('afterend',`<div class="world-chat-tools" id="world-chat-tools"><button data-world="setup">人物与故事</button><button data-world="audio">配乐与提示音</button></div>`);
+
  }
  if(page==='contact'&&roomId==='jin'){$('.contact-detail p').textContent='JIN · '+WORLD_LABELS[state.romance.stage];const p=$('.help-card p');if(p)p.textContent='这是架空成年角色的私人故事。你决定如何认识、是否接受心意和怎样继续生活，成员不会默认知道你们的秘密。'}
 }
@@ -122,11 +121,8 @@ function showLocalSocial(platform){
  modal(label,`<p class="explain">虚构生活动态 · 与现实公开报道分开。本地剧情不会发到真实账号。</p><a class="secondary social-official" target="_blank" rel="noopener noreferrer" href="${platform==='instagram'?'https://www.instagram.com/jin/':'https://weverse.io/bts/artist'}">打开原有官方 ${label} ↗</a><form id="local-social-post"><textarea id="local-social-text" maxlength="500" placeholder="分享一条虚构日常…" aria-label="虚构社交动态"></textarea><button class="primary">发布到游戏动态</button></form>${entries.map(a=>`<article class="local-social-entry"><small>${a.author==='you'?escape(state.nickname):'虚构角色'} · ${time(a.at)}</small><p>${xText(a.text)}</p>${a.image?`<img src="${a.image}" alt="虚构场景配图"><button class="secondary" data-world-photo="${a.id}">保存配图到相册</button>`:''}<button class="secondary" data-world-crosspost="${a.id}">分享到虚构 X</button></article>`).join('')||'<p class="explain">还没有游戏动态，生活事件会慢慢出现在这里。</p>'}`,'<button class="secondary" data-action="close-overlay">关闭</button>');
  $('#local-social-post').addEventListener('submit',e=>{e.preventDefault();const text=$('#local-social-text').value.trim();if(!text)return;state.world.activity.unshift({id:uid(),platform,author:'you',text,at:Date.now()});save();showLocalSocial(platform)});
 }
-function showWorldAudio(){
- const a=state.sceneAudio;modal('语音与剧情配乐',`<p>韩语语音使用 OpenAI 通用合成男声 Onyx，不模仿或克隆金硕珍本人。点按消息才生成，不会自动收费播放；文本会发送给已配置的语音服务。</p><p id="voice-ready">正在检查语音服务…</p><p>韩语音频附韩文与消息原文字幕。未接通服务时不会冒充已经播放。</p><div class="setting-row">原创剧情配乐<button class="toggle ${a.enabled?'on':''}" data-world="music-toggle" role="switch" aria-checked="${a.enabled}" aria-label="原创剧情配乐"></button></div><div class="setting-row">配乐静音<button class="toggle ${a.muted?'on':''}" data-world="music-mute" role="switch" aria-checked="${a.muted}" aria-label="配乐静音"></button></div><label for="world-volume">配乐音量</label><input id="world-volume" type="range" min="0" max="1" step=".01" value="${a.volume}"><label for="voice-volume">语音音量</label><input id="voice-volume" type="range" min="0" max="1" step=".01" value="${state.voiceVolume??.8}"><p class="explain">当前氛围：${state.romance.mood==='sweet'?'甜蜜':state.romance.mood==='tense'?'紧张':'日常'}。音色与旋律为本程序原创合成，切换时淡入淡出；锁屏或后台暂停，不影响原 Spotify。</p><button class="secondary" data-world="voice-stop">停止语音</button>`,'<button class="secondary" data-action="close-overlay">关闭</button>');
- $('#world-volume').addEventListener('input',e=>{a.volume=Number(e.target.value);save();updateSceneMusic()});$('#voice-volume').addEventListener('input',e=>{state.voiceVolume=Number(e.target.value);if(voicePlayer)voicePlayer.volume=state.voiceVolume;save()});
- fetch('/api/voice/config').then(r=>r.json()).then(d=>{const el=$('#voice-ready');if(el)el.textContent=d.ready?'语音服务已配置；实际生成按服务用量计费。':'语音未接通：站长需配置 TTS_API_KEY；中文转韩文还需要已连接的 DeepSeek。'}).catch(()=>{if($('#voice-ready'))$('#voice-ready').textContent='语音服务状态暂不可用。'});
-}
+function showWorldAudio(){const a=state.sceneAudio;modal('背景配乐与提示音',`<p>原创合成配乐会随日常、甜蜜和紧张氛围变化。Spotify 播放时会让出声音。</p><div class="setting-row">剧情配乐<button class="toggle ${a.enabled?'on':''}" data-world="music-toggle" role="switch" aria-label="剧情配乐" aria-checked="${a.enabled}"></button></div><div class="setting-row">配乐静音<button class="toggle ${a.muted?'on':''}" data-world="music-mute" role="switch" aria-label="配乐静音" aria-checked="${a.muted}"></button></div><input id="world-volume" aria-label="配乐音量" type="range" min="0" max="1" step=".01" value="${a.volume}"><button class="secondary" data-v3="test-sound">试听 KakaoTalk 提示音</button><button class="secondary" data-nav="setting:sound">通知与声音设置</button>`);$('#world-volume').addEventListener('input',e=>{a.volume=Number(e.target.value);save();updateSceneMusic()})}
+
 function stopWorldVoice(){voiceGeneration++;voiceBusy=false;voiceBubble='';voicePlayer?.pause();voicePlayer=null;if(voiceUrl)URL.revokeObjectURL(voiceUrl);voiceUrl='';updateSceneMusic();if(page==='chat')decorateWorldVoiceButtons()}
 function decorateWorldVoiceButtons(){document.querySelectorAll('[data-world-voice]').forEach(b=>{b.firstChild.textContent=voiceBubble===b.dataset.worldVoice?'■ 停止语音 ':'▷ 韩语语音 '})}
 async function playWorldVoice(id,member){
@@ -146,7 +142,7 @@ document.addEventListener('pointerdown',()=>{if(state.sceneAudio.enabled)updateS
 setInterval(updateSceneMusic,2500);
 document.addEventListener('click',e=>{
  const el=e.target.closest('[data-world],[data-world-voice],[data-x-action],[data-x-profile],[data-x-thread],[data-x-search],[data-world-crosspost],[data-world-photo],[data-app="instagram"],[data-app="weverse"]');if(!el)return;
- if(el.dataset.app){e.preventDefault();e.stopImmediatePropagation();showLocalSocial(el.dataset.app);return}
+ if(el.dataset.app){e.preventDefault();e.stopImmediatePropagation();openSocialApp(el.dataset.app);return}
  const w=state.world;
  if(el.dataset.xProfile){xProfile=el.dataset.xProfile;xTab='profile';renderMentions();return}
  if(el.hasAttribute('data-x-thread')){if(!el.dataset.xThread)return;xThread=el.dataset.xThread;xTab='thread';renderMentions();return}

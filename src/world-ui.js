@@ -56,7 +56,7 @@ function renderMentions(){
 }
 function openXComposer(reply='',quote='',mention='',image=''){
  xComposeImage=image;
- xReply=reply;xQuote=quote;xComposing=true;modal(reply?'回复':quote?'引用帖子':'发布帖子',`<p class="explain">只发布到游戏内虚构 X。NPC 会通过现有 AI 服务回应，不会发布到真实 X。</p><form id="x-compose">${image?`<img class="share-photo-thumb" src="${escape(image)}" alt="待发布的游戏照片">`:""}<textarea id="x-post-text" maxlength="1000" rows="5" aria-label="帖子内容" placeholder="有什么新鲜事？可使用 @peachfilm 和 #话题">${mention?'@'+escape(mention)+' ':''}</textarea><small id="x-counter">0 / 1000</small><button class="primary" type="submit">${reply?'回复':'发布'}</button></form>`,'<button class="secondary" data-action="close-overlay">取消</button>');
+ xReply=reply;xQuote=quote;xComposing=true;modal(reply?'回复':quote?'引用帖子':'发布帖子',`<p class="explain">只发布到游戏内虚构 X。NPC 会根据公开文字作出游戏内回应，不会发布到真实 X。</p><form id="x-compose">${image?`<img class="share-photo-thumb" src="${escape(image)}" alt="待发布的游戏照片">`:""}<textarea id="x-post-text" maxlength="1000" rows="5" aria-label="帖子内容" placeholder="有什么新鲜事？可使用 @peachfilm 和 #话题">${mention?'@'+escape(mention)+' ':''}</textarea><small id="x-counter">0 / 1000</small><button class="primary" type="submit">${reply?'回复':'发布'}</button></form>`,'<button class="secondary" data-action="close-overlay">取消</button>');
  $('#x-post-text').addEventListener('input',e=>$('#x-counter').textContent=e.target.value.length+' / 1000');
  $('#x-compose').addEventListener('submit',e=>{e.preventDefault();const text=$('#x-post-text').value.trim();if(!text)return;
   const now=Date.now(),w=state.world;

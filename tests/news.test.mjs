@@ -1,0 +1,4 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {parseNewsFeed} from '../src/news-server.mjs';
+test('public headlines retain source and date while dropping invalid or stale entries',()=>{const date=new Date().toUTCString();const feed='<rss><item><title><![CDATA[BTS &amp; Weverse]]></title><link>https://example.com/post</link><source>Newsroom</source><pubDate>'+date+'</pubDate></item><item><title>old</title><link>https://example.com/old</link><pubDate>Mon, 01 Jan 2001 00:00:00 GMT</pubDate></item><item><title>unsafe</title><link>javascript:alert(1)</link><pubDate>'+date+'</pubDate></item></rss>';const data=parseNewsFeed(feed);assert.equal(data.length,1);assert.equal(data[0].title,'BTS & Weverse');assert.equal(data[0].source,'Newsroom');assert.match(data[0].kind,/未独立核验/)});

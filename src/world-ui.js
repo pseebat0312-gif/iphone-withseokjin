@@ -56,11 +56,11 @@ function renderMentions(){
 }
 function openXComposer(reply='',quote='',mention='',image=''){
  xComposeImage=image;
- xReply=reply;xQuote=quote;xComposing=true;modal(reply?'回复':quote?'引用帖子':'发布帖子',`<p class="explain">只发布到本地虚构 X。NPC 反应由本地规则模拟。</p><form id="x-compose">${image?`<img class="share-photo-thumb" src="${escape(image)}" alt="待发布的游戏照片">`:""}<textarea id="x-post-text" maxlength="1000" rows="5" aria-label="帖子内容" placeholder="有什么新鲜事？可使用 @peachfilm 和 #话题">${mention?'@'+escape(mention)+' ':''}</textarea><small id="x-counter">0 / 1000</small><button class="primary" type="submit">${reply?'回复':'发布'}</button></form>`,'<button class="secondary" data-action="close-overlay">取消</button>');
+ xReply=reply;xQuote=quote;xComposing=true;modal(reply?'回复':quote?'引用帖子':'发布帖子',`<p class="explain">只发布到游戏内虚构 X。NPC 会通过现有 AI 服务回应，不会发布到真实 X。</p><form id="x-compose">${image?`<img class="share-photo-thumb" src="${escape(image)}" alt="待发布的游戏照片">`:""}<textarea id="x-post-text" maxlength="1000" rows="5" aria-label="帖子内容" placeholder="有什么新鲜事？可使用 @peachfilm 和 #话题">${mention?'@'+escape(mention)+' ':''}</textarea><small id="x-counter">0 / 1000</small><button class="primary" type="submit">${reply?'回复':'发布'}</button></form>`,'<button class="secondary" data-action="close-overlay">取消</button>');
  $('#x-post-text').addEventListener('input',e=>$('#x-counter').textContent=e.target.value.length+' / 1000');
  $('#x-compose').addEventListener('submit',e=>{e.preventDefault();const text=$('#x-post-text').value.trim();if(!text)return;
   const now=Date.now(),w=state.world;
-  if(xReply){const p=w.posts.find(p=>p.id===xReply);if(!p)return;p.comments.push({id:uid(),author:'you',text,at:now});const npc=npcById(p.author==='you'?p.comments.find(c=>npcById(c.author))?.author:p.author);p.reacted=false;queueSocialReaction(w,p,now);xThread=p.id;xTab='thread';}
+  if(xReply){const p=w.posts.find(p=>p.id===xReply);if(!p)return;p.comments.push({id:uid(),author:'you',text,at:now});const npc=npcById(p.author==='you'?p.comments.find(c=>npcById(c.author))?.author:p.author);p.reacted=false;p.reactionAttempt=0;queueSocialReaction(w,p,now);xThread=p.id;xTab='thread';}
   else{const p={id:uid(),author:'you',text,quote:xQuote||null,image:xComposeImage||null,at:now,likes:0,reposts:0,comments:[]};w.posts.push(p);w.posts=w.posts.slice(-300);const selected=queueSocialReaction(w,p,now,uid);xThread=p.id;xTab='for-you';if(selected.length)showGameBanner('X · 虚构互动',`${selected[0].name} 等人回应了你的帖子`,'mentions');}
   save();xComposing=false;$('#overlay').replaceChildren();renderMentions();
  });$('#x-post-text').focus();

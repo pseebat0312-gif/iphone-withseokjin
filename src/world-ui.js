@@ -94,7 +94,7 @@ function deliverRomanceScenePrevious(force=false){
  if(['schedule','distance','happy'].includes(scene.id)){const sender=state.sms.find(s=>s.id==='bighit');if(sender){sender.messages.push({text:`[虚构生活事件] ${scene.id==='happy'?'今天没有额外安排。把时间留给你自己的生活。':scene.id==='schedule'?'活动安排调整；私人约定由你们自行商量，不代表现实行程。':'公开场合请注意界限，未经同意不发布他人私人信息。'}`,at:Date.now()});state.smsUnread++}}
   save();updateSceneMusic();
 }
-function decorateWorld(){
+function decorateWorld(){if(SCRIPTED_MODE)return;
  if(page==='home'){
   const app=$('[data-app="mentions"]');if(app){app.querySelector('.app-badge')?.remove();if(state.world.unread)app.insertAdjacentHTML('beforeend',`<span class="app-badge">${state.world.unread}</span>`)}
   const today=$('.home-today');if(today&&!today.querySelector('[data-world]'))today.insertAdjacentHTML('beforeend','<button data-world="setup">你与故事 ›</button>');

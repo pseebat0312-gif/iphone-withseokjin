@@ -1,3 +1,5 @@
+> 当前分支是预设互动剧第一阶段（第一至第四幕），未部署。请先读 [验收说明](docs/REVIEW.md)。以下旧版 AI 接口说明仅供保留功能参考，KakaoTalk 已禁止实时模型调用。
+
 # WITH YOU · 女朋友的手机
 
 Fan-made fictional BTS phone experience. Existing Sites project: retained. Original GitHub history is retained; see the continuation branch and CODEX_HANDOFF.md. Data remains browser-local.

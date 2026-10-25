@@ -2,18 +2,18 @@
 let directorBusy=false,directorAgain=false,directorTimer=null,openingOffered=false,openingShown=false,socialBusy=new Set();
 state.romance.engine=state.romance.engine||{version:2,summary:'',focus:'',error:'',lastAttempt:0,lastReflect:0,episodes:[],paused:false};
 const engine=()=>state.romance.engine||(state.romance.engine={version:2,summary:'',focus:'',error:'',lastAttempt:0,lastReflect:0,episodes:[],paused:false});
-function storyReady(){return state.proactive!==false&&state.romance.configured&&!state.romance.paused&&!engine().paused&&document.visibilityState==='visible'&&!['lock','passcode'].includes(page)}
+function storyReady(){if(SCRIPTED_MODE)return false;return state.proactive!==false&&state.romance.configured&&!state.romance.paused&&!engine().paused&&document.visibilityState==='visible'&&!['lock','passcode'].includes(page)}
 function directorHistory(){return state.chats.jin.filter(m=>!state.romance.storyStartAt||m.at>=state.romance.storyStartAt).slice(-18).map(m=>({role:m.role,text:m.text.slice(0,1800)}))}
-function currentStoryContext(){const r=state.romance,e=engine();return romanceContext(r,state.world)+'\n故事路线：'+(state.romance.route||'stranger')+'\n连续剧情摘要：'+e.summary+'\n当前尚待玩家决定的事：'+e.focus+'\n最近事件（避免重复）：'+JSON.stringify(e.episodes.slice(-6).map(x=>x.summary))+'\n游戏订单（私人，NPC 不知道）：'+JSON.stringify(state.orders.slice(-2).map(o=>o.name))}
+function currentStoryContextGenerated(){const r=state.romance,e=engine();return romanceContext(r,state.world)+'\n故事路线：'+(state.romance.route||'stranger')+'\n连续剧情摘要：'+e.summary+'\n当前尚待玩家决定的事：'+e.focus+'\n最近事件（避免重复）：'+JSON.stringify(e.episodes.slice(-6).map(x=>x.summary))+'\n游戏订单（私人，NPC 不知道）：'+JSON.stringify(state.orders.slice(-2).map(o=>o.name))}
 async function worldRequest(body){const r=await fetch('/api/world',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:AbortSignal.timeout(45000)});const data=await r.json();if(!r.ok)throw Error(data.error||'暂时没有取得剧情');return data.plan}
-function worldUserMessage(text){
+function worldUserMessageGenerated(text){
  const r=state.romance;r.turns++;r.stageTurns++;r.journal.push({at:Date.now(),kind:'player',text:text.slice(0,240)});r.journal=r.journal.slice(-50);
  // Record only explicit user facts, never model guesses.
  if(/我叫|我是|我喜欢|我不喜欢|过敏|生日|我的工作|记住|不要叫我/.test(text)&&!r.facts.includes(text.slice(0,150)))r.facts.push(text.slice(0,150));r.facts=r.facts.slice(-40);
  if(/先暂停剧情|暂停生活事件/.test(text)){r.paused=true;toast('自动剧情已暂停，自由聊天继续')}
  engine().revision=(engine().revision||0)+1;save();
 }
-function worldAfterChat(){if(!state.romance.configured)return;clearTimeout(directorTimer);directorTimer=setTimeout(()=>runDirector('reflect'),1200)}
+function worldAfterChatGenerated(){if(!state.romance.configured)return;clearTimeout(directorTimer);directorTimer=setTimeout(()=>runDirector('reflect'),1200)}
 function storyChanged(){save();updateSceneMusic();renderStoryLauncher();if(page==='mentions')refreshXInPlace();}
 async function runDirector(mode='scene',manual=false){
  const r=state.romance,e=engine();if(!storyReady()||!(siteConfig.ready||sessionKey))return;
@@ -50,7 +50,7 @@ function addAmbientPost(text,eventId){
  worldNotice(state.world,'post','日光存档发布了新动态',state.world.posts.at(-1).id,Date.now(),uid());
 }
 function refreshXInPlace(){if(page!=='mentions'||xComposing||$('#overlay').children.length)return;const field=document.activeElement;if(field?.matches('input,textarea'))return;const scroll=$('.page-scroll')?.scrollTop||0;renderMentions();const el=$('.page-scroll');if(el)el.scrollTop=scroll}
-function queueSocialReaction(w,post,now=Date.now()){
+function queueSocialReactionGenerated(w,post,now=Date.now()){
  if(socialBusy.has(post.id)){post.reactionAgain=true;return []}if(post.reacted||w!==state.world||!(siteConfig.ready||sessionKey))return [];
  if(Date.now()-(post.reactionAttempt||0)<45000)return [];
  const available=WORLD_NPCS.filter(n=>!w.blocked.includes(n.id)&&!w.muted.includes(n.id)).map(n=>n.id);if(!available.length)return [];
@@ -63,12 +63,12 @@ function queueSocialReaction(w,post,now=Date.now()){
   if(state.romance.configured&&plan.comments.some(c=>c.author==='night'||c.author==='paper')){recordWorldEvent('public','玩家公开帖子引起不同意见；硕珍只有在玩家告诉他或看见公开帖后才知道。');engine().focus=engine().focus||'网上的讨论与私人生活之间有信息差，不升级为泄露身份';}
  }catch(error){post.reactionError=error.message;save();refreshXInPlace()}finally{socialBusy.delete(post.id);if(post.reactionAgain){post.reactionAgain=false;post.reacted=false;post.reactionAttempt=0;queueSocialReaction(w,post)}}}) ();return [];
 }
-function showRomanceSetup(){
+function showRomanceSetupGenerated(){
  const r=state.romance,e=engine();modal(r.configured?'你们的故事':'先决定，故事从哪里开始',`<p class="story-intro">这是成年角色的虚构生活。你可以随便聊天、发帖、买东西；生活事件会自然到来。每次邀约和关系确认，都由你自己回答。</p><form id="romance-profile"><label for="romance-identity">你是谁？</label><textarea id="romance-identity" maxlength="300" placeholder="身份、喜欢的东西，或者先留空慢慢聊">${escape(r.identity)}</textarea>${!r.configured?`<label for="romance-backstory">这一次的起点</label><select id="romance-backstory"><option value="strangers">从零认识</option><option value="acquainted">已有交集，慢慢靠近</option>${state.chats.jin.length?'<option value="continue" selected>延续已有恋人聊天</option>':''}</select><p class="explain">原有聊天完整保留。选择新起点时，AI 会从这次开场继续理解关系。</p>`:`<div class="story-now"><small>现在 · ${WORLD_LABELS[r.stage]}</small><p>${escape(e.summary||'刚刚开始，给彼此一点自然相处的空间。')}</p>${e.focus?`<small>尚未说完的事</small><p>${escape(e.focus)}</p>`:''}</div>`}<div class="setting-row">自动生活事件<button type="button" class="toggle ${!r.paused?'on':''}" data-story-control="pause" role="switch" aria-label="自动生活事件" aria-checked="${!r.paused}"></button></div><p class="explain">网页在前台时运行，活跃模式约 45–60 秒安排一小步；聊天期间让你先说。不会在关闭网页后继续发消息。会使用现有 DeepSeek 余额。</p><button class="primary">${r.configured?'保存身份，继续聊天':'开始故事'}</button></form>${r.configured?'<button class="secondary" data-story-control="next">让生活往前走一步</button>':''}<button class="secondary" data-world="audio">背景配乐</button>${e.error?`<p class="story-error" role="status">${escape(e.error)}。自由聊天可继续。</p>`:''}${e.episodes.length?`<details class="story-journal"><summary>已经发生的事 · ${e.episodes.length}</summary>${e.episodes.slice(-8).reverse().map(x=>`<p><strong>${escape(x.title)}</strong><br>${escape(x.summary)}</p>`).join('')}</details>`:''}`,'<button class="secondary" data-action="close-overlay">先看看手机</button>');
  $('#romance-profile').addEventListener('submit',event=>{event.preventDefault();r.identity=$('#romance-identity').value.trim();if(!r.configured){const choice=$('#romance-backstory').value;r.backstory=choice==='strangers'?'strangers':'acquainted';if(choice!=='continue'){r.stage='meeting';r.storyStartAt=Date.now()}r.configured=true;r.paused=false;state.proactive=true;r.lastEventAt=0;e.focus='用符合身份背景的第一条消息开始，介绍联系方式的由来，留给玩家回答';}save();$('#overlay').replaceChildren();openRoom('jin','kkt');runDirector('scene',true)});
 }
-function renderStoryLauncher(){if(page!=='home')return;let node=$('#story-launcher');if(!node){node=document.createElement('button');node.id='story-launcher';node.dataset.world='setup';screen.append(node)}node.innerHTML=`<span class="story-live-dot"></span>${!state.romance.configured?'开始你的故事':directorBusy?'生活正在发生…':state.romance.paused?'故事已暂停':WORLD_LABELS[state.romance.stage]+' · 故事进行中'} <span>›</span>`;node.setAttribute('aria-label',state.romance.configured?'查看故事进展':'开始你的故事')}
-function offerStoryOpening(){renderStoryLauncher();if(!state.romance.configured&&page==='home'&&!openingOffered&&!$('#overlay').children.length){openingOffered=true;setTimeout(()=>{if(page==='home'&&!$('#overlay').children.length)showRomanceSetup()},250)}}
+function renderStoryLauncher(){if(SCRIPTED_MODE){renderScriptLauncher();return}if(page!=='home')return;let node=$('#story-launcher');if(!node){node=document.createElement('button');node.id='story-launcher';node.dataset.world='setup';screen.append(node)}node.innerHTML=`<span class="story-live-dot"></span>${!state.romance.configured?'开始你的故事':directorBusy?'生活正在发生…':state.romance.paused?'故事已暂停':WORLD_LABELS[state.romance.stage]+' · 故事进行中'} <span>›</span>`;node.setAttribute('aria-label',state.romance.configured?'查看故事进展':'开始你的故事')}
+function offerStoryOpening(){if(SCRIPTED_MODE)return;renderStoryLauncher();if(!state.romance.configured&&page==='home'&&!openingOffered&&!$('#overlay').children.length){openingOffered=true;setTimeout(()=>{if(page==='home'&&!$('#overlay').children.length)showRomanceSetup()},250)}}
 new MutationObserver(()=>{renderStoryLauncher();if(page==='home')offerStoryOpening();if(page==='chat'&&$('#messages')&&!$('#message-input')?.value){const list=$('#messages');requestAnimationFrame(()=>{if(list.isConnected)list.scrollTop=list.scrollHeight})}}).observe(screen,{childList:true});
 new MutationObserver(()=>{if(page==='home'&&!$('#overlay').children.length)offerStoryOpening()}).observe($('#overlay'),{childList:true});
 document.addEventListener('click',event=>{const target=event.target.closest('[data-story-control]');if(!target)return;if(target.dataset.storyControl==='pause'){if($('#romance-identity'))state.romance.identity=$('#romance-identity').value.trim();state.romance.paused=!state.romance.paused;save();showRomanceSetup()}else if(target.dataset.storyControl==='next'){$('#overlay').replaceChildren();runDirector('scene',true)}},true);
@@ -76,7 +76,7 @@ document.addEventListener('click',event=>{const target=event.target.closest('[da
 setInterval(()=>{if(!storyReady()||$('#overlay').children.length||pending.has('jin')||$('#message-input')?.value.trim())return;runDirector('scene')},15000);
 window.addEventListener('online',()=>{if(storyReady())runDirector('reflect')});
 offerStoryOpening();
-async function queueDirectMessage(peer){
+async function queueDirectMessageGenerated(peer){
  const w=state.world,key='dm:'+peer;if(socialBusy.has(key)||w.blocked.includes(peer))return;socialBusy.add(key);
  try{const history=w.dms.filter(x=>x.peer===peer||x.author===peer).slice(-8);const revision=history.at(-1)?.id;const p=await worldRequest({mode:'dm',post:{text:history.filter(x=>x.author==='you').at(-1)?.text||'',comments:history.map(x=>({author:x.author,text:x.text}))},npcs:[peer]});if(w!==state.world||w.blocked.includes(peer)||w.dms.filter(x=>x.peer===peer||x.author===peer).at(-1)?.id!==revision)return;for(const c of p.comments){if(c.author!==peer)continue;w.dms.push({id:uid(),author:peer,peer,text:c.text,at:Date.now()})}worldNotice(w,'dm',xName(peer)+' 回复了你的私信','',Date.now(),uid());save();showGameBanner('X · 私信',xName(peer)+' 发来新消息','mentions');refreshXInPlace()}catch(error){toast('私信暂未回复：'+error.message)}finally{socialBusy.delete(key)}
 }

@@ -55,3 +55,4 @@ let homeGesture=null;$('#home').addEventListener('touchstart',e=>homeGesture=e.t
 try{sessionKey=sessionStorage.getItem('withyou-deepseek')||'';sessionStorage.removeItem('withyou-gemini')}catch{sessionKey=''}
 fetch('/api/config').then(r=>r.json()).then(c=>{siteConfig=c;if(page==='settings')renderSettings()}).catch(()=>{});setInterval(()=>{if(page==='home')updateAnalogClock()},1000);
 
+

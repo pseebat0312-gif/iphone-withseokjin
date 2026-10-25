@@ -32,3 +32,4 @@ export async function voiceApi(request,env={}) {
   return json({audio:btoa(encoded),korean,original,voice:'onyx',synthetic:true});
  }catch(e){return json({error:e.name==='TimeoutError'?'语音生成超时，请稍后重试。':'语音生成失败，请稍后重试。'},502)}
 }
+

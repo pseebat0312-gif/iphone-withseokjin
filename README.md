@@ -76,3 +76,4 @@ See `CODEX_HANDOFF.md` for current feature status, remaining work, build instruc
 验证：29 项 Node 测试（外部模型/语音使用模拟），桌面与移动视口浏览器检查覆盖 X 互动、动态联动、购物→短信、聊天多气泡、旧记录迁移、备份/恢复/重置、配乐与缺少语音服务提示。真实韩语音质与原站在线模型调用尚未在此开发环境验证；需要密钥和真实服务。真实 iPhone 音频/Safari 也需实机检查。
 
 GitHub 更新不会自动更新原 `chatgpt.site` 网站。发布时保留 `.openai/hosting.json`，由原 Sites 项目部署构建输出，并保留原私有 R2/站长配置；不能通过源码取出原站密钥。环境设置发布也不等于网站部署。
+

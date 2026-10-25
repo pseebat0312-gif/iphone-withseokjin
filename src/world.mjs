@@ -80,3 +80,4 @@ export function validWorldBackup(data){
  if(data.sceneAudio&&(!Number.isFinite(data.sceneAudio.volume)||data.sceneAudio.volume<0||data.sceneAudio.volume>1))return false;
  return true;
 }
+

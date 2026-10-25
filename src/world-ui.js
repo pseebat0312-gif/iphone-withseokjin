@@ -26,7 +26,7 @@ function xNotification(text,post,type='comment'){
 }
 function xPostCard(p,detail=false){
  const quote=p.quote&&state.world.posts.find(x=>x.id===p.quote);
- return `<article class="x-post" data-post-id="${escape(p.id)}"><div>${xAvatar(p.author)}</div><div class="x-post-main"><header><button data-x-profile="${escape(p.author)}"><strong>${escape(xName(p.author))}</strong></button><span>@${escape(xHandle(p.author))} · ${time(p.at)}</span></header><button class="x-post-text" data-x-thread="${escape(p.id)}">${xText(p.text)}</button>${quote?`<blockquote><strong>${escape(xName(quote.author))}</strong><p>${xText(quote.text)}</p></blockquote>`:''}${p.image?`<img class="x-photo" src="${escape(p.image)}" alt="游戏内分享的照片">`:''}<div class="x-actions">${xAction('reply',`${icon('chat')} ${p.comments.length}`,`data-id="${escape(p.id)}"`)}${xAction('repost',`⇄ ${p.reposts}`,`data-id="${escape(p.id)}" aria-label="转发"`,p.reposted)}${xAction('like',`${icon('heart')} ${p.likes}`,`data-id="${escape(p.id)}" aria-label="点赞" aria-pressed="${Boolean(p.liked)}"`,p.liked)}${xAction('quote','引用',`data-id="${escape(p.id)}"`)}</div>${detail?`<h4>回复</h4>${p.comments.map(c=>`<div class="x-comment"><button data-x-profile="${escape(c.author)}"><strong>${escape(xName(c.author))}</strong> <small>@${escape(xHandle(c.author))}</small></button><p>${xText(c.text)}</p>${xAction('reply','回复',`data-id="${escape(p.id)}" data-mention="${escape(xHandle(c.author))}"`)}</div>`).join('')||'<p class="explain">还没有回复。</p>'}`:''}</div></article>`;
+ return `<article class="x-post" data-post-id="${escape(p.id)}"><div>${xAvatar(p.author)}</div><div class="x-post-main"><header><button data-x-profile="${escape(p.author)}"><strong>${escape(xName(p.author))}</strong></button><span>@${escape(xHandle(p.author))} · ${time(p.at)}</span></header><button class="x-post-text" data-x-thread="${escape(p.id)}">${xText(p.text)}</button>${p.author==='you'&&!p.reacted?`<small class="x-reaction-state">${p.reactionError?escape(p.reactionError)+' · 稍后自动重试':'虚构社区正在读你的帖子…'}</small>`:''}${quote?`<blockquote><strong>${escape(xName(quote.author))}</strong><p>${xText(quote.text)}</p></blockquote>`:''}${p.image?`<img class="x-photo" src="${escape(p.image)}" alt="游戏内分享的照片">`:''}<div class="x-actions">${xAction('reply',`${icon('chat')} ${p.comments.length}`,`data-id="${escape(p.id)}"`)}${xAction('repost',`⇄ ${p.reposts}`,`data-id="${escape(p.id)}" aria-label="转发"`,p.reposted)}${xAction('like',`${icon('heart')} ${p.likes}`,`data-id="${escape(p.id)}" aria-label="点赞" aria-pressed="${Boolean(p.liked)}"`,p.liked)}${xAction('quote','引用',`data-id="${escape(p.id)}"`)}</div>${detail?`<h4>回复</h4>${p.comments.map(c=>`<div class="x-comment"><button data-x-profile="${escape(c.author)}"><strong>${escape(xName(c.author))}</strong> <small>@${escape(xHandle(c.author))}</small></button><p>${xText(c.text)}</p>${xAction('reply','回复',`data-id="${escape(p.id)}" data-mention="${escape(xHandle(c.author))}"`)}</div>`).join('')||'<p class="explain">还没有回复。</p>'}`:''}</div></article>`;
 }
 function renderMentions(){
  const w=state.world;const wasUnread=w.unread;
@@ -52,7 +52,7 @@ function renderMentions(){
  }
  shell('',`<header class="x-head"><button data-x-profile="you" aria-label="我的个人主页">${xAvatar('you')}</button><strong>𝕏</strong><button data-x-action="options" aria-label="X 体验设置">${icon('more')}</button></header><p class="x-fiction">虚构 X · 本地模拟，非真实 X 数据或账号</p>${body}`,{cls:'x-page',back:'home',footer:`<nav class="x-nav">${xAction('tab',icon('home'),'data-tab="for-you" aria-label="X 首页"',['for-you','following'].includes(xTab))}${xAction('tab',icon('search'),'data-tab="search" aria-label="搜索与热搜"',xTab==='search')}${xAction('tab',`${icon('bell')}${wasUnread?'<sup>'+wasUnread+'</sup>':''}`,'data-tab="notifications" aria-label="X 通知"',xTab==='notifications')}${xAction('tab',icon('mail'),'data-tab="messages" aria-label="X 私信"',xTab==='messages')}</nav><button class="x-fab" data-x-action="compose" aria-label="发布帖子">＋</button>`});
  $('#x-search')?.addEventListener('submit',e=>{e.preventDefault();xQuery=$('#x-query').value.trim().slice(0,100);renderMentions()});
- $('#x-dm-form')?.addEventListener('submit',e=>{e.preventDefault();const input=$('#x-dm-text'),text=input.value.trim();if(!text||w.blocked.includes(xDm))return;const now=Date.now();w.dms.push({id:uid(),author:'you',peer:xDm,text,at:now});const last=w.dms.filter(m=>m.author===xDm).at(-1);if(!last||now-last.at>15000){w.dms.push({id:uid(),author:xDm,peer:xDm,text:`你说的“${text.slice(0,45)}”我看到了。${npcById(xDm)?.tone==='skeptic'?'我可能有不同看法，但可以好好说。':'我先慢慢看，不急着给你下结论。'}`,at:now});worldNotice(w,'dm',`${xName(xDm)} 回复了私信`,'',now,uid())}w.dms=w.dms.slice(-200);save();renderMentions()});
+ $('#x-dm-form')?.addEventListener('submit',e=>{e.preventDefault();const input=$('#x-dm-text'),text=input.value.trim();if(!text||w.blocked.includes(xDm))return;const now=Date.now();w.dms.push({id:uid(),author:'you',peer:xDm,text,at:now});queueDirectMessage(xDm);w.dms=w.dms.slice(-200);save();renderMentions()});
 }
 function openXComposer(reply='',quote='',mention='',image=''){
  xComposeImage=image;
@@ -60,15 +60,15 @@ function openXComposer(reply='',quote='',mention='',image=''){
  $('#x-post-text').addEventListener('input',e=>$('#x-counter').textContent=e.target.value.length+' / 1000');
  $('#x-compose').addEventListener('submit',e=>{e.preventDefault();const text=$('#x-post-text').value.trim();if(!text)return;
   const now=Date.now(),w=state.world;
-  if(xReply){const p=w.posts.find(p=>p.id===xReply);if(!p)return;p.comments.push({id:uid(),author:'you',text,at:now});const npc=npcById(p.author==='you'?p.comments.find(c=>npcById(c.author))?.author:p.author);if(npc&&!w.blocked.includes(npc.id)&&!w.muted.includes(npc.id)&&now-w.lastReaction>=15000){p.comments.push({id:uid(),author:npc.id,text:npc.tone==='skeptic'?`“${text.slice(0,24)}”这点我保留意见，但没必要人身攻击。`:`明白你说的“${text.slice(0,24)}”了，我先听你说。`,at:now});w.lastReaction=now;worldNotice(w,'comment',`${npc.name} 回复了你的评论`,p.id,now,uid())}xThread=p.id;xTab='thread';}
-  else{const p={id:uid(),author:'you',text,quote:xQuote||null,image:xComposeImage||null,at:now,likes:0,reposts:0,comments:[]};w.posts.push(p);w.posts=w.posts.slice(-300);const selected=reactToPost(w,p,now,uid);xThread=p.id;xTab='for-you';if(selected.length)showGameBanner('X · 虚构互动',`${selected[0].name} 等人回应了你的帖子`,'mentions');}
+  if(xReply){const p=w.posts.find(p=>p.id===xReply);if(!p)return;p.comments.push({id:uid(),author:'you',text,at:now});const npc=npcById(p.author==='you'?p.comments.find(c=>npcById(c.author))?.author:p.author);p.reacted=false;queueSocialReaction(w,p,now);xThread=p.id;xTab='thread';}
+  else{const p={id:uid(),author:'you',text,quote:xQuote||null,image:xComposeImage||null,at:now,likes:0,reposts:0,comments:[]};w.posts.push(p);w.posts=w.posts.slice(-300);const selected=queueSocialReaction(w,p,now,uid);xThread=p.id;xTab='for-you';if(selected.length)showGameBanner('X · 虚构互动',`${selected[0].name} 等人回应了你的帖子`,'mentions');}
   save();xComposing=false;$('#overlay').replaceChildren();renderMentions();
  });$('#x-post-text').focus();
 }
 setInterval(()=>{
  if(document.visibilityState!=='visible'||['lock','passcode'].includes(page)||$('#overlay').children.length)return;
  const w=state.world,p=w.posts.find(p=>p.author==='you'&&!p.reacted&&Date.now()-p.at<3600000);
- if(!p)return;const reactions=reactToPost(w,p,Date.now(),uid);if(!reactions.length)return;
+ if(!p)return;const reactions=queueSocialReaction(w,p,Date.now(),uid);if(!reactions.length)return;
  save();showGameBanner('X · 虚构互动',`${reactions[0].name} 等人回应了你的帖子`,'mentions');if(page==='mentions')renderMentions();else if(page==='home')renderHome();
 },15000);
 function xOptions(){modal('X 体验设置',`<p>全部账号、帖子、评论与趋势均为本地虚构内容，不抓取真实 X。NPC 有不同立场，但每次发帖的互动有限，不会持续追着玩家攻击。</p><div class="setting-row">随机舆论事件<button class="toggle ${state.storyEnabled?'on':''}" data-world="exposure-toggle" aria-label="随机舆论事件" aria-checked="${Boolean(state.storyEnabled)}" role="switch"></button></div><p class="explain">默认关闭；开启后仅在前台解锁时运行，至少间隔 8 分钟。可静音或屏蔽具体账号。</p><button class="secondary" data-world="exposure">体验一条虚构舆论事件</button><button class="secondary" data-world="setup">人物与故事设置</button><p>已屏蔽：${state.world.blocked.map(xName).join('、')||'无'}；已静音：${state.world.muted.map(xName).join('、')||'无'}</p>`,'<button class="secondary" data-action="close-overlay">关闭</button>')}
@@ -78,16 +78,16 @@ function triggerStory(){
  const npc=WORLD_NPCS.find(n=>n.tone==='skeptic'&&!w.blocked.includes(n.id)&&!w.muted.includes(n.id));if(!npc){toast('相关账号已被屏蔽或静音');return}
  const post={id:uid(),author:npc.id,text:`@you 关于“${source.text.slice(0,50)}”，我觉得大家猜得太远了。只是公开动态，别拿它当恋情证据。#今日讨论`,quote:source.id,at:now,likes:3,reposts:1,comments:[{id:uid(),author:'blue',text:'讨论可以，别扒素人位置。',at:now},{id:uid(),author:'paper',text:'怎么什么都能扯到恋爱，无语。',at:now}]};w.posts.push(post);w.lastExposure=now;w.lastExposureSource=source.id;state.romance.publicClues.push({text:post.text,at:now});state.romance.publicClues=state.romance.publicClues.slice(-10);state.romance.mood='tense';xNotification(`${npc.name} @ 了你；猜测不等于事实`,post.id,'mention');if(page==='mentions')renderMentions();updateSceneMusic();
 }
-function currentStoryContext(){return romanceContext(state.romance,state.world)+'\n私人游戏购物记录（不对外公开）：'+JSON.stringify(state.orders.slice(-3).map(o=>({name:o.name,at:o.at})))+'\n公开的游戏社交动态：'+JSON.stringify(state.world.activity.slice(0,3).map(a=>({platform:a.platform,text:a.text}))) }
+function currentStoryContextPrevious(){return romanceContext(state.romance,state.world)+'\n私人游戏购物记录（不对外公开）：'+JSON.stringify(state.orders.slice(-3).map(o=>({name:o.name,at:o.at})))+'\n公开的游戏社交动态：'+JSON.stringify(state.world.activity.slice(0,3).map(a=>({platform:a.platform,text:a.text}))) }
 function recordWorldEvent(kind,text){if(!state.romance)return;state.romance.journal.push({kind,text:text.slice(0,300),at:Date.now()});state.romance.journal=state.romance.journal.slice(-50)}
-function showRomanceSetup(){
+function showRomanceSetupPrevious(){
  const r=state.romance;modal('你与故事',`<p>主角是架空虚构的成年金硕珍，所有私人剧情均为创作。你决定行动、关系节奏和是否接受邀请。原有聊天、订单、照片不会被清空。</p><form id="romance-profile"><label for="romance-identity">你的身份（成年角色）</label><textarea id="romance-identity" maxlength="300" placeholder="例如：在首尔读设计的成年留学生，喜欢摄影">${escape(r.identity)}</textarea><label for="romance-backstory">最初的交集</label><select id="romance-backstory" ${r.configured?'disabled':''}><option value="strangers" ${r.backstory==='strangers'?'selected':''}>从零认识</option><option value="acquainted" ${r.backstory==='acquainted'?'selected':''}>已经认识，慢慢靠近</option></select><p class="explain">${r.configured?'故事已开始，保留当前关系与长期记忆。':'通过聊天自然表达亲近、心意或拒绝，没有任务和固定剧情选项。已有恋人聊天会保留关系。'}</p><button class="primary">${r.configured?'保存身份':'开始自己的故事'}</button></form><button class="secondary" data-world="pause">${r.paused?'恢复生活事件':'暂停自动生活事件'}</button><button class="secondary" data-world="audio">语音与剧情配乐</button>`,'<button class="secondary" data-action="close-overlay">关闭</button>');
  $('#romance-profile').addEventListener('submit',e=>{e.preventDefault();r.identity=$('#romance-identity').value.trim();if(!r.configured){r.backstory=$('#romance-backstory').value;r.configured=true}save();$('#overlay').replaceChildren();openRoom('jin','kkt');deliverRomanceScene(true)});
 }
 function receiveWorldChat(text,scene){
  const msg={id:uid(),role:'assistant',text,at:Date.now(),story:true,scene:scene.id,korean:scene.ko};state.chats.jin.push(msg);save();if(page==='chat'&&roomId==='jin'){const draft=$('#message-input')?.value||'';renderChat();$('#message-input').value=draft}notifyIncoming('jin',text);
 }
-function deliverRomanceScene(force=false){
+function deliverRomanceScenePrevious(force=false){
  const r=state.romance;if(worldSceneActive||pending.has('jin'))return;const scene=nextRomanceScene(r,Date.now(),force);if(!scene)return;
  worldSceneActive=true;let i=0;const deliver=()=>{if(document.visibilityState!=='visible'||['lock','passcode'].includes(page)||r.paused){worldSceneActive=false;worldBubbleTimer=null;return}receiveWorldChat(scene.lines[i++],scene);if(i<scene.lines.length)worldBubbleTimer=setTimeout(deliver,1000);else{worldSceneActive=false;worldBubbleTimer=null}};deliver();
  state.world.activity.unshift({id:uid(),platform:scene.id==='member'||scene.id==='twist'?'weverse':'instagram',text:scene.public,at:Date.now(),scene:scene.id,image:scene.id==='coffee'?'/assets/3.jpg':null});state.world.activity=state.world.activity.slice(0,80);
@@ -109,14 +109,14 @@ function decorateWorld(){
  if(page==='contact'&&roomId==='jin'){$('.contact-detail p').textContent='JIN · '+WORLD_LABELS[state.romance.stage];const p=$('.help-card p');if(p)p.textContent='这是架空成年角色的私人故事。你决定如何认识、是否接受心意和怎样继续生活，成员不会默认知道你们的秘密。'}
 }
 new MutationObserver(decorateWorld).observe(screen,{childList:true});
-function worldUserMessage(text){
+function worldUserMessagePrevious(text){
  if(worldBubbleTimer)clearTimeout(worldBubbleTimer);worldBubbleTimer=null;worldSceneActive=false;
  const replies=state.chats.jin.filter(m=>m.role==='assistant'),last=replies.at(-1);
  const proposalContext=last?.turn?replies.filter(m=>m.turn===last.turn).map(m=>m.text).join(' '):(last?.text||'');
  advanceRomance(state.romance,text,Date.now(),proposalContext);save();updateSceneMusic();
 }
 // The AI is free to propose plans; local scenes never decide the player's actions.
-setInterval(()=>{if(document.visibilityState==='visible'&&!['lock','passcode'].includes(page)&&!$('#overlay').children.length&&!pending.has('jin'))deliverRomanceScene()},30000);
+
 function showLocalSocial(platform){
  const label=platform==='instagram'?'Instagram':'Weverse';const entries=state.world.activity.filter(a=>a.platform===platform);
  modal(label,`<p class="explain">虚构生活动态 · 与现实公开报道分开。本地剧情不会发到真实账号。</p><a class="secondary social-official" target="_blank" rel="noopener noreferrer" href="${platform==='instagram'?'https://www.instagram.com/jin/':'https://weverse.io/bts/artist'}">打开原有官方 ${label} ↗</a><form id="local-social-post"><textarea id="local-social-text" maxlength="500" placeholder="分享一条虚构日常…" aria-label="虚构社交动态"></textarea><button class="primary">发布到游戏动态</button></form>${entries.map(a=>`<article class="local-social-entry"><small>${a.author==='you'?escape(state.nickname):'虚构角色'} · ${time(a.at)}</small><p>${xText(a.text)}</p>${a.image?`<img src="${a.image}" alt="虚构场景配图"><button class="secondary" data-world-photo="${a.id}">保存配图到相册</button>`:''}<button class="secondary" data-world-crosspost="${a.id}">分享到虚构 X</button></article>`).join('')||'<p class="explain">还没有游戏动态，生活事件会慢慢出现在这里。</p>'}`,'<button class="secondary" data-action="close-overlay">关闭</button>');
@@ -152,7 +152,7 @@ document.addEventListener('click',e=>{
  if(el.hasAttribute('data-x-thread')){if(!el.dataset.xThread)return;xThread=el.dataset.xThread;xTab='thread';renderMentions();return}
  if(el.dataset.xSearch){xQuery=el.dataset.xSearch;xTab='search';renderMentions();return}
  if(el.dataset.worldVoice){playWorldVoice(el.dataset.worldVoice,el.dataset.member);return}
- if(el.dataset.worldCrosspost){const entry=w.activity.find(a=>a.id===el.dataset.worldCrosspost);if(!entry)return;const p={id:uid(),author:'you',text:`分享游戏 ${entry.platform==='instagram'?'Instagram':'Weverse'} 动态：${entry.text}`,image:entry.image||null,at:Date.now(),likes:0,reposts:0,comments:[]};w.posts.push(p);reactToPost(w,p,Date.now(),uid);save();$('#overlay').replaceChildren();xTab='for-you';navigate('mentions');return}
+ if(el.dataset.worldCrosspost){const entry=w.activity.find(a=>a.id===el.dataset.worldCrosspost);if(!entry)return;const p={id:uid(),author:'you',text:`分享游戏 ${entry.platform==='instagram'?'Instagram':'Weverse'} 动态：${entry.text}`,image:entry.image||null,at:Date.now(),likes:0,reposts:0,comments:[]};w.posts.push(p);queueSocialReaction(w,p,Date.now(),uid);save();$('#overlay').replaceChildren();xTab='for-you';navigate('mentions');return}
  if(el.dataset.worldPhoto){const entry=w.activity.find(a=>a.id===el.dataset.worldPhoto);if(entry?.image)toDataUrl(entry.image).then(data=>{state.uploads.unshift(data);if(save())toast('配图已保存到相册')}).catch(()=>toast('配图读取失败'));return}
  if(el.dataset.world){switch(el.dataset.world){case'photo-x':$('#overlay').replaceChildren();xTab='for-you';navigate('mentions');openXComposer('','','',photoShareData);break;case'setup':showRomanceSetup();break;case'audio':showWorldAudio();break;case'pause':state.romance.paused=!state.romance.paused;save();showRomanceSetup();break;case'exposure-toggle':state.storyEnabled=!state.storyEnabled;save();xOptions();break;case'exposure':triggerStory();$('#overlay').replaceChildren();break;case'music-toggle':state.sceneAudio.enabled=!state.sceneAudio.enabled;save();updateSceneMusic();showWorldAudio();break;case'music-mute':state.sceneAudio.muted=!state.sceneAudio.muted;save();updateSceneMusic();showWorldAudio();break;case'voice-stop':stopWorldVoice();toast('语音已停止');break}return}
  const action=el.dataset.xAction,p=w.posts.find(p=>p.id===el.dataset.id);
@@ -166,3 +166,4 @@ document.addEventListener('click',e=>{
 },true);
 // Register before existing app handlers: preserve official links inside the new sheets.
 save();decorateWorld();
+

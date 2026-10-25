@@ -8,3 +8,4 @@ worker/
 .netlify/
 .dev.vars
 .env
+

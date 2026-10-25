@@ -40,3 +40,4 @@ document.addEventListener('click',event=>{const el=event.target.closest('[data-a
 document.addEventListener('submit',e=>{if(!e.target.matches('.story-reply'))return;e.preventDefault();const item=state.storyEvents.find(x=>x.id===e.target.dataset.eventId),reply=e.target.querySelector('input').value.trim();if(item&&reply){item.reply=reply;save();renderMentions()}});
 new MutationObserver(()=>{if(page==='home'){$('[data-app="messages"] .app-badge')?.remove();const app=$('[data-app="messages"]');if(app&&state.smsUnread)app.insertAdjacentHTML('beforeend',`<span class="app-badge">${state.smsUnread}</span>`)}}).observe(screen,{childList:true});
 render();
+

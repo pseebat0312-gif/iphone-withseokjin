@@ -12,6 +12,7 @@ const [source, manifest] = await Promise.all([
   readFile(manifestPath, "utf8"),
 ]);
 JSON.parse(manifest);
+const {gzipSync}=await import("node:zlib");assert.ok(gzipSync(source).length<10*1024*1024,"Worker exceeds deployment size limit");
 
 // A data URL forces ESM parsing even though the generated output has no package.json.
 const moduleUrl = `data:text/javascript;base64,${Buffer.from(source).toString("base64")}`;

@@ -9,3 +9,5 @@ worker/
 .dev.vars
 .env
 
+
+.media-build/

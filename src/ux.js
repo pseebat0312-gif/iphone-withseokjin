@@ -4,7 +4,7 @@
  let prefs={...defaults};try{Object.assign(prefs,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch{}
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');let clickAudio=null,lastTap=0,lastHaptic=0,origin=null,longPress=null,routeAnimation=null;
  function motion(){return reduced.matches||prefs.motion==='off'?0:prefs.motion==='subtle'?.5:1}
- function apply(){phone.classList.toggle('ux-motion-off',!motion());phone.classList.add('ux-feedback-on')}
+ function apply(){phone.classList.toggle('ux-motion-off',!motion());phone.classList.add('ux-feedback-on');phone.classList.toggle('ux-lite',!!navigator.deviceMemory&&navigator.deviceMemory<=4||!!navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=4)}
  function persist(){try{localStorage.setItem(KEY,JSON.stringify(prefs))}catch{}apply()}
  function tick(){if(!prefs.sound||document.visibilityState!=='visible'||performance.now()-lastTap<55)return;lastTap=performance.now();try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;if(!clickAudio)clickAudio=new AC();if(clickAudio.state==='suspended')clickAudio.resume().catch(()=>{});const t=clickAudio.currentTime,o=clickAudio.createOscillator(),g=clickAudio.createGain();o.type='sine';o.frequency.setValueAtTime(1050,t);o.frequency.exponentialRampToValueAtTime(700,t+.025);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.022,t+.003);g.gain.exponentialRampToValueAtTime(.0001,t+.032);o.connect(g);g.connect(clickAudio.destination);o.start(t);o.stop(t+.035);o.onended=()=>{o.disconnect();g.disconnect()}}catch{}}
  const oldHaptic=haptic;haptic=function(kind='tap'){if(!prefs.haptics||performance.now()-lastHaptic<35)return;lastHaptic=performance.now();oldHaptic(kind)};

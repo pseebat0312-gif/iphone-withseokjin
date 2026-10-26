@@ -1,0 +1,4 @@
+export const JK_CINEMA_PHOTOS=['/assets/story/jk-performance-1.jpg','/assets/story/jk-performance-2.jpg','/assets/story/jk-performance-3.jpg','/assets/story/jk-performance-4.jpg','/assets/story/jk-performance-5.jpg'];
+export function autoCinemaLines(def){const parts=def.cues.flatMap((cue,beat)=>cue.lines.flatMap(text=>{const chunks=text.match(/.{1,46}(?:[，。！？；、”」]|$)|.{1,46}/gu)||[text];return chunks.map(t=>({text:t,title:cue.title,beat}))}));const weights=parts.map(p=>Math.max(18,p.text.length)),total=weights.reduce((a,b)=>a+b,0);let cumulative=0;return parts.map((p,i)=>{const at=(def.duration-7)*cumulative/total;cumulative+=weights[i];return {...p,at:i===0?0:at}})}
+export function autoCinemaIndex(lines,time){return Math.max(0,lines.findLastIndex(l=>l.at<=time))}
+export function cinemaPhotoIndex(time,duration){return Math.floor(Math.max(0,time)/Math.max(1,duration)*8)%JK_CINEMA_PHOTOS.length}

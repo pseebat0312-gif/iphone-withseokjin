@@ -11,8 +11,8 @@ for p,_,files in os.walk(os.path.join(root,'assets')):
   if name.endswith('.mp3') and '/story/' in src:
    subprocess.run(['ffmpeg','-v','error','-y','-i',src,*(['-ss','13'] if name=='astronaut.mp3' else []),'-map_metadata','-1','-ac','1','-ar','24000','-b:a','24k' if name in ['ocean.mp3','taehyung.mp3','rainydays.mp3'] else '32k',dst],check=True)
   elif name.lower().endswith(('.jpg','.jpeg')):
-   im=Image.open(src).convert('RGB');cast=name in ['taehyung-scene.jpg','jungkook-scene.jpg'];slide=name.startswith('jk-performance-');hq=name.startswith('jk-revised-');im.thumbnail((1024,1536) if hq else (440,600) if slide else (800,800) if cast else (1024,1024));im.save(dst,quality=89 if hq else 49 if slide else 72 if cast else 79,optimize=True)
-   webp=dst+'.webp';im.save(webp,format='WEBP',quality=84,method=6)
+   im=Image.open(src).convert('RGB');cast=name in ['taehyung-scene.jpg','jungkook-scene.jpg'];slide=name.startswith('jk-performance-');hq=name.startswith('jk-revised-');jin=name.startswith('jin-album-');im.thumbnail((600,900) if jin else (1024,1536) if hq else (440,600) if slide else (800,800) if cast else (1024,1024));im.save(dst,quality=89 if hq else 49 if slide else 72 if cast else 79,optimize=True)
+   webp=dst+'.webp';im.save(webp,format='WEBP',quality=62 if jin else 84,method=6)
    if os.path.getsize(webp)>=os.path.getsize(dst):os.remove(webp)
   else:continue
   open(stamp,'w').write(digest)

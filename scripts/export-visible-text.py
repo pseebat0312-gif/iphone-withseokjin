@@ -11,7 +11,7 @@ for p in sorted((root/'src').rglob('*')):
  s=p.read_text();rel=str(p.relative_to(root))
  for m in pattern.finditer(s):
   raw=m.group()[1:-1]
-  if not re.search(r'[\u3400-\u9fff\uac00-\ud7af]',raw):continue
+  if not re.search(r'[\u3400-\u9fff\uac00-\ud7af]|[A-Za-z]{2,}[ -][A-Za-z]{2,}',raw):continue
   text=raw.replace('\\n','\n').replace("\\'", "'").replace('\\"','"')
   if '<' in text and '>' in text:
    # Human text and accessibility labels, without HTML markup.
@@ -34,4 +34,4 @@ text=header+base+'\n\nH 补充界面、场景说明、提示、帮助与其他�
 for r in records:text+=f"\n【文字 {r['id']}】{r['source']}"+(f" · 第 {r['line']} 行" if 'line'in r else '')+'\n'+r['text']+'\n【结束】\n'
 (out/'with-you-complete-text.txt').write_text(text)
 (out/'visible-text-index.json').write_text(json.dumps(records,ensure_ascii=False,indent=2))
-print(json.dumps({'storyEntries':1876,'additionalSourceEntries':len(records),'bytes':len(text.encode())}))
+print(json.dumps({'storyEntries':json.loads((out/'all-dialogue.json').read_text())['entries'].__len__(),'additionalSourceEntries':len(records),'bytes':len(text.encode())}))

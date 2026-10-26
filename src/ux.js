@@ -1,6 +1,6 @@
 /* Presentation adapter: never writes story state or modifies the music player. */
 (function(){
- const KEY='withyou-ui-preferences-v1',defaults={sound:false,haptics:true,motion:'normal',voiceEnabled:false,voiceVolume:.8};
+ const KEY='withyou-ui-preferences-v1',defaults={sound:true,haptics:true,motion:'normal',voiceEnabled:false,voiceVolume:.8};
  let prefs={...defaults};try{Object.assign(prefs,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch{}
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');let clickAudio=null,lastTap=0,lastHaptic=0,origin=null,longPress=null,routeAnimation=null;
  function motion(){return reduced.matches||prefs.motion==='off'?0:prefs.motion==='subtle'?.5:1}

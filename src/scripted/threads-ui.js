@@ -3,7 +3,7 @@
  let view='home',filter='for-you',selected='',profile='me',query='';
  const db=()=>{state.threads=state.threads||{posts:[],likes:[],reposts:[],following:[],seen:[],notices:[],actions:[]};return state.threads};
  const me=()=>campaign?.profile?.name||state.nickname||'你';
- const logo=()=>'<img class="threads-logo" src="/assets/threads-official.png" alt="Threads">';
+ const logo=()=>'<img class="threads-logo" src="/assets/threads-official.png?v=36" alt="Threads">';
  function syncThreads(){const s=db();for(const p of THREADS_DRAFT){if(!threadsUnlocked(p,campaign)||s.posts.some(x=>x.id===p.id))continue;const at=Date.now();s.posts.push({...structuredClone(p),at,comments:p.comments.map((c,i)=>({...c,id:p.id+'-c'+i,at})),likes:0});if(p.node){s.notices.unshift({id:p.id,post:p.id,text:p.name+' 发布了一条动态',at});if(page!=='threads'&&campaign?.started!==false){showGameBanner('Threads',p.text,'threads');const notice=$('#notification-banner button');if(notice){notice.removeAttribute('data-nav');notice.dataset.thOpen=p.id;const label=notice.querySelector('small');if(label)label.innerHTML='THREADS <time>现在</time>';}}}}save();badge()}
  function badge(){const s=db(),n=s.notices.filter(x=>!s.seen.includes(x.id)).length;document.querySelectorAll('[data-app="threads"]').forEach(b=>{b.querySelector('.app-badge')?.remove();if(n)b.insertAdjacentHTML('beforeend','<span class="app-badge">'+n+'</span>')})}
  function author(p){return p.author==='me'?me():p.name||p.author}

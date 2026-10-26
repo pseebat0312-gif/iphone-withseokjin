@@ -4,7 +4,7 @@ import {applyReviewedText} from '../src/scripted/reviewed-text.mjs';
 import fs from 'node:fs';import vm from 'node:vm';
 import {NODES,nodeLines} from '../src/scripted/story-data.mjs';import {SCENES,DAILY_EPISODES} from '../src/scripted/romance-data.mjs';import * as L from '../src/scripted/long-scenes.mjs';import {CONTINUITY_NODES,TIME_SCENES,INTRO_PAGES,installContinuity} from '../src/scripted/continuity-data.mjs';import {applyDialogueOverrides,polishPhoneBubbles} from '../src/scripted/dialogue-tools.mjs';
 refineIntimateProse(L.LONG_CHAPTERS);
-const root=new URL('../',import.meta.url),read=p=>fs.readFileSync(new URL(p,root),'utf8');applyDialogueOverrides(NODES,JSON.parse(read('src/dialogue-overrides.json')));polishPhoneBubbles(NODES);installContinuity();applyReviewedText(NODES,JSON.parse(read('src/reviewed-text.json')));
+const root=new URL('../',import.meta.url),read=p=>fs.readFileSync(new URL(p,root),'utf8');applyDialogueOverrides(NODES,JSON.parse(read('src/dialogue-overrides.json')));polishPhoneBubbles(NODES);installContinuity();applyReviewedText(NODES,JSON.parse(read('src/reviewed-text.json')));applyReviewedText(NODES,JSON.parse(read('src/latest-chat-edits.json')));
 const entries=[],names={jin:'金硕珍',v:'金泰亨',jk:'田柾国',friend:'书妍',unknown:'陌生号码',you:'玩家',peach:'桃',paper:'纸',night:'夜',blue:'蓝'};
 function add(id,speaker,text,section,context=''){if(typeof text==='string'&&text.trim())entries.push({id,speaker:names[speaker]||speaker,text,section,context})}
 const current=new Set();function walk(id){if(current.has(id))return;current.add(id);for(const c of NODES[id].choices)for(const next of c.next)walk(next)}walk('intro-v');walk('spark');

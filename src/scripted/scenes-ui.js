@@ -5,7 +5,7 @@ function playSceneAudio(tone){if(tone==='silence'){stopSceneAudio();sceneAudio=n
  if(sceneAudio&&sceneAudio.dataset.source===src){if(sceneAudioNeedsGesture&&!campaign?.media?.muted){sceneAudio.play().then(()=>{sceneAudioNeedsGesture=false;refreshSceneIsland()}).catch(()=>{});}return}
  if(sceneAudio){scenePositions[currentSceneTone]=sceneAudio.currentTime;sceneAudio.pause()}
  currentSceneTone=tone;sceneAudioPriority=true;sceneAudioNeedsGesture=false;if(spotifyController)spotifyController.pause();
- const audio=new Audio(src);sceneAudio=audio;audio.dataset.source=src;audio.preload='auto';audio.loop=!['piano','truth'].includes(tone);audio.volume=campaign?.media?.muted?0:(campaign?.media?.volume??.45);
+ const audio=new Audio(src);sceneAudio=audio;audio.dataset.source=src;audio.preload='auto';audio.loop=false;audio.volume=campaign?.media?.muted?0:(campaign?.media?.volume??.45);
  audio.addEventListener('loadedmetadata',()=>{const resume=campaign?.cinema?.active&&TIME_SCENES[campaign.cinema.key]?.music===tone?campaign.cinema.position:scenePositions[tone];if(resume)audio.currentTime=Math.min(resume,Math.max(0,audio.duration-1));refreshSceneIsland()});
  for(const type of ['playing','pause','ended','waiting','timeupdate'])audio.addEventListener(type,()=>{refreshSceneIsland();if(type==='timeupdate'&&campaign){campaign.playback={tone,time:audio.currentTime};}});
  audio.play().then(()=>{sceneAudioNeedsGesture=false;refreshSceneIsland()}).catch(()=>{sceneAudioNeedsGesture=true;refreshSceneIsland();toast('点灵动岛的播放键，继续这首歌')});refreshSceneIsland();

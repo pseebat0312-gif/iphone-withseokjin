@@ -1,0 +1,14 @@
+/* Additive early chapters; music-bound pages retain the original clocks and resume state. */
+(()=>{
+ Object.assign(LONG_CHAPTERS,structuredClone(PACING_CHAPTERS));
+ const earlyPlaces={earlyStore:{...SCENES.home,title:'便利店 · 临时的一顿饭',time:'收工之后',description:'窗边只剩两把椅子'},earlyRain:{...SCENES.riverside,title:'屋檐下 · 雨停以前',time:'各自忙完的晚上',description:'再走到下一个路口'},earlyBar:{...SCENES.piano,title:'小酒吧 · 演出开始以前',time:'周五晚上',description:'他比约好的时间来得更早'}};Object.assign(SCENES,earlyPlaces);for(const[key,c]of Object.entries(LONG_CHAPTERS))if(earlyPlaces[key])for(const p of c.pages)p.place=key;for(const n of Object.values(NODES))if(n.pacingChapter)n.scene=n.pacingChapter;
+ const oldChapter=chapterFor;chapterFor=function(n){return n.pacingChapter||oldChapter(n)};
+ const oldComplete=completeLongScene;completeLongScene=function(){const s=campaign?.sceneChapter,n=NODES[s?.node];if(!n?.pacingChapter)return oldComplete();s.active=false;campaign.longSeen=campaign.longSeen||[];if(!campaign.longSeen.includes(s.group))campaign.longSeen.push(s.group);campaign.pacingMemories=campaign.pacingMemories||{};campaign.pacingMemories[s.key]={...s.choices};if(s.key==='earlyStore')campaign.flags.snackSpicy=s.choices[3]==='spicy';if(s.key==='earlyRain')campaign.flags.rainCloser=s.choices[3]==='near';if(s.key==='earlyBar')campaign.flags.watchFace=s.choices[3]==='face';if(!campaign.done.includes(n.id)){if(!campaign.delivered.includes(n.id))deliverScript(n.id);const id=s.choices[s.index]||'quiet';choose(campaign,n.id,n.choices.some(c=>c.id===id)?id:n.choices[0].id)}scriptSave();continueAfterScene(['见面结束后，各自的生活还在继续。手机里的那个人，已经和刚才见到的他连在了一起。'],{actor:'jin',scene:n.scene,act:2})};
+ // Show the prelude bridge without rewriting the user's post-relationship invitation.
+
+ const oldChoice=takeScriptChoice;takeScriptChoice=function(node,id){const result=oldChoice(node,id);if(node==='r-screen'){xThread='script:r-lamp';xTab='thread';navigate('mentions');notifyIncoming('jin',NODES['r-x-read'].messages[0])}return result};
+ const priorSceneLines=scenePageLines;scenePageLines=function(key,index,choices){const lines=priorSceneLines(key,index,choices);if(key==='confession'&&index===9&&campaign?.flags.pianoHeard)return [...lines,'“昨晚弹错那一下，你后来还笑我。”他看着你，自己也笑了，“今天这句，我想说清楚一点。”'];return lines};
+ const after=afterRender;afterRender=function(...args){const result=after(...args);if(campaign?.hintsOff)screen.querySelector('#script-guide')?.remove();return result};
+ const beforeSettings=renderSetting;renderSetting=function(key){beforeSettings(key);if(key==='help'||key==='notifications')($('.page-scroll')||screen).insertAdjacentHTML('beforeend','<button class="secondary" data-pacing-hints>剧情提示：'+(campaign?.hintsOff?'已关闭':'已开启')+'</button>')};
+ document.addEventListener('click',e=>{if(!e.target.closest('[data-pacing-hints]')||!campaign)return;campaign.hintsOff=!campaign.hintsOff;scriptSave();renderSetting(page.split(':')[1]||'help')});
+})();

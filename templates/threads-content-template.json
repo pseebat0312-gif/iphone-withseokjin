@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "说明": "修改正文和计数即可。afterSeconds为发布后秒数；likes点赞，replies回复数，reposts转发数，shares小飞机分享数。所有计数是累计总数，必须递增。导入后进入草稿，不会自动发布。人物账号使用普通NPC或me（玩家），不使用BTS成员。node填null随时可用，填剧情节点ID则到该情节后才进草稿。正文不限制你写什么。实际显示的评论内容由comments提供；总回复数可大于已编写评论条数。",
+  "defaultGrowth": [
+    {"afterSeconds":0,"likes":0,"replies":0,"reposts":0,"shares":0},
+    {"afterSeconds":30,"likes":6,"replies":1,"reposts":1,"shares":16},
+    {"afterSeconds":90,"likes":38,"replies":4,"reposts":5,"shares":280},
+    {"afterSeconds":300,"likes":162,"replies":12,"reposts":21,"shares":1800}
+  ],
+  "posts": [
+    {
+      "id":"my-post-001",
+      "author":"me",
+      "node":null,
+      "text":"这里填写你想发的正文。比如：今天有人把我不吃的那一份偷偷换到他自己盘子里了😙",
+      "topic":"日常",
+      "growth":[
+        {"afterSeconds":0,"likes":0,"replies":0,"reposts":0,"shares":0},
+        {"afterSeconds":30,"likes":4,"replies":1,"reposts":0,"shares":30},
+        {"afterSeconds":90,"likes":27,"replies":3,"reposts":2,"shares":680},
+        {"afterSeconds":300,"likes":108,"replies":8,"reposts":12,"shares":7600},
+        {"afterSeconds":900,"likes":512,"replies":26,"reposts":59,"shares":28000}
+      ],
+      "comments":[
+        {"author":"peachfilm","name":"桃子胶片","afterSeconds":30,"text":"这里写第一条评论"},
+        {"author":"nightnote","name":"夜间笔记","afterSeconds":90,"text":"这里写另一种反应，支持、疑问或者调侃都可以"}
+      ]
+    },
+    {
+      "id":"my-post-002",
+      "author":"me",
+      "node":"r-home-message",
+      "text":"这里写确定关系后你想发的一篇帖子。把node改成null，可以不等剧情解锁。",
+      "comments":[]
+    }
+  ]
+}

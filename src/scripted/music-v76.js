@@ -1,0 +1,22 @@
+/* Two-pass soundtrack queue. Reading and phone navigation never cut a track. */
+(()=>{
+ Object.assign(STORY_MEDIA,{foryou:'/assets/story/lowderthanbombs-v95.mp3',rain:'/assets/story/rain-v76.mp3',confession:'/assets/story/crystalsnow-v76.mp3?revision=87',pluto:'/assets/story/134340-v76.mp3',holdmetight:'/assets/story/holdmetight-v76.mp3',loveisnotover:'/assets/story/loveisnotover-v76.mp3',ocean:'/assets/story/butterfly-v76.mp3?revision=87',epiphany:'/assets/story/epiphany.mp3'});
+ Object.assign(TRACK_NAMES,{foryou:'Louder than bombs',rain:'Rain',confession:'Crystal Snow',pluto:'134340',holdmetight:'Hold Me Tight',loveisnotover:'Love Is Not Over',ocean:'Butterfly',epiphany:'Epiphany'});
+ const requested=new Set();let requestedTone='',generation=0;
+ function start(tone,epoch,following=null,pass=1){if(epoch!==generation)return;const src=campaign?.media?.music?.[tone]||STORY_MEDIA[tone];if(!src)return;currentSceneTone=tone;sceneAudioPriority=true;const a=new Audio(src);sceneAudio=a;a.dataset.source=src;a.preload='auto';a.loop=false;a.volume=campaign?.media?.muted?0:(campaign?.media?.volume??.45);sceneAudioNeedsGesture=false;if(spotifyController)spotifyController.pause();
+ a.addEventListener('loadedmetadata',()=>{if(epoch!==generation)return;if(pass===1&&tone==='piano'&&campaign?.cinema?.active&&campaign.cinema.key==='piano'&&campaign.cinema.position)a.currentTime=Math.min(campaign.cinema.position,a.duration);refreshSceneIsland()});
+ for(const type of ['playing','pause','waiting','timeupdate'])a.addEventListener(type,()=>{if(epoch!==generation)return;refreshSceneIsland();if(type==='timeupdate'&&campaign)campaign.playback={tone,time:a.currentTime}});
+ a.addEventListener('ended',()=>{if(epoch!==generation||sceneAudio!==a)return;if(pass<(tone==='rain'?1:2)){start(tone,epoch,following,pass+1);return;}const rest=Array.isArray(following)?following:following?[following]:[];if(rest.length)start(rest[0],epoch,rest.slice(1));else refreshSceneIsland()},{once:true});a.addEventListener('error',()=>{if(epoch===generation)toast('这首音乐暂时未能加载，可在音乐面板重试')},{once:true});
+ a.play().then(()=>{if(epoch===generation){sceneAudioNeedsGesture=false;refreshSceneIsland()}}).catch(()=>{if(epoch===generation){sceneAudioNeedsGesture=true;refreshSceneIsland()}});refreshSceneIsland();
+ }
+ function request(tone){if(campaign?.dailyGuideSeen82&&typeof storyProgressState==='function'&&storyProgressState(campaign)==='complete'&&tone!=='epiphany')return;if(!tone||tone==='silence'||!(campaign?.media?.music?.[tone]||STORY_MEDIA[tone]))return;if(tone===requestedTone){if(sceneAudioNeedsGesture&&sceneAudio&&!campaign?.media?.muted)sceneAudio.play().then(()=>{sceneAudioNeedsGesture=false}).catch(()=>{});return}requestedTone=tone;requested.add(tone);const epoch=++generation;if(sceneAudio)sceneAudio.pause();sceneAudio=null;currentSceneTone='';if(tone==='confession'){setTimeout(()=>start(tone,epoch),15000);return}start(tone,epoch,tone==='epiphany'?['moon','astronaut','awake','piano']:tone==='ocean'?['moon']:null)}
+ // Reading completion and navigation preserve the song; a new score replaces it.
+ playSceneAudio=request;stopSceneAudio=function(){if(campaign?.media?.muted&&sceneAudio)sceneAudio.volume=0;refreshSceneIsland()};
+ // Re-entering the same scene or advancing a page cannot restart an ended song.
+ const oldRender=renderScriptScene;renderScriptScene=function(n,...args){const result=oldRender(n,...args);if(n?.checkpoint&&!$('#main-end76')){const box=$('.scene-ending');box?.insertAdjacentHTML('afterbegin','<button class="primary" id="main-end76" data-main-end76>主线故事结束</button>')}return result};
+ window.addEventListener('click',e=>{const b=e.target.closest('[data-main-end76]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();globalThis.publishFirstAfterglow79?.();b.textContent='主线已结束 · 继续我们的日常';b.disabled=true;},true);
+ window.addEventListener('click',e=>{if(!e.target.closest('[data-script-continue],[data-script-daily]')||!campaign||storyProgressState(campaign)!=='complete'||campaign.dailyGuideSeen82)return;campaign.dailyGuideSeen82=true;scriptSave();$('#script-guide')?.remove();$('#story-launcher')?.remove();globalThis.publishFirstAfterglow79?.();request('epiphany');},true);
+ const oldPanel=sceneMusicPanel;sceneMusicPanel=function(){oldPanel();const p=$('.scene-player-card p:nth-child(2)');if(p)p.textContent='每首默认连续播放两遍，翻页和结束阅读都不会截断。进入另一处有配乐的场景时，会立即切换新曲。';};
+ // Expose small controls for regression checks without altering story state.
+ globalThis.soundtrack76={request,requested};
+})();

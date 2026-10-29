@@ -1,0 +1,13 @@
+{
+  "name": "with-seokjin-phone",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "python3 scripts/optimize-media.py && node scripts/compile.mjs && bash scripts/build.sh && node scripts/validate-artifact.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "dev": "node scripts/dev.mjs"
+  },
+  "devDependencies": {
+    "terser": "^5.51.2"
+  }
+}

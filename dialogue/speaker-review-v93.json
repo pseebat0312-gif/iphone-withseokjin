@@ -1,0 +1,4686 @@
+{
+  "intro": [
+    [
+      {
+        "text": "门铃响过两声，里面传来拖鞋踩过地板的声音。",
+        "speaker": null
+      },
+      {
+        "text": "“来了来了。”",
+        "speaker": "v"
+      },
+      {
+        "text": "泰亨打开门，穿着宽松的灰色上衣，头发还有些乱。",
+        "speaker": null
+      },
+      {
+        "text": "“进来吧，外面冷不冷？”",
+        "speaker": "v"
+      },
+      {
+        "text": "你刚踏进玄关，就闻到了厨房里飘来的香气。",
+        "speaker": null
+      },
+      {
+        "text": "客厅放着音乐，鞋柜旁随意摆着几双鞋。厨房里隐约传来讲话声，随后响起一阵清脆的笑。",
+        "speaker": null
+      },
+      {
+        "text": "你知道今天要见的人是金硕珍。",
+        "speaker": null
+      },
+      {
+        "text": "从泰亨告诉你的那天起，你就一直期待着。来之前，你甚至提前想好了该怎么打招呼。",
+        "speaker": null
+      },
+      {
+        "text": "可真正站在这里，听见厨房里传来的声音，还是忍不住往里面看了一眼。",
+        "speaker": null
+      },
+      {
+        "text": "泰亨接过你的外套，顺着你的目光看向厨房。",
+        "speaker": null
+      },
+      {
+        "text": "“哦，金硕珍哥在做饭。”",
+        "speaker": "v"
+      },
+      {
+        "text": "你问他是不是就在里面。",
+        "speaker": null
+      },
+      {
+        "text": "“嗯，就在厨房。”",
+        "speaker": "v"
+      },
+      {
+        "text": "泰亨看了看你，突然笑起来。",
+        "speaker": null
+      },
+      {
+        "text": "“怎么，紧张啊？”",
+        "speaker": "v"
+      },
+      {
+        "text": "你让他赶紧带路。",
+        "speaker": null
+      },
+      {
+        "text": "他把外套挂好，笑着朝厨房走去。",
+        "speaker": null
+      },
+      {
+        "text": "“哈哈哈哈，走吧，我介绍你们认识。”",
+        "speaker": "v"
+      },
+      {
+        "text": "到了厨房门口，他朝里面喊了一声。",
+        "speaker": null
+      },
+      {
+        "text": "“哥。”",
+        "speaker": "v"
+      },
+      {
+        "text": "灶台前的人应声。",
+        "speaker": null
+      },
+      {
+        "text": "“嗯？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "泰亨侧过身，给你让出位置。",
+        "speaker": null
+      },
+      {
+        "text": "{{INTRO_NAME}}",
+        "speaker": "v"
+      }
+    ],
+    [
+      {
+        "text": "“啊，来了啊。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "金硕珍从灶台前转过身。",
+        "speaker": null
+      },
+      {
+        "text": "他手里还握着木铲，穿着一件简单的深色针织衫，袖口随意挽到手腕上方。",
+        "speaker": null
+      },
+      {
+        "text": "你抬起头。",
+        "speaker": null
+      },
+      {
+        "text": "然后短暂地忘记了自己准备好的问候。",
+        "speaker": null
+      },
+      {
+        "text": "以前在照片、采访和舞台上见过他无数次。",
+        "speaker": null
+      },
+      {
+        "text": "可真正站在面前，才发现镜头竟然也会遗漏很多东西。",
+        "speaker": null
+      },
+      {
+        "text": "他的五官比照片里更加立体，挺直的鼻梁投下一道浅浅的阴影。灯光落进眼睛里，连眼睫都看得分明。",
+        "speaker": null
+      },
+      {
+        "text": "那张脸漂亮得几乎有些不真实。",
+        "speaker": null
+      },
+      {
+        "text": "偏偏他还拿着一把木铲，身后炖着一锅汤。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍看向你，微微点头。",
+        "speaker": null
+      },
+      {
+        "text": "“你好。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他的声音清亮，唇边带着一点浅浅的笑意。",
+        "speaker": null
+      },
+      {
+        "text": "“我是金硕珍。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你也介绍了自己。",
+        "speaker": null
+      },
+      {
+        "text": "他听完，轻轻重复了一遍你的名字，像是在确认发音。",
+        "speaker": null
+      },
+      {
+        "text": "“嗯，知道了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "随后，他朝餐桌的方向示意。",
+        "speaker": null
+      },
+      {
+        "text": "“先坐吧，马上可以吃饭了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "说完，他转回灶台，拿起勺子尝了一点汤。",
+        "speaker": null
+      },
+      {
+        "text": "泰亨站在旁边，忽然凑近你，压低声音。",
+        "speaker": null
+      },
+      {
+        "text": "“怎么样？”",
+        "speaker": "v"
+      },
+      {
+        "text": "你转头看他。",
+        "speaker": null
+      },
+      {
+        "text": "“什么怎么样？”",
+        "speaker": "me"
+      },
+      {
+        "text": "他笑得一脸意味深长。",
+        "speaker": null
+      },
+      {
+        "text": "“没什么。”",
+        "speaker": "v"
+      },
+      {
+        "text": "厨房里忽然传来金硕珍的声音。",
+        "speaker": null
+      },
+      {
+        "text": "“金泰亨，站在那里干什么？过来拿盘子。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“哦，来了！”",
+        "speaker": "v"
+      },
+      {
+        "text": "你忍不住笑起来。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍也回头笑了一下，随后继续认真地看着锅里的汤。",
+        "speaker": null
+      }
+    ],
+    [
+      {
+        "text": "泰亨刚拉开椅子，椅脚便晃了一下。",
+        "speaker": null
+      },
+      {
+        "text": "“啊，这个怎么还在这里？”",
+        "speaker": "v"
+      },
+      {
+        "text": "金硕珍端菜出来，随口回答：",
+        "speaker": null
+      },
+      {
+        "text": "“昨天就晃了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“那你怎么不修？”",
+        "speaker": "v"
+      },
+      {
+        "text": "“因为昨天有人说要修。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "泰亨愣了两秒。",
+        "speaker": null
+      },
+      {
+        "text": "“……是我吗？”",
+        "speaker": "v"
+      },
+      {
+        "text": "“嗯。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "金硕珍回答得十分平静，你忍不住笑起来。",
+        "speaker": null
+      },
+      {
+        "text": "泰亨无奈地把椅子挪到自己这边。金硕珍指了指旁边的位置。",
+        "speaker": null
+      },
+      {
+        "text": "“你坐这个吧，稳一点。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "随后又朝厨房走去。",
+        "speaker": null
+      },
+      {
+        "text": "“泰亨，筷子够吗？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“够。”",
+        "speaker": "v"
+      },
+      {
+        "text": "“碗呢？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“也够。”",
+        "speaker": "v"
+      },
+      {
+        "text": "“那过来帮忙。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“哥，我刚坐下！”",
+        "speaker": "v"
+      },
+      {
+        "text": "“所以才叫你啊。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你看着他们斗嘴，原本有些拘谨的心情也渐渐放松下来。",
+        "speaker": null
+      }
+    ],
+    [
+      {
+        "text": "金硕珍把最后一道菜端上桌。",
+        "speaker": null
+      },
+      {
+        "text": "“好了，吃吧。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "泰亨尝了一口。",
+        "speaker": null
+      },
+      {
+        "text": "“哥，这个好吃。”",
+        "speaker": "v"
+      },
+      {
+        "text": "“当然好吃。做了这么久，难道还能不好吃吗？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你也认真夸了他。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍正低头盛汤，听见后抬眼笑了。",
+        "speaker": null
+      },
+      {
+        "text": "“是吧？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你问他是不是经常做饭。",
+        "speaker": null
+      },
+      {
+        "text": "“有空就做，就是洗碗比较麻烦。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "泰亨立刻接话：",
+        "speaker": null
+      },
+      {
+        "text": "“所以今天我洗？”",
+        "speaker": "v"
+      },
+      {
+        "text": "“你今天终于懂事了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "金硕珍笑着给自己倒水，随后指了指桌上的小碟子。",
+        "speaker": null
+      },
+      {
+        "text": "“这个味道重一点，旁边那个比较清淡。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你说两个版本都很好吃。",
+        "speaker": null
+      },
+      {
+        "text": "“这句话我喜欢听ㅋㅋㅋ。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他又问你要不要单独做一份不辣的，你说桌上的菜已经够丰富了。",
+        "speaker": null
+      },
+      {
+        "text": "“那就先吃吧。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "话音刚落，他忽然看向泰亨。",
+        "speaker": null
+      },
+      {
+        "text": "“呀，你是不是把最大的那块肉夹走了？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“……没有吧？”",
+        "speaker": "v"
+      },
+      {
+        "text": "“我都看见了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "两个人又笑着争论起来，你也慢慢加入了话题。",
+        "speaker": null
+      }
+    ],
+    [
+      {
+        "text": "聊到咖啡馆，你提起雨巷里的那家小店。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍忽然抬头。",
+        "speaker": null
+      },
+      {
+        "text": "“是不是旁边有个侧门的那家？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你惊讶地点头。",
+        "speaker": null
+      },
+      {
+        "text": "“啊，我去过！那里的蛋糕确实很好吃。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他想不起其中一款蛋糕的名字，伸手比画着形状。",
+        "speaker": null
+      },
+      {
+        "text": "你一下猜中了。",
+        "speaker": null
+      },
+      {
+        "text": "“对对，就是那个。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他眼睛弯起来。",
+        "speaker": null
+      },
+      {
+        "text": "你又向他推荐自己最喜欢的另一款，他认真听完，点点头。",
+        "speaker": null
+      },
+      {
+        "text": "“那个我还没试过。下次去试试。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "泰亨在旁边插话：",
+        "speaker": null
+      },
+      {
+        "text": "“你们聊这么开心，我是不是应该去开家蛋糕店？”",
+        "speaker": "v"
+      },
+      {
+        "text": "金硕珍转头看他。",
+        "speaker": null
+      },
+      {
+        "text": "“你先把今天的碗洗了吧。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“哥！”",
+        "speaker": "v"
+      },
+      {
+        "text": "你们都笑起来。",
+        "speaker": null
+      },
+      {
+        "text": "过了一会儿，金硕珍又看向你。",
+        "speaker": null
+      },
+      {
+        "text": "“你说的那款叫什么来着？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你告诉他。他轻轻重复一遍，像是认真记下了那个名字。",
+        "speaker": null
+      }
+    ],
+    [
+      {
+        "text": "厨房忽然传来轻响。",
+        "speaker": null
+      },
+      {
+        "text": "“啊，火还开着！”",
+        "speaker": "v"
+      },
+      {
+        "text": "泰亨赶紧起身，留下你和金硕珍坐在桌边。",
+        "speaker": null
+      },
+      {
+        "text": "你拿起空杯子，金硕珍正好伸手去拿水壶。",
+        "speaker": null
+      },
+      {
+        "text": "“要水吗？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他替你倒好，顺手给自己也添了一点。指尖扶着杯沿，将杯子放回桌面。",
+        "speaker": null
+      },
+      {
+        "text": "厨房又传来泰亨的声音：",
+        "speaker": null
+      },
+      {
+        "text": "“哥！这个是不是该关了？”",
+        "speaker": "v"
+      },
+      {
+        "text": "“你看看熟了没有。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“怎么看？”",
+        "speaker": "v"
+      },
+      {
+        "text": "“……打开看。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你忍不住笑起来。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍也笑了，朝厨房喊：",
+        "speaker": null
+      },
+      {
+        "text": "“呀，金泰亨，你平时一个人怎么吃饭的？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“点外卖！”",
+        "speaker": "v"
+      },
+      {
+        "text": "金硕珍笑着摇头，起身准备帮忙，走出两步又回头。",
+        "speaker": null
+      },
+      {
+        "text": "“他说怕你们第一次见面没话聊。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他朝厨房示意了一下。",
+        "speaker": null
+      },
+      {
+        "text": "“现在看来，他自己倒是挺忙的。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你说今晚聊得很开心。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍看了你一眼，轻轻点头。",
+        "speaker": null
+      },
+      {
+        "text": "“嗯，挺好的。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "随后走进厨房。你端着杯子，听见里面重新响起他们的笑声。",
+        "speaker": null
+      }
+    ],
+    [
+      {
+        "text": "饭后，泰亨去找外套，你走到玄关换鞋。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍擦了擦手，从厨房出来。",
+        "speaker": null
+      },
+      {
+        "text": "“要走了？今天吃得还好吗？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你认真夸了他的厨艺。",
+        "speaker": null
+      },
+      {
+        "text": "他垂眼笑了。",
+        "speaker": null
+      },
+      {
+        "text": "“那就好。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他又问起刚才那家蛋糕店的位置，听完若有所思地点点头。",
+        "speaker": null
+      },
+      {
+        "text": "“我下次经过的时候去看看。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "泰亨在客厅喊着找外套，金硕珍应了一声，又回头看你。",
+        "speaker": null
+      },
+      {
+        "text": "“对了，刚才你问的那个菜单，我应该有存。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他拿出手机，低头翻找。灯光落在垂下的睫毛上，指尖慢慢划过屏幕。",
+        "speaker": null
+      },
+      {
+        "text": "“等我找找。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你说以后发也可以。",
+        "speaker": null
+      },
+      {
+        "text": "“嗯。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他收起手机。玄关安静了片刻，他抬眼望向你，嘴角慢慢浮起笑意。",
+        "speaker": null
+      },
+      {
+        "text": "“今天聊得挺开心的。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你笑着回应。",
+        "speaker": null
+      },
+      {
+        "text": "“路上小心。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他抬手挥了挥。",
+        "speaker": null
+      },
+      {
+        "text": "“再见。”",
+        "speaker": "jin"
+      }
+    ],
+    [
+      {
+        "text": "泰亨陪你走到楼下，路灯把树影拉得很长。",
+        "speaker": null
+      },
+      {
+        "text": "“怎么样，今天？”",
+        "speaker": "v"
+      },
+      {
+        "text": "你说很开心。",
+        "speaker": null
+      },
+      {
+        "text": "“金硕珍哥做饭很好吃吧。”",
+        "speaker": "v"
+      },
+      {
+        "text": "你点头。",
+        "speaker": null
+      },
+      {
+        "text": "“那你觉得他人怎么样？”",
+        "speaker": "v"
+      },
+      {
+        "text": "你想起金硕珍握着木铲转身的样子，还有他笑起来时明亮的眼睛、认真听你讲话时微微偏过的头。",
+        "speaker": null
+      },
+      {
+        "text": "他没有特别热情，却让人忍不住想再多了解一点。",
+        "speaker": null
+      },
+      {
+        "text": "泰亨听完笑了。",
+        "speaker": null
+      },
+      {
+        "text": "“嗯，挺像他的。他熟了以后更有意思。”",
+        "speaker": "v"
+      },
+      {
+        "text": "走出几步，泰亨忽然拿起手机。",
+        "speaker": null
+      },
+      {
+        "text": "“哦，对了。金硕珍哥不是说要把菜谱发给你吗？”",
+        "speaker": "v"
+      },
+      {
+        "text": "你点头。",
+        "speaker": null
+      },
+      {
+        "text": "“你们要不要交换一下联系方式？以后也方便直接问他。”",
+        "speaker": "v"
+      },
+      {
+        "text": "你想起玄关里，金硕珍低头找菜单时的样子。",
+        "speaker": null
+      },
+      {
+        "text": "泰亨晃了晃手机，笑着等你。",
+        "speaker": null
+      },
+      {
+        "text": "“所以呢？愿意吗？”",
+        "speaker": "v"
+      }
+    ]
+  ],
+  "earlyStore": [
+    [
+      {
+        "text": "便利店的玻璃门响起提示音。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍站在侧门旁，戴着黑色棒球帽，穿着宽松的深色外套，正低头看手机。",
+        "speaker": null
+      },
+      {
+        "text": "听见脚步声，他抬起头。",
+        "speaker": null
+      },
+      {
+        "text": "“来了啊，好久不见。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他把手机收进口袋，眼睛微微弯起。",
+        "speaker": null
+      },
+      {
+        "text": "你又一次看得有些出神。帽檐下挺直的鼻梁、清晰的眉眼，还有那张笑起来格外漂亮的脸。",
+        "speaker": null
+      },
+      {
+        "text": "“对了，这个给你。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他递过塑料袋，里面是两份饭团。",
+        "speaker": null
+      },
+      {
+        "text": "“刚才顺手买的。你吃饭了吗？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你摇头。",
+        "speaker": null
+      },
+      {
+        "text": "“那正好，坐那边吧。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他朝窗边走去，走出两步又回头。",
+        "speaker": null
+      },
+      {
+        "text": "你们恰好对视。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍微微一怔，随后笑了。",
+        "speaker": null
+      },
+      {
+        "text": "“这边。”",
+        "speaker": "jin"
+      }
+    ],
+    [
+      {
+        "text": "靠窗只有两个高脚凳。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍抽出纸巾擦了擦桌面，将椅子稍稍挪开。",
+        "speaker": null
+      },
+      {
+        "text": "“坐吧。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "便利店里暖气开得很足，窗外的车灯偶尔映在他的外套上。",
+        "speaker": null
+      },
+      {
+        "text": "他拿出两份饭团。",
+        "speaker": null
+      },
+      {
+        "text": "“这个我以前吃过，还挺好吃的。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你问他是不是经常来。",
+        "speaker": null
+      },
+      {
+        "text": "“有时候工作结束得晚，就随便买点。今天刚好经过这里。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你想起今天是他主动约的见面。",
+        "speaker": null
+      },
+      {
+        "text": "自从交换联系方式，你们偶尔会聊起菜谱、天气和生活里的小事。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍看见你在笑。",
+        "speaker": null
+      },
+      {
+        "text": "“怎么了？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“没想到我们会在便利店里吃饭。”",
+        "speaker": "me"
+      },
+      {
+        "text": "他也笑起来。",
+        "speaker": null
+      },
+      {
+        "text": "“我也没想到。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "低头折好塑料袋，他轻轻补了一句：",
+        "speaker": null
+      },
+      {
+        "text": "“不过这样也挺好的。”",
+        "speaker": "jin"
+      }
+    ],
+    [
+      {
+        "text": "金硕珍拿起饭团，刚准备拆开，忽然发现背面印着不同的辣度。",
+        "speaker": null
+      },
+      {
+        "text": "他把两份放在一起比较。",
+        "speaker": null
+      },
+      {
+        "text": "“啊……买错口味了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "原来一份辣，一份普通。",
+        "speaker": null
+      },
+      {
+        "text": "“刚才还以为是一样的，长得也太像了吧。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他低头研究包装，帽檐下垂着几缕柔软的头发。",
+        "speaker": null
+      },
+      {
+        "text": "灯光落在他的手上。",
+        "speaker": null
+      },
+      {
+        "text": "修长的手指翻动包装，银色尾戒轻轻碰过塑料封口，发出细小的声响。",
+        "speaker": null
+      },
+      {
+        "text": "你看得有些出神。",
+        "speaker": null
+      },
+      {
+        "text": "微微凸起的指节、指尖捏住包装时的弧度，戒指随着动作转过一点，闪出细窄的光。",
+        "speaker": null
+      },
+      {
+        "text": "还有他低头时，从帽檐下露出来的睫毛。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍忽然抬头。",
+        "speaker": null
+      },
+      {
+        "text": "“那……你能吃辣吗？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你终于回过神。",
+        "speaker": null
+      }
+    ],
+    [
+      {
+        "text": "金硕珍把两个饭团推到桌子中间。",
+        "speaker": null
+      },
+      {
+        "text": "“你先选吧。这个辣，这个普通。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你问他想吃哪份。",
+        "speaker": null
+      },
+      {
+        "text": "“我都可以，你挑。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他笑了一下，指尖仍搭在包装边缘。",
+        "speaker": null
+      },
+      {
+        "text": "尾戒在灯下泛着银光。",
+        "speaker": null
+      },
+      {
+        "text": "你低头挑选，他拿起饮料，拧松瓶盖。",
+        "speaker": null
+      },
+      {
+        "text": "“喜欢哪个就拿哪个。”",
+        "speaker": "jin"
+      }
+    ],
+    [
+      {
+        "text": "你很快拆开包装，金硕珍却还在跟塑料膜较劲。",
+        "speaker": null
+      },
+      {
+        "text": "他低着头，用指尖捏住封口，试了好几次。鼻子微微皱起，终于撕开一条小缝时，嘴角露出一个满意的笑。",
+        "speaker": null
+      },
+      {
+        "text": "像只努力啃东西的仓鼠。",
+        "speaker": null
+      },
+      {
+        "text": "你忍不住笑出了声。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍抬头。",
+        "speaker": null
+      },
+      {
+        "text": "“嗯？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“这个有点难拆。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他继续低头，好不容易打开，便拿起饭团咬了一口。",
+        "speaker": null
+      },
+      {
+        "text": "脸颊随着咀嚼微微鼓起来。",
+        "speaker": null
+      },
+      {
+        "text": "更像仓鼠了。",
+        "speaker": null
+      },
+      {
+        "text": "你彻底忍不住。",
+        "speaker": null
+      },
+      {
+        "text": "他慢慢转过头，嘴里还有饭团，只好先眨眨眼。等咽下去，才轻声问：",
+        "speaker": null
+      },
+      {
+        "text": "“怎么了？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你说他吃东西的样子很可爱。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍愣了一下，低头笑了。指尖还捏着包装边缘，耳尖却渐渐泛红。",
+        "speaker": null
+      },
+      {
+        "text": "“啊……你也快吃吧。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "说完又咬了一口，嘴角还留着笑意。",
+        "speaker": null
+      }
+    ],
+    [
+      {
+        "text": "金硕珍讲起今天拍摄时的趣事。",
+        "speaker": null
+      },
+      {
+        "text": "他说到兴奋的地方，眉毛微微扬起，眼睛轻轻眯起来，声音也明亮几分。",
+        "speaker": null
+      },
+      {
+        "text": "你起初认真听着，后来却渐渐被他的脸吸引。",
+        "speaker": null
+      },
+      {
+        "text": "轻轻颤动的睫毛、漂亮的唇形，还有笑起来时眼睛里的光。",
+        "speaker": null
+      },
+      {
+        "text": "“然后……”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他忽然停下，看向你。",
+        "speaker": null
+      },
+      {
+        "text": "“你在听吗？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你赶紧点头。",
+        "speaker": null
+      },
+      {
+        "text": "他笑了一声，继续讲，却又突然有些不自在，低头咬了一口饭团。",
+        "speaker": null
+      },
+      {
+        "text": "脸颊鼓起来。",
+        "speaker": null
+      },
+      {
+        "text": "你想起刚才那只仓鼠，又笑了。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍抬眼看你，也跟着笑起来。",
+        "speaker": null
+      },
+      {
+        "text": "过了一会儿，他喝了口饮料，问起你最近的生活。",
+        "speaker": null
+      },
+      {
+        "text": "你开始讲，他安静地听着。遇到有趣的地方，他会微微睁大眼睛，随后笑得肩膀轻轻颤动。",
+        "speaker": null
+      },
+      {
+        "text": "偶尔你说到一半看向他，他便抬眼应一声：",
+        "speaker": null
+      },
+      {
+        "text": "“嗯？”",
+        "speaker": "jin"
+      }
+    ],
+    [
+      {
+        "text": "饭团吃完了，桌上剩下塑料包装和饮料。",
+        "speaker": null
+      },
+      {
+        "text": "便利店的门忽然打开，晚风吹起桌上的包装袋。",
+        "speaker": null
+      },
+      {
+        "text": "你伸手去按。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍也恰好伸出了手。",
+        "speaker": null
+      },
+      {
+        "text": "指尖轻轻擦过你的手背，紧接着，是银色尾戒冰凉的触感。",
+        "speaker": null
+      },
+      {
+        "text": "他动作停了一瞬，垂眼看向碰在一起的手。",
+        "speaker": null
+      },
+      {
+        "text": "修长的手指还压着包装，银戒在灯下闪了一下。",
+        "speaker": null
+      },
+      {
+        "text": "过了短短一秒，他才慢慢收回手。",
+        "speaker": null
+      },
+      {
+        "text": "“差点飞了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他轻声说，把包装折好。",
+        "speaker": null
+      },
+      {
+        "text": "你低头看着手背，刚才的凉意似乎还在。",
+        "speaker": null
+      },
+      {
+        "text": "过了一会儿，金硕珍问：",
+        "speaker": null
+      },
+      {
+        "text": "“你明天忙吗？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他握着饮料瓶，指尖沿着标签轻轻划过。",
+        "speaker": null
+      },
+      {
+        "text": "听完你的回答，他接着聊起你最近提过的事情。",
+        "speaker": null
+      },
+      {
+        "text": "偶尔目光相遇，他会轻轻抿一下嘴唇，低头喝水。",
+        "speaker": null
+      }
+    ],
+    [
+      {
+        "text": "你们收好包装，一起走到自动贩卖机前。",
+        "speaker": null
+      },
+      {
+        "text": "“喝点什么？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "金硕珍按下你选的饮料，机器咕噜一声，将瓶子送到取货口。",
+        "speaker": null
+      },
+      {
+        "text": "他弯腰拿出来，又买了一瓶给自己。",
+        "speaker": null
+      },
+      {
+        "text": "走出便利店，晚风有点凉。",
+        "speaker": null
+      },
+      {
+        "text": "他拢了拢外套领口，低头喝了一口饮料。",
+        "speaker": null
+      },
+      {
+        "text": "你侧过脸，他正望着前面的街道，嘴角还留着笑。",
+        "speaker": null
+      }
+    ],
+    [
+      {
+        "text": "夜晚的街道亮着灯。",
+        "speaker": null
+      },
+      {
+        "text": "你们并肩走着，聊起那个难拆的饭团包装。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍低头笑了。",
+        "speaker": null
+      },
+      {
+        "text": "“你还记得啊。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他握着饮料瓶，拇指慢慢转动瓶盖。",
+        "speaker": null
+      },
+      {
+        "text": "绿灯亮起，金硕珍往前走了一步，又停下来等你。",
+        "speaker": null
+      },
+      {
+        "text": "“走吧。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你跟上去，和他并肩走过斑马线。",
+        "speaker": null
+      }
+    ],
+    [
+      {
+        "text": "到了下一个路口，你们停下脚步。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍看了看时间。",
+        "speaker": null
+      },
+      {
+        "text": "“今天过得还挺快。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他忽然想起上次聊过的蛋糕店。",
+        "speaker": null
+      },
+      {
+        "text": "“我后来去查了一下，看起来确实不错。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你问他有没有去过。",
+        "speaker": null
+      },
+      {
+        "text": "“还没有，最近有点忙。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他说着低头笑了笑。",
+        "speaker": null
+      },
+      {
+        "text": "路灯落在额发上，眼睛里映着暖黄色的光。他握着饮料瓶，指尖无意识地转动瓶盖。",
+        "speaker": null
+      },
+      {
+        "text": "过了一会儿，重新看向你。",
+        "speaker": null
+      },
+      {
+        "text": "“下次有空，还一起吃点东西？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他说完，嘴角微微抿起，目光却没有移开。",
+        "speaker": null
+      },
+      {
+        "text": "风吹动他的额发。那双漂亮的眼睛里带着一点期待。",
+        "speaker": null
+      },
+      {
+        "text": "他似乎也有些紧张，低头看了眼饮料，又笑着抬起头。",
+        "speaker": null
+      },
+      {
+        "text": "安静地等你回答。",
+        "speaker": null
+      }
+    ]
+  ],
+  "earlyRain": [
+    [
+      {
+        "text": "雨是在你们见面后突然下起来的。",
+        "speaker": null
+      },
+      {
+        "text": "走到街口时，雨点已经密密落下。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍抬头看了一眼。",
+        "speaker": null
+      },
+      {
+        "text": "“啊，下大了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他撑开伞，站在屋檐边等你。雨水顺着伞沿滑落，溅湿了鞋尖。",
+        "speaker": null
+      },
+      {
+        "text": "你走过去，他往旁边让了让。",
+        "speaker": null
+      },
+      {
+        "text": "“站里面吧。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "见你低头看他的鞋，他也跟着看了一眼，笑了。",
+        "speaker": null
+      },
+      {
+        "text": "“没事，反正已经湿了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "看过天气预报，他收起手机。",
+        "speaker": null
+      },
+      {
+        "text": "“好像还要下一会儿。一起走吧。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你走进伞下，他抬高伞柄，雨声在头顶响起。",
+        "speaker": null
+      }
+    ],
+    [
+      {
+        "text": "金硕珍把伞往你这边挪了挪。",
+        "speaker": null
+      },
+      {
+        "text": "“这样可以吗？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你点头，两个人并肩走进雨里。",
+        "speaker": null
+      },
+      {
+        "text": "他的肩膀比你高出一截，宽松的外套随着步伐轻轻晃动。",
+        "speaker": null
+      },
+      {
+        "text": "风吹偏了伞面，他抬手调整，雨水却落在自己的袖口上。",
+        "speaker": null
+      },
+      {
+        "text": "“你那边淋到了。”",
+        "speaker": "me"
+      },
+      {
+        "text": "他低头看了一眼。",
+        "speaker": null
+      },
+      {
+        "text": "“哦，真的。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "重新扶正伞柄，他侧过头看你。",
+        "speaker": null
+      },
+      {
+        "text": "“这样呢？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你点头，他也笑了。",
+        "speaker": null
+      },
+      {
+        "text": "继续往前走时，你们的肩膀偶尔靠得很近。每次快要碰上，你都会放慢脚步。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍察觉到后，也悄悄放慢了一点。",
+        "speaker": null
+      }
+    ],
+    [
+      {
+        "text": "一辆车驶过，轮胎碾起一片水花。",
+        "speaker": null
+      },
+      {
+        "text": "“小心。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "金硕珍抬高伞，另一只手下意识伸向你的手肘。",
+        "speaker": null
+      },
+      {
+        "text": "水花落在鞋尖前面。",
+        "speaker": null
+      },
+      {
+        "text": "“差一点。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他低头笑了笑，随后看了一眼你们之间的距离。",
+        "speaker": null
+      },
+      {
+        "text": "“往这边一点。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他稍稍侧过身。",
+        "speaker": null
+      },
+      {
+        "text": "你抬头，恰好撞上他的目光。",
+        "speaker": null
+      },
+      {
+        "text": "近得能看清他眼睛里映着的路灯。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍轻轻眨眼，先移开视线。",
+        "speaker": null
+      },
+      {
+        "text": "手却仍停在你手肘旁，指尖微微蜷着，没有真正碰上。",
+        "speaker": null
+      }
+    ],
+    [
+      {
+        "text": "经过街口，金硕珍忽然指向马路对面。",
+        "speaker": null
+      },
+      {
+        "text": "“那个是不是你之前说的店？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "雨幕里，一块小招牌亮着暖黄色的光。",
+        "speaker": null
+      },
+      {
+        "text": "正是你上次提过的地方。",
+        "speaker": null
+      },
+      {
+        "text": "“你怎么知道？”",
+        "speaker": "me"
+      },
+      {
+        "text": "他笑了一下。",
+        "speaker": null
+      },
+      {
+        "text": "“你说过啊。旁边有条小巷子，招牌还特别难找。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你问他是不是后来查过。",
+        "speaker": null
+      },
+      {
+        "text": "“嗯，看过一下。这附近好像有不少有意思的地方。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他又看了看那家店。",
+        "speaker": null
+      },
+      {
+        "text": "“有空可以来看看。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你想起便利店那晚，他也记得你提过的蛋糕店。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍低头看你。",
+        "speaker": null
+      },
+      {
+        "text": "“是这家吧？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你点头。",
+        "speaker": null
+      },
+      {
+        "text": "他笑起来，眼角弯成漂亮的弧度。",
+        "speaker": null
+      },
+      {
+        "text": "“看来没记错。”",
+        "speaker": "jin"
+      }
+    ],
+    [
+      {
+        "text": "红灯亮着。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍看了眼信号灯。",
+        "speaker": null
+      },
+      {
+        "text": "“这个红灯好长。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你笑了，他也跟着笑。",
+        "speaker": null
+      },
+      {
+        "text": "你说起白天发生的事情。雨声有些大，他微微低下头，侧耳听着。",
+        "speaker": null
+      },
+      {
+        "text": "你们离得很近。",
+        "speaker": null
+      },
+      {
+        "text": "近到他转过头时，连眼睫轻轻颤动都看得清楚。",
+        "speaker": null
+      },
+      {
+        "text": "“然后呢？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他抬眼看你。",
+        "speaker": null
+      },
+      {
+        "text": "你回过神，继续讲下去。",
+        "speaker": null
+      },
+      {
+        "text": "他听完笑起来，也说起今天工作时的趣事。",
+        "speaker": null
+      },
+      {
+        "text": "讲到有趣的地方，他忽然扬起眉毛，眼睛亮了起来。",
+        "speaker": null
+      },
+      {
+        "text": "你看着他的笑容，差点忘了接话。",
+        "speaker": null
+      },
+      {
+        "text": "直到绿灯亮起。",
+        "speaker": null
+      },
+      {
+        "text": "“啊，走吧。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你们并肩过街。",
+        "speaker": null
+      },
+      {
+        "text": "走到一半，他又接上刚才的话题。",
+        "speaker": null
+      },
+      {
+        "text": "“对了，那件事后来怎么样了？”",
+        "speaker": "jin"
+      }
+    ],
+    [
+      {
+        "text": "一阵风吹过，金硕珍抬手握稳伞柄。",
+        "speaker": null
+      },
+      {
+        "text": "袖口擦过你的手背，留下一点湿凉。",
+        "speaker": null
+      },
+      {
+        "text": "“你袖子湿了。”",
+        "speaker": "me"
+      },
+      {
+        "text": "“哦，真的。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他随手卷起袖口。",
+        "speaker": null
+      },
+      {
+        "text": "那枚熟悉的银色尾戒在路灯下闪了一下。",
+        "speaker": null
+      },
+      {
+        "text": "你想起便利店里，他的手指与自己轻轻碰到的瞬间。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍发现你的目光，顺着看向自己的手。",
+        "speaker": null
+      },
+      {
+        "text": "“嗯？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你抬头。",
+        "speaker": null
+      },
+      {
+        "text": "你们在伞下对视。",
+        "speaker": null
+      },
+      {
+        "text": "他眨了一下眼，唇角慢慢弯起，随后重新握稳伞柄。",
+        "speaker": null
+      },
+      {
+        "text": "走出几步，他忽然开口：",
+        "speaker": null
+      },
+      {
+        "text": "“上次那个饭团……后来我又买了一次。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“真的？”",
+        "speaker": "me"
+      },
+      {
+        "text": "“嗯，这次包装拆得很顺利。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你笑起来。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍也低头笑了，银色尾戒随着动作转过一点。",
+        "speaker": null
+      },
+      {
+        "text": "过了一会儿，他轻轻补上一句：",
+        "speaker": null
+      },
+      {
+        "text": "“不过还是上次比较有意思。”",
+        "speaker": "jin"
+      }
+    ],
+    [
+      {
+        "text": "到了原本该分别的路口，雨势已经小了许多。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍停下来。",
+        "speaker": null
+      },
+      {
+        "text": "“你是往这边走吧？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你点头。",
+        "speaker": null
+      },
+      {
+        "text": "他看了看时间，又望向另一条街。",
+        "speaker": null
+      },
+      {
+        "text": "“感觉时间还早。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他侧过脸，嘴角带着一点笑意。",
+        "speaker": null
+      },
+      {
+        "text": "“要不要再走到前面？那边好像还有几家店。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他说完，手指轻轻转动伞柄，又慢慢握紧。",
+        "speaker": null
+      },
+      {
+        "text": "你答应以后，他明显笑了起来。",
+        "speaker": null
+      },
+      {
+        "text": "“那走吧。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他重新撑稳伞，与你并肩往前。",
+        "speaker": null
+      },
+      {
+        "text": "这一次，他的步子放得更慢。",
+        "speaker": null
+      }
+    ],
+    [
+      {
+        "text": "雨渐渐小下来，湿润的路面映着店铺的灯光。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍说附近有家以前去过的小店。",
+        "speaker": null
+      },
+      {
+        "text": "“应该就在前面。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“你确定吗？”",
+        "speaker": "me"
+      },
+      {
+        "text": "他低头笑了。",
+        "speaker": null
+      },
+      {
+        "text": "“应该吧。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你看着他，他恰好也转过头。",
+        "speaker": null
+      },
+      {
+        "text": "短暂对视后，金硕珍将目光移向路灯。",
+        "speaker": null
+      },
+      {
+        "text": "走出几步，又偏头笑着问：",
+        "speaker": null
+      },
+      {
+        "text": "“怎么了？怕我迷路啊？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "伞下两个人的影子，随着脚步在湿润的路面上轻轻晃动。",
+        "speaker": null
+      }
+    ],
+    [
+      {
+        "text": "你们在另一段屋檐下停住。",
+        "speaker": null
+      },
+      {
+        "text": "暖黄色的灯映在伞沿，雨滴一颗颗滑落。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍收低伞。",
+        "speaker": null
+      },
+      {
+        "text": "“这里避一会儿吧。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "灯光落在他的眉眼间，睫毛投出浅浅的影子，额前的头发被潮湿的风吹得有些凌乱。",
+        "speaker": null
+      },
+      {
+        "text": "你忍不住多看了一会儿。",
+        "speaker": null
+      },
+      {
+        "text": "他忽然低下头。",
+        "speaker": null
+      },
+      {
+        "text": "“嗯？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“怎么了？”",
+        "speaker": "me"
+      },
+      {
+        "text": "他笑了一下。",
+        "speaker": null
+      },
+      {
+        "text": "“你刚才在看什么？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你抬眼，他也望着你。",
+        "speaker": null
+      },
+      {
+        "text": "安静了两秒，两个人忽然都笑起来。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍低头转着伞柄。",
+        "speaker": null
+      },
+      {
+        "text": "“今天时间过得挺快。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他看向渐渐变细的雨丝。",
+        "speaker": null
+      },
+      {
+        "text": "“我还以为会下很久。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "雨真的快停了。",
+        "speaker": null
+      }
+    ],
+    [
+      {
+        "text": "屋檐上的雨滴渐渐稀疏。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍站在你身旁，慢慢收拢伞。",
+        "speaker": null
+      },
+      {
+        "text": "安静下来后，你发现他已经好几次偏头看你。",
+        "speaker": null
+      },
+      {
+        "text": "每次目光相遇，他都会轻轻笑一下，又转回去看雨。",
+        "speaker": null
+      },
+      {
+        "text": "这一次，你没有立刻移开视线。",
+        "speaker": null
+      },
+      {
+        "text": "他垂眼看着伞柄，拇指缓缓摩挲着上面的纹路。",
+        "speaker": null
+      },
+      {
+        "text": "你问他是不是有什么话想说。",
+        "speaker": null
+      },
+      {
+        "text": "“嗯……”",
+        "speaker": "jin"
+      },
+      {
+        "text": "停顿片刻，他抬起头。",
+        "speaker": null
+      },
+      {
+        "text": "“就是觉得今天挺开心的。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他笑了，眼睛微微弯起。",
+        "speaker": null
+      },
+      {
+        "text": "“跟你聊天挺有意思的。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "雨滴顺着屋檐滑落。",
+        "speaker": null
+      },
+      {
+        "text": "“刚才走到那个路口，我还以为要跟你说再见了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他自己也笑起来。",
+        "speaker": null
+      },
+      {
+        "text": "“结果又走了这么远。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你跟着笑了。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍望着你，手里的伞轻轻转过半圈。",
+        "speaker": null
+      },
+      {
+        "text": "“现在走，还是……”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他停顿一下。",
+        "speaker": null
+      },
+      {
+        "text": "“再等一会儿？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他的目光一直停留在你脸上，等着回答。",
+        "speaker": null
+      }
+    ],
+    [
+      {
+        "text": "雨声渐渐变轻，街对面的店铺开始收起遮雨棚。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍抬头看了看天空。",
+        "speaker": null
+      },
+      {
+        "text": "“真的快停了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他转向你。",
+        "speaker": null
+      },
+      {
+        "text": "“今天突然下雨，我还以为会很麻烦。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你问他现在呢。",
+        "speaker": null
+      },
+      {
+        "text": "他低头想了想，嘴角慢慢扬起来。",
+        "speaker": null
+      },
+      {
+        "text": "“现在觉得……还挺好的。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "最后几滴雨从屋檐落下。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍伸手试了试，修长的手指在灯下微微张开，银色尾戒闪过一点光。",
+        "speaker": null
+      },
+      {
+        "text": "“嗯，停了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他慢慢收起伞，伞骨合拢时发出轻响。",
+        "speaker": null
+      },
+      {
+        "text": "头顶那片小小的空间消失了。",
+        "speaker": null
+      },
+      {
+        "text": "你们却仍然站得很近。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍低头系好伞带，抬眼看你。",
+        "speaker": null
+      },
+      {
+        "text": "“走吧？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他与你并肩走出屋檐，湿漉漉的街道映着暖黄色的灯光。",
+        "speaker": null
+      }
+    ],
+    [
+      {
+        "text": "走到最后一个路口，你们的脚步渐渐慢下来。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍低头绕紧伞带。",
+        "speaker": null
+      },
+      {
+        "text": "“今天真的走了挺久。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他转过身，路灯映在眉眼间，额前的头发随着晚风轻轻晃动。",
+        "speaker": null
+      },
+      {
+        "text": "“那……今天就到这里？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你点头。",
+        "speaker": null
+      },
+      {
+        "text": "他也点了点头，低头看了一眼伞，又重新望向你。",
+        "speaker": null
+      },
+      {
+        "text": "“今天真的挺开心的。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他笑起来。",
+        "speaker": null
+      },
+      {
+        "text": "“下次有空，再一起出来吧。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "听见你的回答，他唇角的笑意明显深了一点。",
+        "speaker": null
+      },
+      {
+        "text": "“好，那就这么说定了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他抬起手。",
+        "speaker": null
+      },
+      {
+        "text": "“路上小心，再见。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你走出几步，忍不住回头。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍还站在原地。察觉到你的目光，他微微一怔，随后笑着再次挥手。",
+        "speaker": null
+      },
+      {
+        "text": "到了街角，手机忽然震动。",
+        "speaker": null
+      },
+      {
+        "text": "是金硕珍。",
+        "speaker": null
+      },
+      {
+        "text": "“刚才忘记说了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“今天真的很开心。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "几秒后，又跳出一条。",
+        "speaker": null
+      },
+      {
+        "text": "“下次见。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你望着屏幕。",
+        "speaker": null
+      },
+      {
+        "text": "路灯映在雨后的积水里。你想起他在伞下低头听你说话时的眼睛，还有那枚随着动作闪过银光的尾戒。",
+        "speaker": null
+      },
+      {
+        "text": "手指停在输入框上。",
+        "speaker": null
+      },
+      {
+        "text": "你想了想，开始打字。",
+        "speaker": null
+      }
+    ]
+  ],
+  "home": [
+    [
+      {
+        "text": "门打开的时候，金硕珍还穿着那件你熟悉的宽松毛衣。",
+        "speaker": null
+      },
+      {
+        "text": "“来了啊。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他接过你的东西，原本还想说些什么，目光却在你脸上停了几秒。",
+        "speaker": null
+      },
+      {
+        "text": "这几天网上的议论始终没有停下来。你们明明每天都在联系，可每次聊天，总会不知不觉绕回那些照片、评论，还有需要处理的事情。连一句普通的晚安，都变得匆匆忙忙。",
+        "speaker": null
+      },
+      {
+        "text": "他伸手轻轻碰了碰你的脸颊。",
+        "speaker": null
+      },
+      {
+        "text": "“怎么感觉又瘦了一点……是不是这几天都没好好吃饭？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "说着，他自己也叹了口气。",
+        "speaker": null
+      },
+      {
+        "text": "“我也是。昨天忙到半夜，回去还想看看你有没有睡。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他低头看了看你脚边的鞋，忽然想起什么，弯腰从鞋柜里拿出一双新拖鞋。",
+        "speaker": null
+      },
+      {
+        "text": "“对了，给你买的。试试看合不合适。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "等你换好，他才终于露出一点真正放松的笑。",
+        "speaker": null
+      },
+      {
+        "text": "“哎一古，终于见到了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他的声音轻下来。",
+        "speaker": null
+      },
+      {
+        "text": "“进来吧。今天好好休息，什么都不用赶。”",
+        "speaker": "jin"
+      }
+    ],
+    [
+      {
+        "text": "屋里很暖和，厨房传来汤水慢慢煮开的声音。",
+        "speaker": null
+      },
+      {
+        "text": "硕珍把你的外套挂好，回头发现你还站在客厅里看着窗外，便走过来陪你站了一会儿。",
+        "speaker": null
+      },
+      {
+        "text": "“怎么了？在看什么？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "窗外的城市和平时没有任何不同。车灯沿着道路缓缓移动，远处的楼房一盏盏亮起。那些曾经让你们小心翼翼的陌生目光，此刻都隔在了窗户外面。",
+        "speaker": null
+      },
+      {
+        "text": "他没有催你坐下，只是站在你身边，等你慢慢放松下来。",
+        "speaker": null
+      },
+      {
+        "text": "过了一会儿，他伸手把窗帘拉上了一点。",
+        "speaker": null
+      },
+      {
+        "text": "“今天就待在家里吧。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他偏头看你。",
+        "speaker": null
+      },
+      {
+        "text": "“我本来想做一大桌菜的，结果下午一直在想你来了以后要干什么，差点把汤煮干了ㅋㅋ”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你终于笑了，他也跟着笑起来。",
+        "speaker": null
+      },
+      {
+        "text": "在沙发上坐下以后，你环顾四周，忍不住感叹。",
+        "speaker": null
+      },
+      {
+        "text": "“你家好大啊，金硕珍……”",
+        "speaker": "me"
+      },
+      {
+        "text": "他愣了一下，随即笑出了声。",
+        "speaker": null
+      },
+      {
+        "text": "“突然这么正式地叫我名字干什么ㅋㅋ”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“喜欢这里吗？”",
+        "speaker": "jin"
+      }
+    ],
+    [
+      {
+        "text": "“以后都是你的😙”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他回答得太自然，连自己都没觉得有什么特别，直到看见你的表情，才忍不住笑了起来。",
+        "speaker": null
+      },
+      {
+        "text": "“怎么了？干嘛这样看我？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "硕珍往沙发里靠了靠，伸手指了指旁边的位置。",
+        "speaker": null
+      },
+      {
+        "text": "“过来坐嘛。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "等你坐下，他的目光又落在客厅里。",
+        "speaker": null
+      },
+      {
+        "text": "“其实这里平时挺安静的。我一个人的时候，经常开着电视，结果根本不知道里面在播什么。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他笑着摇了摇头。",
+        "speaker": null
+      },
+      {
+        "text": "“有时候回来太晚，连灯都懒得全部打开。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "说到这里，他忽然转过头看你。",
+        "speaker": null
+      },
+      {
+        "text": "“所以今天你来了，我真的特别高兴。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他停顿了一下，声音比刚才柔和许多。",
+        "speaker": null
+      },
+      {
+        "text": "“以后想来的时候就来吧。你在这里，我觉得家里都热闹一点。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "厨房忽然传来一声轻响。",
+        "speaker": null
+      },
+      {
+        "text": "“啊！我的汤！”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他猛地站起来，走出两步又回头。",
+        "speaker": null
+      },
+      {
+        "text": "“你先坐着，马上就好！”",
+        "speaker": "jin"
+      }
+    ],
+    [
+      {
+        "text": "餐桌上已经摆好了两套餐具。",
+        "speaker": null
+      },
+      {
+        "text": "硕珍从厨房端出最后一道菜，放下盘子的时候，还特意把你喜欢的那道往你面前推了推。",
+        "speaker": null
+      },
+      {
+        "text": "“来，先尝这个。我今天做得特别认真。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你伸手拿水杯，才发现那只杯子有些眼熟。",
+        "speaker": null
+      },
+      {
+        "text": "上次来时，你随口说过喜欢它的颜色。如今它还放在原来的位置，杯底干干净净，旁边甚至多了一个配套的小杯垫。",
+        "speaker": null
+      },
+      {
+        "text": "你问他是不是一直留着。",
+        "speaker": null
+      },
+      {
+        "text": "“嗯？当然啊。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他顺着你的目光看过去。",
+        "speaker": null
+      },
+      {
+        "text": "“你用过的东西，我怎么舍得随便收起来。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "说完，他似乎又觉得自己讲得太认真，轻轻笑了一声。",
+        "speaker": null
+      },
+      {
+        "text": "“而且每次看见那个杯子，我就会想，啊，下次你来的时候还可以用。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他在你对面坐下，拿起筷子，却没有立刻动。",
+        "speaker": null
+      },
+      {
+        "text": "“其实我这几天还买了好多东西。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“想着你过来可能会用到这个、那个……结果买完又觉得是不是太多了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他抬眼看你，笑得有些不好意思。",
+        "speaker": null
+      },
+      {
+        "text": "“怎么办啊，我好像已经开始习惯家里有你了。”",
+        "speaker": "jin"
+      }
+    ],
+    [
+      {
+        "text": "饭吃到一半，硕珍的手机震动了两次。",
+        "speaker": null
+      },
+      {
+        "text": "他拿起来看了一眼，脸上的笑意淡了些。",
+        "speaker": null
+      },
+      {
+        "text": "你大概猜到是什么消息。",
+        "speaker": null
+      },
+      {
+        "text": "这几天几乎每天都有新的讨论。有些照片明明看不清楚，却被人反复放大、分析；有些再普通不过的行程，也被拼凑成各种猜测。",
+        "speaker": null
+      },
+      {
+        "text": "他盯着屏幕看了片刻，手指在上面滑了几下，最后把手机扣在桌上。",
+        "speaker": null
+      },
+      {
+        "text": "“啊，真是……”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他缓缓吐出一口气，抬头看向你。",
+        "speaker": null
+      },
+      {
+        "text": "“我有时候真的很想知道，他们怎么会有那么多精力。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他试着笑一下，笑意却没能完全留住。",
+        "speaker": null
+      },
+      {
+        "text": "“这几天让你受委屈了吧。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "说完这句话，他沉默了几秒。",
+        "speaker": null
+      },
+      {
+        "text": "“我知道你一直说没关系，也一直在配合我。可是那些话……你看见了，怎么可能一点都不难受。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他伸手握住你的手，拇指轻轻碰着你的指节。",
+        "speaker": null
+      },
+      {
+        "text": "“你在我面前不用一直那么懂事。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“难过了就告诉我，好不好？哪怕只是想抱怨几句，我也想听。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他看着你，眼神里有些心疼。",
+        "speaker": null
+      },
+      {
+        "text": "“我知道那些事情没办法一下子全部解决，可我希望你每次见到我的时候，都能比之前开心一点。”",
+        "speaker": "jin"
+      }
+    ],
+    [
+      {
+        "text": "吃完饭，硕珍收拾了桌子，回到客厅时，发现你正坐在沙发上发呆。",
+        "speaker": null
+      },
+      {
+        "text": "他原本想叫你帮忙挑一部电影，话到了嘴边，又轻轻停住。",
+        "speaker": null
+      },
+      {
+        "text": "“累了吧？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他在你身边坐下，伸手握住你的手。",
+        "speaker": null
+      },
+      {
+        "text": "“过来一点。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "等你靠近，他才慢慢把你揽进怀里，掌心轻轻落在你的肩背上。",
+        "speaker": null
+      },
+      {
+        "text": "他安静了一会儿，低头看了看你。",
+        "speaker": null
+      },
+      {
+        "text": "“这几天我一直在想，见面以后要跟你说什么。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“有好多话想讲。想问你有没有好好吃饭，晚上睡得怎么样，有没有又一个人偷偷看那些评论……”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他轻轻叹了口气。",
+        "speaker": null
+      },
+      {
+        "text": "“可是现在见到了，又觉得先这样待一会儿就挺好。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "窗外的光落在沙发一角，厨房里还有一点没有散尽的饭菜香气。",
+        "speaker": null
+      },
+      {
+        "text": "他把身旁的毯子拉过来。",
+        "speaker": null
+      },
+      {
+        "text": "“我今天也有点累。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "说着，他笑了笑，把声音放得很轻。",
+        "speaker": null
+      },
+      {
+        "text": "“可以让我靠着你休息一会儿吗？”",
+        "speaker": "jin"
+      }
+    ],
+    [
+      {
+        "text": "你们在沙发上坐了很久。",
+        "speaker": null
+      },
+      {
+        "text": "硕珍起初还在说自己这几天的工作，说到某个录制现场发生的趣事，终于忍不住笑出了声。",
+        "speaker": null
+      },
+      {
+        "text": "“真的，我当时都不知道该说什么了ㅋㅋ”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他讲得兴起，还站起来模仿了一下当时的动作，结果自己先笑得弯下腰。",
+        "speaker": null
+      },
+      {
+        "text": "等重新坐回你身边，他才发现，你已经很久没有像这样轻松地笑过了。",
+        "speaker": null
+      },
+      {
+        "text": "他看了你一会儿，忽然伸手轻轻捏了捏你的手指。",
+        "speaker": null
+      },
+      {
+        "text": "“这样多好啊。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你问他什么好。",
+        "speaker": null
+      },
+      {
+        "text": "“你笑起来啊。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他笑了笑。",
+        "speaker": null
+      },
+      {
+        "text": "“这几天每次跟你聊天，我都能感觉到你在努力让我放心。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“明明你自己也累，还要反过来安慰我。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他的声音慢慢低下来。",
+        "speaker": null
+      },
+      {
+        "text": "“其实我有时候也挺难受的。尤其是工作的时候，手机不能一直拿着，知道你可能正在面对那些事情，我却没办法马上陪你说话。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他停顿了一下。",
+        "speaker": null
+      },
+      {
+        "text": "“以后如果有哪天你觉得特别难过，就直接跟我讲。你想说多少我都听。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他把毯子往你这边拉了拉。",
+        "speaker": null
+      },
+      {
+        "text": "“来，刚才你说到哪儿了？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“嗯。然后呢？我想听完。”",
+        "speaker": "jin"
+      }
+    ],
+    [
+      {
+        "text": "不知道过了多久，窗外已经完全暗了。",
+        "speaker": null
+      },
+      {
+        "text": "硕珍低头看了眼时间，突然轻轻叹了口气。",
+        "speaker": null
+      },
+      {
+        "text": "“啊……怎么这么快。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他抬头看着你，眼睛里又有了平时那种调皮的笑意。",
+        "speaker": null
+      },
+      {
+        "text": "“我今天早上起床的时候，就一直在想什么时候能见到你。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“中午吃饭也在想，下午开会的时候……”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他说到这里停了一下，自己忍不住笑了。",
+        "speaker": null
+      },
+      {
+        "text": "“好吧，开会的时候还是有认真听的ㅋㅋ”",
+        "speaker": "jin"
+      },
+      {
+        "text": "笑完以后，他忽然安静下来。",
+        "speaker": null
+      },
+      {
+        "text": "“不过是真的。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“以前觉得每天见面也没什么，忙的时候各做各的就好了。最近才发现，想见一个人的时候，原来真的会觉得时间过得这么慢。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你问他现在是不是好多了。",
+        "speaker": null
+      },
+      {
+        "text": "硕珍认真想了一会儿。",
+        "speaker": null
+      },
+      {
+        "text": "“嗯……好一点了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他稍稍低头，离你近了一些。",
+        "speaker": null
+      },
+      {
+        "text": "“可是刚才是想见你，见到了又想多抱一会儿。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他自己笑了起来。",
+        "speaker": null
+      },
+      {
+        "text": "“这可怎么办啊。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "过了一会儿，他又轻轻补了一句。",
+        "speaker": null
+      },
+      {
+        "text": "“我好想每天都能这样见到你。”",
+        "speaker": "jin"
+      }
+    ],
+    [
+      {
+        "text": "手机在桌上震动起来。",
+        "speaker": null
+      },
+      {
+        "text": "硕珍看了眼屏幕，是工作上的消息。他拿起来读完，眉头微微皱起，手指在输入框里停了一会儿。",
+        "speaker": null
+      },
+      {
+        "text": "“明天又要提前出门了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他放下手机，向后靠在沙发上，轻轻叹了口气。",
+        "speaker": null
+      },
+      {
+        "text": "“本来还想明天早上一起吃个早饭。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "那一点失落来得很突然。",
+        "speaker": null
+      },
+      {
+        "text": "明明今天过得很好，饭也吃得开心，刚才还聊了那么多有趣的事情。可一想到明天又要各自忙碌，可能连好好通话的时间都要挤出来，他就有些舍不得。",
+        "speaker": null
+      },
+      {
+        "text": "硕珍转过头看你。",
+        "speaker": null
+      },
+      {
+        "text": "“我以前真的觉得自己挺会安排时间的。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他无奈地笑了一下。",
+        "speaker": null
+      },
+      {
+        "text": "“工作、休息、见朋友，什么都能安排好。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“现在才发现，原来时间怎么安排都不够用。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他伸手握住你的手，轻轻晃了晃。",
+        "speaker": null
+      },
+      {
+        "text": "“今天是不是过得太快了一点？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你们安静地坐了一会儿。",
+        "speaker": null
+      },
+      {
+        "text": "他忽然说：",
+        "speaker": null
+      },
+      {
+        "text": "“下次有空，我们哪里都不去，就像今天这样待着，好不好？”",
+        "speaker": "jin"
+      }
+    ],
+    [
+      {
+        "text": "后来你们一起回到厨房收拾餐具。",
+        "speaker": null
+      },
+      {
+        "text": "水龙头开得很小，硕珍站在水槽前洗碗，你在旁边把擦干的杯子放回柜子。",
+        "speaker": null
+      },
+      {
+        "text": "他看见你把那只熟悉的杯子拿起来，忽然伸手指了指。",
+        "speaker": null
+      },
+      {
+        "text": "“那个放外面吧。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你问他为什么。",
+        "speaker": null
+      },
+      {
+        "text": "“因为下次还要用啊。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他回答得理所当然，过了一会儿却又轻轻笑了。",
+        "speaker": null
+      },
+      {
+        "text": "“其实今天早上，我还特意把它拿出来洗了一遍。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他低头冲掉手上的泡沫。",
+        "speaker": null
+      },
+      {
+        "text": "“这几天发生了那么多事，我昨天晚上都没怎么睡好。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“后来我就想，明天你来了，我们先吃顿饭吧。做点你喜欢吃的，聊聊天。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他说着停了一下，关掉水龙头。",
+        "speaker": null
+      },
+      {
+        "text": "“我那个时候就在想，只要能好好见到你，这一天应该就会很开心。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他擦干手，转过身看向你。",
+        "speaker": null
+      },
+      {
+        "text": "“结果真的比我想的还开心。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "那只杯子还握在你手里，他伸手接过去，轻轻放回桌面。",
+        "speaker": null
+      },
+      {
+        "text": "“以后回忆起这段时间，我希望自己还能想起今天。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“想起你坐在这里，吃我做的饭，笑我头发乱七八糟。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他笑着看了看厨房。",
+        "speaker": null
+      },
+      {
+        "text": "“这么普通的一天，怎么就这么好呢。”",
+        "speaker": "jin"
+      }
+    ],
+    [
+      {
+        "text": "到了要离开的时候，硕珍陪你走到玄关。",
+        "speaker": null
+      },
+      {
+        "text": "他从衣架上取下你的外套，替你整理好领口，又低头看看外面的天气。",
+        "speaker": null
+      },
+      {
+        "text": "“外面好像有点冷。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“要不要再穿一件？我这里有。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你说想再坐五分钟。",
+        "speaker": null
+      },
+      {
+        "text": "他的动作停了下来。",
+        "speaker": null
+      },
+      {
+        "text": "“真的？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他抬头看你，眼睛一下子弯起来。",
+        "speaker": null
+      },
+      {
+        "text": "“好啊。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他把外套重新挂回去，连声音都轻快了几分。",
+        "speaker": null
+      },
+      {
+        "text": "“再坐五分钟。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "可回到沙发以后，他又有些舍不得地拉住你的手，像是忽然想到了什么。",
+        "speaker": null
+      },
+      {
+        "text": "“其实你今天来的时候，我还有一点担心。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他低头看着你们握在一起的手。",
+        "speaker": null
+      },
+      {
+        "text": "“怕你最近太累了，怕你来了以后也没办法放松，怕我一不小心又提起那些不开心的事。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他说着笑了笑。",
+        "speaker": null
+      },
+      {
+        "text": "“结果你刚才在厨房里跟我讲话的时候，我突然觉得，啊，真好。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“我们还能像以前一样，一起吃饭，一起开玩笑，想说什么就说什么。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他抬起头，认真地看着你。",
+        "speaker": null
+      },
+      {
+        "text": "“这几天真的辛苦你了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "声音很轻。",
+        "speaker": null
+      },
+      {
+        "text": "“谢谢你今天来见我。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "窗外的夜色越来越深，客厅里的灯还亮着。",
+        "speaker": null
+      },
+      {
+        "text": "他轻轻握紧你的手，又慢慢松开一点。",
+        "speaker": null
+      },
+      {
+        "text": "“以后要是又遇到什么不开心的事，我们就一起慢慢解决。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“开心的事情也一样，第一时间告诉我，好不好？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他看着你，终于笑起来。",
+        "speaker": null
+      },
+      {
+        "text": "“下次不用准备什么特别的节目。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“你来就好。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "过了一会儿，他又小声补上一句。",
+        "speaker": null
+      },
+      {
+        "text": "“我真的很喜欢和你待在一起。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“今天也是，明天也是。”",
+        "speaker": "jin"
+      }
+    ]
+  ],
+  "ocean": [
+    [
+      {
+        "text": "车子停下时，海面正被午后的阳光照得闪闪发亮。",
+        "speaker": null
+      },
+      {
+        "text": "金硕珍先下了车，绕到你这边，打开车门的时候，发现你还靠在座椅上，睡眼惺忪地望着他。",
+        "speaker": null
+      },
+      {
+        "text": "“醒啦？睡得好吗？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他弯下腰，笑着伸手理了理你睡乱的头发。",
+        "speaker": null
+      },
+      {
+        "text": "“到了哦。你不是一直想来看海吗？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你透过车窗往外看，远处的海水泛着淡淡的蓝，阳光落在浪尖上，像是撒了一层细碎的银光。",
+        "speaker": null
+      },
+      {
+        "text": "“好漂亮……”",
+        "speaker": "me"
+      },
+      {
+        "text": "“是吧？我挑的地方。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他一脸得意，跟着你看向海面，忽然笑起来。",
+        "speaker": null
+      },
+      {
+        "text": "“好像我电脑壁纸哈哈哈哈哈。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你笑着看他，他也弯起眼睛，把外套放到你的膝盖上。",
+        "speaker": null
+      },
+      {
+        "text": "“还困吗？困的话来我怀里躺会儿，休息好了再下去。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他坐回来，伸手将你揽到身边，低头看了看你的脸。",
+        "speaker": null
+      },
+      {
+        "text": "“今天一整天都留给你了。想在这里待多久都行。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "这几天你们的生活被各种消息、电话和工作安排填得满满当当。现在听见他这样说，连车窗外的海浪都显得格外温柔。",
+        "speaker": null
+      },
+      {
+        "text": "硕珍低头看了你一会儿，忽然轻轻碰了碰你的手背。",
+        "speaker": null
+      },
+      {
+        "text": "“这几天辛苦了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他的声音比刚才低了些。",
+        "speaker": null
+      },
+      {
+        "text": "“今天要开开心心的，好不好？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "过了一会儿，他先去确认小屋的露台，回来时自然地接过你的东西。",
+        "speaker": null
+      },
+      {
+        "text": "一直到走进小屋、关上门，他才摘下帽子和口罩，长长地舒了一口气。",
+        "speaker": null
+      },
+      {
+        "text": "“哎一古，终于到了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他转过身看你，笑得特别开心。",
+        "speaker": null
+      },
+      {
+        "text": "“来，欢迎来到我们的海边小屋。”",
+        "speaker": "jin"
+      }
+    ],
+    [
+      {
+        "text": "露台正对着大海。",
+        "speaker": null
+      },
+      {
+        "text": "推开玻璃门的一瞬间，带着淡淡咸味的海风迎面吹来。远处的浪一层层涌向岸边，阳光落在白色栏杆上，暖得让人想一直待在这里。",
+        "speaker": null
+      },
+      {
+        "text": "硕珍把热饮端出来，放到背风的桌角，又挪了挪椅子，让你坐在最方便看海的位置。",
+        "speaker": null
+      },
+      {
+        "text": "“怎么样？喜欢吗？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他站在旁边等你回答，见你点头，才满意地坐下来。",
+        "speaker": null
+      },
+      {
+        "text": "“我第一次看到这里的照片，就觉得你一定会喜欢。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他把手机调成静音，放在桌面上，随后舒舒服服地往椅背上一靠。",
+        "speaker": null
+      },
+      {
+        "text": "“啊……真好。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你转过头看他。",
+        "speaker": null
+      },
+      {
+        "text": "他正望着海面，阳光照在侧脸上，连眼睛都微微眯起来。",
+        "speaker": null
+      },
+      {
+        "text": "“就这样坐着看海也很幸福。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "说完，他又偏头看向你。",
+        "speaker": null
+      },
+      {
+        "text": "“尤其是旁边还有你。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "这句话说得随意，他却在说完以后伸过手来，轻轻勾住了你的指尖。",
+        "speaker": null
+      },
+      {
+        "text": "前些天那些匆忙结束的通话、隔着屏幕的晚安，还有一遍遍约好又被工作打乱的见面，似乎都在这一刻慢慢有了着落。",
+        "speaker": null
+      },
+      {
+        "text": "你笑起来，他也跟着笑，索性伸直双腿，整个人放松地靠在椅子里。",
+        "speaker": null
+      },
+      {
+        "text": "“要是以后每个周末都能这样就好了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他说着看向远处，想了想，又笑起来。",
+        "speaker": null
+      },
+      {
+        "text": "“好像有点贪心啊。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "过了一会儿，你还在看海，他却悄悄把视线转了过来。",
+        "speaker": null
+      },
+      {
+        "text": "等你发现时，他已经看了你好一会儿。",
+        "speaker": null
+      },
+      {
+        "text": "“干嘛？”",
+        "speaker": "me"
+      },
+      {
+        "text": "“嗯？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他笑着歪了歪头。",
+        "speaker": null
+      },
+      {
+        "text": "“你真可爱。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "说完又若无其事地端起杯子喝了一口，嘴角却一直弯着。",
+        "speaker": null
+      }
+    ],
+    [
+      {
+        "text": "硕珍摘下帽子，伸手随意抓了抓头发。",
+        "speaker": null
+      },
+      {
+        "text": "海风立刻把他额前的几缕头发吹得翘了起来。他还浑然不觉，低头整理着放在旁边的外套。",
+        "speaker": null
+      },
+      {
+        "text": "你忍不住多看了几眼。",
+        "speaker": null
+      },
+      {
+        "text": "“怎么了？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他抬起头，刚好对上你的目光。",
+        "speaker": null
+      },
+      {
+        "text": "“怎么一直看哥哥？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你指了指他的头发。",
+        "speaker": null
+      },
+      {
+        "text": "“呆毛。”",
+        "speaker": "me"
+      },
+      {
+        "text": "他伸手摸了摸，反而弄得更乱。",
+        "speaker": null
+      },
+      {
+        "text": "“哪里？这里吗？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你笑得停不下来。",
+        "speaker": null
+      },
+      {
+        "text": "“哥哥真可爱。”",
+        "speaker": "me"
+      },
+      {
+        "text": "“啊，真是……”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他也笑起来，露出一点无可奈何的表情。",
+        "speaker": null
+      },
+      {
+        "text": "“那你帮我弄一下嘛，我自己又看不见。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你靠近，伸手替他整理被风吹乱的头发。",
+        "speaker": null
+      },
+      {
+        "text": "硕珍微微低下头，方便你碰到。等你真的凑近了，他却忽然安静下来。",
+        "speaker": null
+      },
+      {
+        "text": "你们离得很近，近到他抬眼时，目光恰好落在你的脸上。",
+        "speaker": null
+      },
+      {
+        "text": "他原本还带着笑，渐渐地，连笑声都轻了下去。",
+        "speaker": null
+      },
+      {
+        "text": "“好近啊……”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他轻声说。",
+        "speaker": null
+      },
+      {
+        "text": "你刚想退开，他便握住你的指尖，将你的手轻轻放进掌心。",
+        "speaker": null
+      },
+      {
+        "text": "“等一下。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他低头看看你们握在一起的手，又抬头看你。",
+        "speaker": null
+      },
+      {
+        "text": "“这样多好。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“手都不知道放哪了，哈哈哈哈。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他说着故意把你的手举起来一点。",
+        "speaker": null
+      },
+      {
+        "text": "“现在知道了。放这里行不行？🥺”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你笑着任他握着，他便把你的手轻轻拢好。",
+        "speaker": null
+      },
+      {
+        "text": "过了一会儿，他低头看向你们交握的手，声音忽然柔和下来。",
+        "speaker": null
+      },
+      {
+        "text": "“真好啊。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“终于可以这样牵着你，慢慢待一整天了。”",
+        "speaker": "jin"
+      }
+    ],
+    [
+      {
+        "text": "海风慢慢吹过来，硕珍伸手替你拢了拢外套。",
+        "speaker": null
+      },
+      {
+        "text": "他忽然想起什么，拿出手机翻了几下，把一张照片递到你面前。",
+        "speaker": null
+      },
+      {
+        "text": "“你看这个。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "照片里是某天拍摄结束后的天空。夕阳落在建筑物后面，云被染成很温柔的橘粉色。",
+        "speaker": null
+      },
+      {
+        "text": "“那天收工特别晚。出来的时候一抬头，就看到这个。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他笑着看你。",
+        "speaker": null
+      },
+      {
+        "text": "“当时第一反应就是，啊，你要是在这里就好了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你把照片放大看了看。",
+        "speaker": null
+      },
+      {
+        "text": "“是不是很好看？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他凑过来，和你一起看着屏幕。",
+        "speaker": null
+      },
+      {
+        "text": "“我还想发给你的。结果那天忙着赶路，回去以后又忘记了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "说到这里，他忽然笑起来。",
+        "speaker": null
+      },
+      {
+        "text": "“其实我手机里还有好多这样的照片。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“有时候看到好吃的，会想着下次带你去。看到漂亮的地方，也会想着哪天跟你一起来。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他低头翻动相册，动作渐渐慢下来。",
+        "speaker": null
+      },
+      {
+        "text": "“前几天也是，拍摄结束后特别累，大家都在说要赶紧回去休息。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“我坐在车上，看着窗外，突然就特别想给你打电话。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他说着抬起眼睛。",
+        "speaker": null
+      },
+      {
+        "text": "“可是那天你也忙了一整天吧。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他轻轻摩挲着你的指尖。",
+        "speaker": null
+      },
+      {
+        "text": "“那时候就想，等忙完这一阵，一定要带你好好出去玩一次。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“今天真的来了，反而有点舍不得让时间过去。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他低头翻动相册，找到另一张照片。",
+        "speaker": null
+      },
+      {
+        "text": "是一只表情有些滑稽的小猫。",
+        "speaker": null
+      },
+      {
+        "text": "“还有这个ㅋㅋㅋㅋ。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“你看它的脸，像不像你有时候生气的样子？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你抬头瞪他，他立刻笑得肩膀都在抖。",
+        "speaker": null
+      },
+      {
+        "text": "“哈哈哈哈，真的很像嘛！”",
+        "speaker": "jin"
+      },
+      {
+        "text": "笑够了，他把手机收起来，轻轻握住你的手。",
+        "speaker": null
+      },
+      {
+        "text": "“不过小猫很可爱。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他偏头看你，眼睛亮亮的。",
+        "speaker": null
+      },
+      {
+        "text": "“你也很可爱。”",
+        "speaker": "jin"
+      }
+    ],
+    [
+      {
+        "text": "太阳渐渐升高，沙滩上的人也慢慢少了。",
+        "speaker": null
+      },
+      {
+        "text": "硕珍站在露台边往外看了一会儿，回头朝你伸出手。",
+        "speaker": null
+      },
+      {
+        "text": "“我们下去走走吧？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他换了一双方便走路的鞋，又弯腰把你的鞋拿过来放好。",
+        "speaker": null
+      },
+      {
+        "text": "从小屋通往海边的步道很短，两旁长着一些低矮的植物，风吹过时，叶片轻轻晃动。",
+        "speaker": null
+      },
+      {
+        "text": "走到沙滩入口时，远处还有几个人沿着海岸散步。",
+        "speaker": null
+      },
+      {
+        "text": "硕珍看了一眼，便放慢脚步，陪你在旁边等着。",
+        "speaker": null
+      },
+      {
+        "text": "你想起最近发生的那些事，忽然问他，以后出来约会是不是都要这样小心。",
+        "speaker": null
+      },
+      {
+        "text": "他转过头看你。",
+        "speaker": null
+      },
+      {
+        "text": "那一瞬间，他脸上的笑意轻轻收了起来。",
+        "speaker": null
+      },
+      {
+        "text": "“这几天是不是让你觉得很累？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他握了握你的手，沉默片刻，才继续说。",
+        "speaker": null
+      },
+      {
+        "text": "“其实我也想了很多。以前总觉得自己安排好就行，后来才发现，你也会因为我经历很多麻烦。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他看着远处渐渐走开的行人，声音柔和下来。",
+        "speaker": null
+      },
+      {
+        "text": "“有时候你跟我说没关系，我听着反而更心疼。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他停下脚步，认真地望着你。",
+        "speaker": null
+      },
+      {
+        "text": "“你以后有什么委屈，都可以跟我说。生气也好，难过也好，我都想知道。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“我希望你和我在一起的时候，可以很轻松，可以想笑就笑，想说什么就说什么。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "说到这里，他忽然伸手轻轻碰了碰你的脸颊。",
+        "speaker": null
+      },
+      {
+        "text": "“今天就先让我好好陪你，好不好？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他转回头，看见远处的沙滩已经安静下来，便重新露出笑容。",
+        "speaker": null
+      },
+      {
+        "text": "“走吧。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他忽然蹲下去，认真地卷起自己的裤脚，又把鞋放到干燥的地方。",
+        "speaker": null
+      },
+      {
+        "text": "“好啦。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他站起身，笑着朝你伸手。",
+        "speaker": null
+      },
+      {
+        "text": "“出发！今天哥哥带你去踩海水。”",
+        "speaker": "jin"
+      }
+    ],
+    [
+      {
+        "text": "刚踩进沙滩，脚下的沙便软软地陷下去一点。",
+        "speaker": null
+      },
+      {
+        "text": "硕珍走在你身边，原本还在兴致勃勃地说着什么，忽然发现你走得有些慢，便停下来等你。",
+        "speaker": null
+      },
+      {
+        "text": "“怎么啦？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他低头看了看沙子，又看向你，笑着伸出手。",
+        "speaker": null
+      },
+      {
+        "text": "“手给我一下。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "等你握住，他才重新迈开步子。",
+        "speaker": null
+      },
+      {
+        "text": "“嗯，这样好走一点。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "浪花慢慢漫过沙滩，水退下去的时候，留下两串深浅不同的脚印。",
+        "speaker": null
+      },
+      {
+        "text": "你低头看着，突然觉得有趣。",
+        "speaker": null
+      },
+      {
+        "text": "硕珍顺着你的目光望过去，也笑了。",
+        "speaker": null
+      },
+      {
+        "text": "“哇，走了这么长一串。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他回头看看你们来时的方向。",
+        "speaker": null
+      },
+      {
+        "text": "“不过一会儿浪上来就冲掉了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你有些可惜，他却轻轻晃了晃你们牵着的手。",
+        "speaker": null
+      },
+      {
+        "text": "“那就再走嘛。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他笑得很灿烂。",
+        "speaker": null
+      },
+      {
+        "text": "“反正海岸这么长，我们可以一直走。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他牵着你继续往前，走几步便回头看看，像是生怕错过你脸上的任何表情。",
+        "speaker": null
+      },
+      {
+        "text": "偶尔有浪花扑过来，他会提前提醒你，自己却常常因为躲得太慢，被海水溅湿裤脚。",
+        "speaker": null
+      },
+      {
+        "text": "“哎呀！”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他低头看着湿掉的裤子，又抬头看你。",
+        "speaker": null
+      },
+      {
+        "text": "“哈哈哈哈，完了，今天只能这样回去了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你笑得厉害，他便故意朝你走近一步，假装要把湿掉的裤脚给你看。",
+        "speaker": null
+      },
+      {
+        "text": "等你躲开，他又笑着把你牵回来。",
+        "speaker": null
+      },
+      {
+        "text": "“好了好了，慢点走。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他的手掌暖暖的，握着你的力度恰到好处。",
+        "speaker": null
+      },
+      {
+        "text": "走出一段距离，他忽然偏头看你。",
+        "speaker": null
+      },
+      {
+        "text": "“你今天笑得真开心。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他跟着笑起来。",
+        "speaker": null
+      },
+      {
+        "text": "“真希望以后每次带你出来，你都能这么开心。”",
+        "speaker": "jin"
+      }
+    ],
+    [
+      {
+        "text": "走着走着，硕珍忽然停下来，望着眼前的海发起了呆。",
+        "speaker": null
+      },
+      {
+        "text": "“怎么了？”",
+        "speaker": "me"
+      },
+      {
+        "text": "他回过神，笑着摇摇头。",
+        "speaker": null
+      },
+      {
+        "text": "“就是突然觉得，这里好像我以前梦到过的地方。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他仔细想了想。",
+        "speaker": null
+      },
+      {
+        "text": "“真的。也是海边，天气也很好，旁边还有个人。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你问他是谁。",
+        "speaker": null
+      },
+      {
+        "text": "硕珍转过头看你，眼里慢慢浮起笑意。",
+        "speaker": null
+      },
+      {
+        "text": "“女主角是你。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "说完他自己先笑了起来。",
+        "speaker": null
+      },
+      {
+        "text": "“怎么样？这次哥哥的梦还挺准吧？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他又看向海面，嘴角的笑意渐渐变得柔和。",
+        "speaker": null
+      },
+      {
+        "text": "“以前我还想过，以后如果有喜欢的人，一定要跟她去很多地方。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“现在真的和你站在这里，感觉好神奇。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他轻轻捏了捏你的手。",
+        "speaker": null
+      },
+      {
+        "text": "“突然觉得，以后还有好多事情可以一起做。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你说下次约会要换自己安排，他立刻点头。",
+        "speaker": null
+      },
+      {
+        "text": "“好啊，我都听你的。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "想了想，他又一本正经地举起手。",
+        "speaker": null
+      },
+      {
+        "text": "“不过我有一个要求。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你等着他说下去。",
+        "speaker": null
+      },
+      {
+        "text": "“坐车的时候，我想坐你旁边。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“吃饭的时候也是。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他故意停顿一下，接着笑起来。",
+        "speaker": null
+      },
+      {
+        "text": "“看电影也一样。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你问他怎么这么多要求，他反而理直气壮地看着你。",
+        "speaker": null
+      },
+      {
+        "text": "“因为想离你近一点啊。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "说着，他忽然凑近一点，笑着看你的眼睛。",
+        "speaker": null
+      },
+      {
+        "text": "“以后有很多很多次约会，对吧？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "海风吹乱了他的头发，他笑着侧过脸，忽然又回头看你。",
+        "speaker": null
+      },
+      {
+        "text": "“怎么啦？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“这么喜欢看我啊？😌”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你笑着看他，他也跟着笑，轻轻捏了捏你的手。",
+        "speaker": null
+      },
+      {
+        "text": "“好吧，给你看。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“今天可以一直看。”",
+        "speaker": "jin"
+      }
+    ],
+    [
+      {
+        "text": "走到沙滩稍微背风的地方，硕珍忽然停下脚步。",
+        "speaker": null
+      },
+      {
+        "text": "海风把你的衣领吹得翻了起来，他伸手替你挡了一下，低头仔细看了看。",
+        "speaker": null
+      },
+      {
+        "text": "“冷吗？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他稍稍靠近。",
+        "speaker": null
+      },
+      {
+        "text": "“过来一点。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "见你走近，他便轻轻拉住你的手，把你带到自己身旁。",
+        "speaker": null
+      },
+      {
+        "text": "“这里风小一点。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他低下头，发现你的衣领还翘着，忍不住笑了。",
+        "speaker": null
+      },
+      {
+        "text": "“等一下，衣服乱了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他的指尖停在你肩边，目光落到你脸上。",
+        "speaker": null
+      },
+      {
+        "text": "“我帮你弄一下，好不好？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你点头以后，他才慢慢把衣领整理好，动作小心又温柔。",
+        "speaker": null
+      },
+      {
+        "text": "整理完，他的手却还停在你的肩旁。",
+        "speaker": null
+      },
+      {
+        "text": "你抬起头看他。",
+        "speaker": null
+      },
+      {
+        "text": "他也正低头看着你。",
+        "speaker": null
+      },
+      {
+        "text": "海浪轻轻涌上岸边，风从你们身旁吹过。",
+        "speaker": null
+      },
+      {
+        "text": "硕珍的目光渐渐柔和下来，唇边浮起一点笑。",
+        "speaker": null
+      },
+      {
+        "text": "“今天真的好开心。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他轻声说。",
+        "speaker": null
+      },
+      {
+        "text": "“尤其是现在。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他看了看眼前的大海，又重新看向你，忽然轻轻笑起来。",
+        "speaker": null
+      },
+      {
+        "text": "“其实从刚才开始，就一直想这样跟你待着。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他伸出手，掌心轻轻落在你的肩侧。",
+        "speaker": null
+      },
+      {
+        "text": "“再过来一点，好不好？”",
+        "speaker": "jin"
+      }
+    ],
+    [
+      {
+        "text": "硕珍忽然伸出双臂，将你紧紧揽进怀里。",
+        "speaker": null
+      },
+      {
+        "text": "他的动作比平时急切了一些，手臂环过你的后背，将你整个拥进怀中。你们贴得很近，他低下头，把脸埋进你的肩窝，长长地舒了一口气。",
+        "speaker": null
+      },
+      {
+        "text": "“啊……终于抱到了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他的声音闷闷的，带着一点笑。",
+        "speaker": null
+      },
+      {
+        "text": "海风从身旁吹过，浪声一阵阵涌来。他的怀抱却始终温暖，手掌轻轻抚过你的后背，又将你抱得更紧了些。",
+        "speaker": null
+      },
+      {
+        "text": "“宝宝……”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他低声叫你。",
+        "speaker": null
+      },
+      {
+        "text": "“最近真的好想你。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他抬起头看了看你，眼睛弯起来，随后又忍不住把你拥回怀里。",
+        "speaker": null
+      },
+      {
+        "text": "“每天都想。工作的时候想，回家的路上也想。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“今天终于可以这样抱着你了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他把下巴轻轻靠在你的发顶，过了很久才稍稍偏过脸。",
+        "speaker": null
+      },
+      {
+        "text": "“你知道吗？刚才在车上就想抱你了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“结果你睡得那么香，我看了半天，舍不得叫醒。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你伸手插进他的发丝，替他慢慢理顺被海风吹乱的头发。",
+        "speaker": null
+      },
+      {
+        "text": "硕珍舒服地眯起眼睛，顺势将脸埋回你的肩头，像只撒娇的小动物，手臂还牢牢环着你。",
+        "speaker": null
+      },
+      {
+        "text": "“嗯……再摸一会儿。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他低低笑了起来。",
+        "speaker": null
+      },
+      {
+        "text": "“好喜欢这样。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你们在海边相拥了很久。浪花一次次漫上沙滩，又缓缓退去，他始终舍不得松手。",
+        "speaker": null
+      },
+      {
+        "text": "过了一会儿，他稍稍抬头，靠近你的耳边，轻声说了句什么。声音被海风吹得有些模糊，你刚想转头问他，他却突然调皮地轻轻咬了一下你的耳朵。",
+        "speaker": null
+      },
+      {
+        "text": "“呀，金硕珍！”",
+        "speaker": "me"
+      },
+      {
+        "text": "他立刻笑起来，肩膀都跟着轻轻发颤。",
+        "speaker": null
+      },
+      {
+        "text": "“哈哈哈哈，怎么啦？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你叫他坏哥哥，他反而笑得更开心，低头把脸重新藏进你的肩窝。",
+        "speaker": null
+      },
+      {
+        "text": "“好好好，哥哥坏。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "说完，他又抱紧了你，声音渐渐轻下来。",
+        "speaker": null
+      },
+      {
+        "text": "“真的好幸福啊。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“今天终于可以和你这样待在一起了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "海风吹乱了他的头发，你伸手继续轻轻抚摸，他便安静地靠着你。",
+        "speaker": null
+      },
+      {
+        "text": "很久以后，他才抬起头，认真地望着你的眼睛。",
+        "speaker": null
+      },
+      {
+        "text": "“我真的好喜欢你。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他轻轻笑了。",
+        "speaker": null
+      },
+      {
+        "text": "“好喜欢，好喜欢。”",
+        "speaker": "jin"
+      }
+    ],
+    [
+      {
+        "text": "硕珍稍稍松开怀抱，双手仍轻轻扶着你的肩。",
+        "speaker": null
+      },
+      {
+        "text": "海风把几缕头发吹到你的脸颊旁，他伸手替你拨开，指尖轻轻擦过脸侧。",
+        "speaker": null
+      },
+      {
+        "text": "“你知道吗？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他望着你，眼里带着一点笑意。",
+        "speaker": null
+      },
+      {
+        "text": "“刚才一路上，我都在想一件事。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你问他在想什么。",
+        "speaker": null
+      },
+      {
+        "text": "他故意抿住嘴，笑着摇头。",
+        "speaker": null
+      },
+      {
+        "text": "“你猜。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你看着他，他终于忍不住笑出声。",
+        "speaker": null
+      },
+      {
+        "text": "“啊，怎么办。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他轻轻捧起你的脸，目光在你脸上停了很久。",
+        "speaker": null
+      },
+      {
+        "text": "“今天真的太幸福了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“从早上出门开始，我就一直在想，今天一定要让你开开心心的。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "说到这里，他自己也笑了。",
+        "speaker": null
+      },
+      {
+        "text": "“结果现在好像是我更开心。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "海浪轻轻涌来。",
+        "speaker": null
+      },
+      {
+        "text": "他低头看了看你们之间的距离，又重新望进你的眼睛。",
+        "speaker": null
+      },
+      {
+        "text": "“宝宝……”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“好想亲你。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他的声音放得很轻，脸上却带着藏不住的期待。",
+        "speaker": null
+      },
+      {
+        "text": "“可以吗？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他用双手温柔地托着你的脸颊，安静地等着你的回答。",
+        "speaker": null
+      }
+    ],
+    [
+      {
+        "text": "得到你的回应，硕珍眼里的笑意一下子漾开。",
+        "speaker": null
+      },
+      {
+        "text": "他俯下身，温柔地吻住你。你伸手抱住他，他也顺势收紧双臂，将你拥得更近。",
+        "speaker": null
+      },
+      {
+        "text": "海浪一阵阵涌上岸边，微凉的海水漫过你们的脚踝。他稍稍扶稳你，笑着低下头，再次吻了吻你。",
+        "speaker": null
+      },
+      {
+        "text": "这一次，他停留得更久。",
+        "speaker": null
+      },
+      {
+        "text": "他轻轻托着你的脸颊，闭上眼睛，专注地与你相吻。海风吹乱了他的头发，浪花反复漫上沙滩，你们仍紧紧相拥，仿佛这一刻可以一直延续下去。",
+        "speaker": null
+      },
+      {
+        "text": "过了许久，他才慢慢退开一点，额头仍轻轻抵着你的。",
+        "speaker": null
+      },
+      {
+        "text": "“啊……”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他的声音里全是笑意。",
+        "speaker": null
+      },
+      {
+        "text": "“怎么办啊。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他低头笑了一会儿，又抬眼看你。",
+        "speaker": null
+      },
+      {
+        "text": "“今天真的太幸福了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你伸手替他拨开被风吹乱的头发，他便微微低头，乖乖让你整理。",
+        "speaker": null
+      },
+      {
+        "text": "过了一会儿，他忽然想起什么，忍不住笑出声。",
+        "speaker": null
+      },
+      {
+        "text": "“刚才想说什么来着？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他认真想了两秒，最后摇摇头。",
+        "speaker": null
+      },
+      {
+        "text": "“完了，被你亲忘了😙”",
+        "speaker": "jin"
+      },
+      {
+        "text": "说完，他又轻轻吻了吻你的额头。",
+        "speaker": null
+      },
+      {
+        "text": "“都怪你。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你笑着看他，他也笑起来，低头把你的手重新握进掌心。",
+        "speaker": null
+      },
+      {
+        "text": "“真的，今天怎么这么开心啊。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他抬头望了一眼天空，像是想把眼前的景色都记下来。",
+        "speaker": null
+      },
+      {
+        "text": "“以后再来这里的时候，我肯定还会想起今天。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他转过头看你。",
+        "speaker": null
+      },
+      {
+        "text": "“想起我们刚才站在这里。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“还有你笑得特别开心的样子。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他轻轻把你的手放进自己外套的口袋里。",
+        "speaker": null
+      },
+      {
+        "text": "“手有点凉。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他低头看你。",
+        "speaker": null
+      },
+      {
+        "text": "“这样暖和一点吧？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "远处的海浪不断涌向岸边。",
+        "speaker": null
+      },
+      {
+        "text": "你们沿着海岸继续慢慢走着，他偶尔转过头来看你，目光里带着藏不住的笑意。",
+        "speaker": null
+      },
+      {
+        "text": "过了一会儿，他轻轻叫了一声你的名字。",
+        "speaker": null
+      },
+      {
+        "text": "等你回头，他只是笑。",
+        "speaker": null
+      },
+      {
+        "text": "“没事。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“就是突然好想叫叫你。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他看着你，又忍不住笑了起来。",
+        "speaker": null
+      },
+      {
+        "text": "“好喜欢你啊。”",
+        "speaker": "jin"
+      }
+    ],
+    [
+      {
+        "text": "太阳渐渐升高，沙滩也比刚才暖和了许多。",
+        "speaker": null
+      },
+      {
+        "text": "硕珍牵着你往小屋的方向走，一路上还在说着下次想带你去的地方。",
+        "speaker": null
+      },
+      {
+        "text": "“其实我收藏了好多地方。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他拿出手机，翻到一个列表给你看。",
+        "speaker": null
+      },
+      {
+        "text": "“你看，这个是我上次看到的。还有这个，风景特别漂亮。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你问他是什么时候收藏的。",
+        "speaker": null
+      },
+      {
+        "text": "他笑了一下。",
+        "speaker": null
+      },
+      {
+        "text": "“有一阵子了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他低头看看屏幕，又看看你。",
+        "speaker": null
+      },
+      {
+        "text": "“每次看到什么好玩的地方，就想着以后有空带你去。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "说完，他把手机收好。",
+        "speaker": null
+      },
+      {
+        "text": "“不过下次去哪儿，轮到你挑。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他轻轻晃了晃你们牵着的手。",
+        "speaker": null
+      },
+      {
+        "text": "“你去哪儿，我就跟你去。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "回到小屋门口，他低头拍掉鞋边的沙，又蹲下来，替你整理好鞋上的拉链。",
+        "speaker": null
+      },
+      {
+        "text": "“好啦。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他站起来，向你伸出手。",
+        "speaker": null
+      },
+      {
+        "text": "“中午想吃什么？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你还在犹豫，他已经笑着开始提议。",
+        "speaker": null
+      },
+      {
+        "text": "“要不要一起做饭？这里厨房挺大的。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“或者出去吃也行。你想吃什么，我们就吃什么。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "走进屋里时，他回头看了一眼海面。",
+        "speaker": null
+      },
+      {
+        "text": "“今天真好。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他笑着说。",
+        "speaker": null
+      },
+      {
+        "text": "“下次还来吧。”",
+        "speaker": "jin"
+      }
+    ],
+    [
+      {
+        "text": "回到小屋，硕珍把沾了沙的鞋放在门边，又去厨房倒了两杯温水。",
+        "speaker": null
+      },
+      {
+        "text": "你坐在沙发上，看着玻璃窗外的海发呆。",
+        "speaker": null
+      },
+      {
+        "text": "他端着杯子回来，见你还望着窗外，便放轻脚步，在你身旁坐下。",
+        "speaker": null
+      },
+      {
+        "text": "“在想什么？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你说只是觉得今天过得很开心。",
+        "speaker": null
+      },
+      {
+        "text": "他听完，慢慢笑了。",
+        "speaker": null
+      },
+      {
+        "text": "“我也是。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他把杯子放到桌上，转身握住你的手。",
+        "speaker": null
+      },
+      {
+        "text": "“而且今天还有好多时间。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他靠在沙发上，轻轻伸了个懒腰，随后偏过头看你。",
+        "speaker": null
+      },
+      {
+        "text": "“刚才走了那么久，现在怎么又不想动了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "说着，他笑着往你这边靠近一点。",
+        "speaker": null
+      },
+      {
+        "text": "“再陪哥哥坐一会儿吧。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他将毯子拉过来，轻轻搭在你们膝头。",
+        "speaker": null
+      },
+      {
+        "text": "窗外传来一阵阵海浪声。",
+        "speaker": null
+      },
+      {
+        "text": "他忽然低头看了看你们交握的手，声音柔和下来。",
+        "speaker": null
+      },
+      {
+        "text": "“其实我之前想过很多次，我们什么时候能有这样的一天。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“早上一起出门，慢慢走路，看海，吃饭，想到什么就聊什么。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他抬眼看向你。",
+        "speaker": null
+      },
+      {
+        "text": "“今天真的实现了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "笑意慢慢爬上他的嘴角。",
+        "speaker": null
+      },
+      {
+        "text": "“而且比我想象中还要好。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他伸手轻轻碰了碰你的头发，神情渐渐认真起来。",
+        "speaker": null
+      },
+      {
+        "text": "“最近发生那么多事情，有时候我也会担心。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“担心你会觉得累，担心你受委屈，担心我们的见面总是被各种事情打乱。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他看着你，轻轻握紧你的手。",
+        "speaker": null
+      },
+      {
+        "text": "“可是今天看到你这么开心，我就觉得，真的太好了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“以后也会有很多这样的日子，对吧？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他笑着靠近一点。",
+        "speaker": null
+      },
+      {
+        "text": "“我想把每一个季节都留一点给我们。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“春天可以去看花，夏天来海边，秋天去散步，冬天就在家里做饭。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "说着，他自己也笑起来。",
+        "speaker": null
+      },
+      {
+        "text": "“感觉光是想想就很幸福。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他低头看着你们握在一起的手。",
+        "speaker": null
+      },
+      {
+        "text": "“谢谢你陪我来。”",
+        "speaker": "jin"
+      }
+    ],
+    [
+      {
+        "text": "窗外的海还在轻轻响着。",
+        "speaker": null
+      },
+      {
+        "text": "硕珍坐在你身边，手松松地握着你的。午后的阳光穿过窗户，落在沙发旁的地板上，把房间照得暖洋洋的。",
+        "speaker": null
+      },
+      {
+        "text": "你们聊起刚才在海边发生的事情。",
+        "speaker": null
+      },
+      {
+        "text": "他说自己裤脚被浪打湿的时候，差点以为整个人都要摔进海里；又说你一路笑得那么开心，害他也跟着一直笑。",
+        "speaker": null
+      },
+      {
+        "text": "“今天真的太好玩了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他看向窗外。",
+        "speaker": null
+      },
+      {
+        "text": "“以后天气好的时候，我们再来一次。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "过了一会儿，他忽然伸手碰了碰你的头发。",
+        "speaker": null
+      },
+      {
+        "text": "“今天开心吗？”",
+        "speaker": "jin"
+      },
+      {
+        "text": "等你回答，他才满意地点点头。",
+        "speaker": null
+      },
+      {
+        "text": "“嗯。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他笑着轻轻握紧你的手。",
+        "speaker": null
+      },
+      {
+        "text": "“我也是。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "房间里安静下来，只剩下窗外的海浪声。",
+        "speaker": null
+      },
+      {
+        "text": "硕珍靠着沙发，偏头看你，目光里满是温柔。",
+        "speaker": null
+      },
+      {
+        "text": "“以后我们还会有很多这样的日子吧。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他说着轻轻笑起来。",
+        "speaker": null
+      },
+      {
+        "text": "“春天去看花，夏天来海边，秋天找个地方散步。冬天嘛……”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他想了一会儿。",
+        "speaker": null
+      },
+      {
+        "text": "“冬天就在家里做饭好了。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他低头看看你们的手，笑意更深了一点。",
+        "speaker": null
+      },
+      {
+        "text": "“感觉光是想想就很幸福。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "过了一会儿，他忽然轻声叫你。",
+        "speaker": null
+      },
+      {
+        "text": "“以后也一起去很多地方吧。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“我想跟你留下好多好多回忆。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他轻轻握住你的手，望向窗外的大海。",
+        "speaker": null
+      },
+      {
+        "text": "“还有啊。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他忽然转过头，笑着看你。",
+        "speaker": null
+      },
+      {
+        "text": "“以后要是有什么委屈，什么烦恼，都要告诉我。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“开心的事也要告诉我。我想知道你每天都过得怎么样。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他说完，轻轻笑起来。",
+        "speaker": null
+      },
+      {
+        "text": "“我也会把每天遇到的好玩的事情讲给你听。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“这样以后我们老了，说不定还会有讲不完的话。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他自己先被这个想法逗笑了。",
+        "speaker": null
+      },
+      {
+        "text": "“哈哈哈哈，感觉会很吵啊。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "笑过以后，他的声音渐渐柔和下来。",
+        "speaker": null
+      },
+      {
+        "text": "“但是应该会很幸福。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "他望着你，眼睛里满是笑意。",
+        "speaker": null
+      },
+      {
+        "text": "“我真的很期待以后的每一天。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "窗外的海面依旧闪闪发亮。",
+        "speaker": null
+      },
+      {
+        "text": "他轻轻靠近，把你揽进怀里，掌心温暖地覆在你的肩背上。",
+        "speaker": null
+      },
+      {
+        "text": "“今天先这样陪着我吧。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "“想再坐多久都可以。”",
+        "speaker": "jin"
+      },
+      {
+        "text": "你们还可以继续坐在这里，听海浪慢慢拍上岸边。",
+        "speaker": null
+      }
+    ]
+  ]
+}

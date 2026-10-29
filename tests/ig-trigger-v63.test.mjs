@@ -1,0 +1,12 @@
+import {routePrivateJin} from '../src/scripted/private-routing.mjs';
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import vm from 'node:vm';
+import {NODES} from '../src/scripted/story-data.mjs';import {installContinuity} from '../src/scripted/continuity-data.mjs';import {installPacing} from '../src/scripted/pacing-data.mjs';import {installCommentFlow} from '../src/scripted/comment-flow-v58.mjs';import {createStory,deliverNode,choose,available} from '../src/scripted/story-engine.mjs';import {queueCommentNotices,commentNoticesPending} from '../src/scripted/comment-notices.mjs';
+installContinuity();routePrivateJin(NODES);installPacing(NODES);installCommentFlow(NODES);
+test('actual choice handler immediately delivers IG for BOTH intro-days choices; then KKT and Threads',()=>{
+ const source=fs.readFileSync('src/scripted/story-ui.js','utf8');
+ for(const choice of NODES['intro-days'].choices){let now=1000;const s=createStory('introduced');s.started=true;s.queue=['intro-days'];deliverNode(s,'intro-days');const seen=[],button={dataset:{},classList:{remove(){}},replaceChildren(){},removeAttribute(){},querySelector(){return {innerHTML:''}}};
+ const c={campaign:s,NODES,Date:{now:()=>now},deliverNode,choose,available,liveNode:()=>available(s)[0],queueCommentNotices,commentNoticesPending,state:{threads:{}},page:'settings',roomId:'jin',scriptBusy:false,scriptReadyAt:0,document:{visibilityState:'visible'},syncScriptApps(){},scriptSave(){},notifyIncoming(){throw Error('Must not show KKT before IG')},showGameBanner(title,text){seen.push(title)},scriptName:()=> '金硕珍',$:()=>button,decorateScriptDestination(){},storyProgressState:()=> 'active',render(){},haptic(){},toast(e){throw Error(e)}};
+ const extracts=[source.slice(source.indexOf('function deliverScript('),source.indexOf('function renderChatPreset(')),source.slice(source.indexOf('function pumpScript('),source.indexOf('setInterval(pumpScript')),source.slice(source.indexOf('function takeScriptChoice('),source.indexOf('\n',source.indexOf('function takeScriptChoice(')))];
+ vm.runInNewContext(extracts.join('\n'),c);c.takeScriptChoice('intro-days',choice.id);assert.match(seen[0],/jin.*大号评论/);assert.ok(s.delivered.includes('spark'));assert.ok(!s.delivered.includes('a-music'));now=7500;c.pumpScript();assert.equal(seen[1],'金硕珍');now=14000;c.pumpScript();assert.equal(seen[2],'Threads 正在热议');
+ }
+});

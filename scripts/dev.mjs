@@ -1,0 +1,4 @@
+import http from 'node:http';
+const args=process.argv;const at=args.indexOf('--port');const port=Number(process.env.PORT||(at>=0?args[at+1]:3000));
+const server=http.createServer(async(req,res)=>{try{const chunks=[];for await(const c of req)chunks.push(c);const method=req.method;const request=new Request('http://'+req.headers.host+req.url,{method,headers:req.headers,...(!['GET','HEAD'].includes(method)?{body:Buffer.concat(chunks)}:{})});const {default:worker}=await import('../worker/index.js?time='+Math.floor(Date.now()/3000));const response=await worker.fetch(request,{DEEPSEEK_API_KEY:process.env.DEEPSEEK_API_KEY,DEEPSEEK_MODEL:process.env.DEEPSEEK_MODEL,TTS_API_KEY:process.env.TTS_API_KEY},{});res.writeHead(response.status,Object.fromEntries(response.headers));res.end(Buffer.from(await response.arrayBuffer()))}catch(e){res.writeHead(500);res.end('Preview error')}});server.listen(port,'0.0.0.0',()=>console.log('Phone preview ready on '+port));
+

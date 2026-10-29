@@ -1,0 +1,1 @@
+export function pendingStrangerCall(campaign,now){if(!campaign||campaign.silenceWaves)return null;return campaign.unknownCalls?.find(c=>!c.read&&c.at<=now&&(!c.notified||now-(c.lastNotified||c.at)>90000&&(c.reminders||0)<3))||null}

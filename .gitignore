@@ -1,0 +1,19 @@
+dist/
+site.tar.gz
+
+dist-client-check.js
+
+# Generated Worker; edit src/ and build.
+worker/
+.netlify/
+.dev.vars
+.env
+
+
+.media-build/
+
+independent/
+
+assets/story/*.mp3
+assets/kakao.mp3
+.github/workflows/deploy-independent.yml

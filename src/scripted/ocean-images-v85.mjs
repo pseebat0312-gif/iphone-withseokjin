@@ -1,0 +1,2 @@
+export const OCEAN_IMAGES85=[1,2,3,4,5].map(i=>'/assets/story/sea-live-v85-'+i+'.jpg');
+export function installOceanImages85(scenes,chapters){const c=chapters.ocean;if(!c)return;const base=scenes.seaside,pool=[...new Set(c.pages.map(p=>scenes[p.place]?.image).filter(Boolean).concat(base?.image||[])),...OCEAN_IMAGES85];c.pages.forEach((p,i)=>{const id='ocean85-'+i;scenes[id]={...base,image:pool[Math.min(pool.length-1,Math.floor(i*pool.length/c.pages.length))]};p.place=id})}

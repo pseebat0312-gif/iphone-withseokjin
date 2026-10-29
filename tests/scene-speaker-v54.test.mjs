@@ -1,0 +1,3 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import {sceneSpeakerFor} from '../src/scripted/scene-media.mjs';import {shortReadingBeats,sceneBeatMarkup} from '../src/scripted/chat-refinement.mjs';
+const review=JSON.parse(fs.readFileSync('src/editorial-v50.json'));
+test('explicit attributions work; merely mentioning someone inside a quote cannot change the speaker',()=>{for(const [text,actor]of [['泰亨说：“哥，人我带来了。”','v'],['书妍问：“你觉得呢？”','friend'],['硕珍笑着说：“坐这里。”','jin'],['柾国低声说：“来了啊。”','jk']])assert.equal(sceneSpeakerFor({text,fallback:'jin'}),actor);assert.equal(sceneSpeakerFor({text:'“硕珍哥说你今天要来。”',fallback:'v'}),'v');assert.equal(sceneSpeakerFor({text:'“这首歌很好听。”',fallback:'jk'}),'jk')});

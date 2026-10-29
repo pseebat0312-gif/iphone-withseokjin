@@ -1,0 +1,43 @@
+[
+  {
+    "attachment": "IMG_7293.jpeg",
+    "source": "assets/story/rain-night-1.jpg",
+    "group": "rain"
+  },
+  {
+    "attachment": "IMG_7292.jpeg",
+    "source": "assets/story/rain-night-2.jpg",
+    "group": "rain"
+  },
+  {
+    "attachment": "IMG_7294.jpeg",
+    "source": "assets/story/rain-night-3.jpg",
+    "group": "rain"
+  },
+  {
+    "attachment": "IMG_7291.jpeg",
+    "source": "assets/story/cafe-first-1.jpg",
+    "group": "first cafe"
+  },
+  {
+    "attachment": "IMG_7729.jpeg",
+    "source": "assets/story/cafe-first-3.jpg",
+    "group": "first cafe"
+  },
+  {
+    "attachment": "IMG_9146.jpeg",
+    "source": "assets/story/cafe-confession-1.jpg",
+    "group": "confession"
+  },
+  {
+    "attachment": "IMG_9140.jpeg",
+    "source": "assets/story/cafe-confession-2.jpg",
+    "group": "confession"
+  },
+  {
+    "attachment": "IMG_7257(1).jpeg",
+    "source": "assets/story/jin-album-8.jpg",
+    "group": "first cafe",
+    "reused": true
+  }
+]
